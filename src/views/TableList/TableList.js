@@ -1,4 +1,5 @@
-import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -8,6 +9,13 @@ import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
+import {
+  getbranchDetails,
+  postBranchDetails,
+  getbranchReports,
+  postBranchReports,
+  dashboardCount,
+} from "../../middleware/actions";
 
 const styles = {
   cardCategoryWhite: {
@@ -16,11 +24,11 @@ const styles = {
       margin: "0",
       fontSize: "14px",
       marginTop: "0",
-      marginBottom: "0"
+      marginBottom: "0",
     },
     "& a,& a:hover,& a:focus": {
-      color: "#FFFFFF"
-    }
+      color: "#FFFFFF",
+    },
   },
   cardTitleWhite: {
     color: "#FFFFFF",
@@ -34,42 +42,91 @@ const styles = {
       color: "#777",
       fontSize: "65%",
       fontWeight: "400",
-      lineHeight: "1"
-    }
-  }
+      lineHeight: "1",
+    },
+  },
 };
 
 const useStyles = makeStyles(styles);
 
 export default function TableList() {
   const classes = useStyles();
+  const branches = useSelector((state) => state.branches);
+  const dashboard_Count = useSelector((state) => state.dashboard_Count);
+  const postBranchResponse = useSelector((state) => state.postBranchResponse);
+  const branchReport = useSelector((state) => state.branchReport);
+  const dispatch = useDispatch();
+  let [response, setResponse] = useState("");
+  useEffect(() => {
+    dispatch(getbranchDetails());
+    // console.log(branches);
+    // return () => {
+    //   console.log("cleared");
+    // };
+  }, []);
+  const data = [
+    {
+      Branch: "string",
+      Camera_count: 10,
+      People_count: 20,
+      Alert_count: 30,
+      Image_link:
+        "https://res.cloudinary.com/dubm0zyx2/image/upload/v1570085339/13497809_1755248361385609_3709209667542308841_o_euhljv.jpg",
+      Date: "string",
+    },
+    {
+      Branch: "string",
+      Camera_count: 30,
+      People_count: 50,
+      Alert_count: 70,
+      Image_link:
+        "https://res.cloudinary.com/dubm0zyx2/image/upload/v1570085339/13497809_1755248361385609_3709209667542308841_o_euhljv.jpg",
+      Date: "string",
+    },
+    {
+      Branch: "string",
+      Camera_count: 20,
+      People_count: 20,
+      Alert_count: 30,
+      Image_link:
+        "https://res.cloudinary.com/dubm0zyx2/image/upload/v1570085339/13497809_1755248361385609_3709209667542308841_o_euhljv.jpg",
+      Date: "string",
+    },
+  ];
   return (
     <GridContainer>
+      {console.log(branches)}
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Simple Table</h4>
-            <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p>
+            <h4 className={classes.cardTitleWhite}>Branch</h4>
+            <p className={classes.cardCategoryWhite}>List of all branches</p>
           </CardHeader>
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Name", "Country", "City", "Salary"]}
-              tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-                ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-                ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-                ["Mason Porter", "Chile", "Gloucester", "$78,615"]
+              tableHead={[
+                "Branch",
+                "Camera Count",
+                "People_count",
+                "Alert_count",
+                "Image",
+                "Date",
               ]}
+              // tableData={[
+              //   ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
+              //   ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
+              //   ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
+              //   ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
+              //   ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
+              //   ["Mason Porter", "Chile", "Gloucester", "$78,615"],
+              // ]}
+              tableData={branches}
             />
           </CardBody>
         </Card>
       </GridItem>
-      <GridItem xs={12} sm={12} md={12}>
+      {/* <GridItem xs={12} sm={12} md={12}>
         <Card plain>
           <CardHeader plain color="primary">
             <h4 className={classes.cardTitleWhite}>
@@ -106,7 +163,7 @@ export default function TableList() {
             />
           </CardBody>
         </Card>
-      </GridItem>
+      </GridItem> */}
     </GridContainer>
   );
 }

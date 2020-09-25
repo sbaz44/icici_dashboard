@@ -26,6 +26,7 @@ export default function CustomTable(props) {
                   <TableCell
                     className={classes.tableCell + " " + classes.tableHeadCell}
                     key={key}
+                    align="center"
                   >
                     {prop}
                   </TableCell>
@@ -35,7 +36,7 @@ export default function CustomTable(props) {
           </TableHead>
         ) : null}
         <TableBody>
-          {tableData.map((prop, key) => {
+          {/* {tableData.map((prop, key) => {
             return (
               <TableRow key={key} className={classes.tableBodyRow}>
                 {prop.map((prop, key) => {
@@ -47,7 +48,45 @@ export default function CustomTable(props) {
                 })}
               </TableRow>
             );
-          })}
+          })} */}
+          {tableData.map((row, index) => (
+            <TableRow key={row.index} className={classes.tableBodyRow}>
+              <TableCell className={classes.tableCell} align="center">
+                {row.Branch}
+              </TableCell>
+              <TableCell className={classes.tableCell} align="center">
+                {row.Camera_count}
+              </TableCell>
+              <TableCell className={classes.tableCell} align="center">
+                {row.People_count}
+              </TableCell>
+              <TableCell className={classes.tableCell} align="center">
+                {row.Alert_count}
+              </TableCell>
+              <TableCell className={classes.tableCell} align="center">
+                {row.Image_link && (
+                  <a
+                    style={{ color: "black" }}
+                    href={row.Image_link}
+                    target="_blank"
+                    alt=""
+                  >
+                    <img
+                      src={row.Image_link}
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </a>
+                )}
+              </TableCell>
+              <TableCell className={classes.tableCell} align="center">
+                {row.Created}
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>
@@ -55,7 +94,7 @@ export default function CustomTable(props) {
 }
 
 CustomTable.defaultProps = {
-  tableHeaderColor: "gray"
+  tableHeaderColor: "gray",
 };
 
 CustomTable.propTypes = {
@@ -66,8 +105,8 @@ CustomTable.propTypes = {
     "success",
     "info",
     "rose",
-    "gray"
+    "gray",
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
-  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
+  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
 };
