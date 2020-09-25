@@ -144,10 +144,12 @@ export default function Dashboard() {
               </h3>
             </CardHeader>
             <CardFooter stats>
-              {/* <div className={classes.stats}>
-                <DateRange />
-                Last 24 Hours
-              </div> */}
+              <a href="/admin/table">
+                <div className={classes.stats} style={{ color: "#43a047" }}>
+                  {/* <DateRange /> */}
+                  View More
+                </div>
+              </a>
             </CardFooter>
           </Card>
         </GridItem>
