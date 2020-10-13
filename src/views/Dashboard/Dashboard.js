@@ -36,6 +36,7 @@ import {
   getbranchReports,
   postBranchReports,
   dashboardCount,
+  graphData,
 } from "../../middleware/actions";
 
 import {
@@ -52,6 +53,7 @@ export default function Dashboard() {
   const classes = useStyles();
   const branches = useSelector((state) => state.branches);
   const dashboard_Count = useSelector((state) => state.dashboard_Count);
+  const graph_data = useSelector((state) => state.graph_data);
   const postBranchResponse = useSelector((state) => state.postBranchResponse);
   const branchReport = useSelector((state) => state.branchReport);
   const dispatch = useDispatch();
@@ -76,7 +78,8 @@ export default function Dashboard() {
   });
   useEffect(() => {
     dispatch(dashboardCount());
-    // console.log(branches);
+    dispatch(graphData());
+    console.log(graph_data);
     // return () => {
     //   console.log("cleared");
     // };
@@ -84,6 +87,7 @@ export default function Dashboard() {
 
   return (
     <div>
+      {console.log(graph_data)}
       <GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
@@ -177,7 +181,7 @@ export default function Dashboard() {
             <CardHeader color="success">
               <ChartistGraph
                 className="ct-chart"
-                data={data.Total_alerts}
+                data={graph_data.Total_alerts}
                 type="Line"
                 options={dailySalesChart.options}
                 listener={dailySalesChart.animation}
@@ -185,18 +189,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardBody>
               <h4 className={classes.cardTitle}>Total Alerts</h4>
-              <p className={classes.cardCategory}>
-                <span className={classes.successText}>
-                  <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                </span>
-                increase in today sales.
-              </p>
             </CardBody>
-            <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime /> updated 4 minutes ago
-              </div>
-            </CardFooter>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
@@ -204,7 +197,7 @@ export default function Dashboard() {
             <CardHeader color="warning">
               <ChartistGraph
                 className="ct-chart"
-                data={data.Social_distancing_alerts}
+                data={graph_data.Social_distancing_alerts}
                 type="Bar"
                 options={emailsSubscriptionChart.options}
                 responsiveOptions={emailsSubscriptionChart.responsiveOptions}
@@ -213,13 +206,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardBody>
               <h4 className={classes.cardTitle}>Social Distancing Alerts</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
             </CardBody>
-            <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime /> campaign sent 2 days ago
-              </div>
-            </CardFooter>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
@@ -227,7 +214,7 @@ export default function Dashboard() {
             <CardHeader color="danger">
               <ChartistGraph
                 className="ct-chart"
-                data={data.Teller_missing_alerts}
+                data={graph_data.Teller_missing_alerts}
                 type="Line"
                 options={completedTasksChart.options}
                 listener={completedTasksChart.animation}
@@ -235,13 +222,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardBody>
               <h4 className={classes.cardTitle}>Teller Missing Alerts</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
             </CardBody>
-            <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime /> campaign sent 2 days ago
-              </div>
-            </CardFooter>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
@@ -249,7 +230,7 @@ export default function Dashboard() {
             <CardHeader color="primary">
               <ChartistGraph
                 className="ct-chart"
-                data={data.Camera_tampering_alerts}
+                data={graph_data.Camera_tampering_alerts}
                 type="Line"
                 options={completedTasksChart.options}
                 listener={completedTasksChart.animation}
@@ -257,13 +238,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardBody>
               <h4 className={classes.cardTitle}>Camera Tampering Alerts</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
             </CardBody>
-            <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime /> campaign sent 2 days ago
-              </div>
-            </CardFooter>
           </Card>
         </GridItem>
       </GridContainer>

@@ -4,11 +4,13 @@ import {
   POST_BRANCH_DETAILS,
   POST_BRANCH_REPORTS,
   GET_DASHBOARD_COUNT,
+  GET_GRAPH_DATA,
 } from "./actions";
 
 const initialState = {
   branches: [],
   dashboard_Count: [],
+  graph_data: [],
   postBranchResponse: {
     statusCode: 10,
   },
@@ -49,6 +51,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         dashboard_Count: action.payload,
+      };
+    case GET_GRAPH_DATA:
+      return {
+        ...state,
+        graph_data: action.payload,
       };
 
     default:
