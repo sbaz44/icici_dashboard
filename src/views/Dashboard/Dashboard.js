@@ -56,6 +56,24 @@ export default function Dashboard() {
   const branchReport = useSelector((state) => state.branchReport);
   const dispatch = useDispatch();
   let [response, setResponse] = useState("");
+  let [data, setData] = useState({
+    Total_alerts: {
+      labels: ["W", "T", "F", "S", "S", "M", "T"],
+      series: [[478, 8033, 1238, 14776, 0, 0, 120]],
+    },
+    Social_distancing_alerts: {
+      labels: ["W", "T", "F", "S", "S", "M", "T"],
+      series: [[43, 97, 526, 0, 0, 0, 0]],
+    },
+    Teller_missing_alerts: {
+      labels: ["W", "T", "F", "S", "S", "M", "T"],
+      series: [[38, 12, 181, 2, 0, 0, 104]],
+    },
+    Camera_tampering_alerts: {
+      labels: ["W", "T", "F", "S", "S", "M", "T"],
+      series: [[245, 7729, 1, 14659, 0, 0, 8]],
+    },
+  });
   useEffect(() => {
     dispatch(dashboardCount());
     // console.log(branches);
@@ -66,7 +84,6 @@ export default function Dashboard() {
 
   return (
     <div>
-      {console.log(dashboard_Count)}
       <GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
@@ -160,18 +177,18 @@ export default function Dashboard() {
             <CardHeader color="success">
               <ChartistGraph
                 className="ct-chart"
-                data={dailySalesChart.data}
+                data={data.Total_alerts}
                 type="Line"
                 options={dailySalesChart.options}
                 listener={dailySalesChart.animation}
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Daily Sales</h4>
+              <h4 className={classes.cardTitle}>Total Alerts</h4>
               <p className={classes.cardCategory}>
                 <span className={classes.successText}>
                   <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                </span>{" "}
+                </span>
                 increase in today sales.
               </p>
             </CardBody>
@@ -187,7 +204,7 @@ export default function Dashboard() {
             <CardHeader color="warning">
               <ChartistGraph
                 className="ct-chart"
-                data={emailsSubscriptionChart.data}
+                data={data.Social_distancing_alerts}
                 type="Bar"
                 options={emailsSubscriptionChart.options}
                 responsiveOptions={emailsSubscriptionChart.responsiveOptions}
@@ -195,7 +212,7 @@ export default function Dashboard() {
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Email Subscriptions</h4>
+              <h4 className={classes.cardTitle}>Social Distancing Alerts</h4>
               <p className={classes.cardCategory}>Last Campaign Performance</p>
             </CardBody>
             <CardFooter chart>
@@ -210,14 +227,36 @@ export default function Dashboard() {
             <CardHeader color="danger">
               <ChartistGraph
                 className="ct-chart"
-                data={completedTasksChart.data}
+                data={data.Teller_missing_alerts}
                 type="Line"
                 options={completedTasksChart.options}
                 listener={completedTasksChart.animation}
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Completed Tasks</h4>
+              <h4 className={classes.cardTitle}>Teller Missing Alerts</h4>
+              <p className={classes.cardCategory}>Last Campaign Performance</p>
+            </CardBody>
+            <CardFooter chart>
+              <div className={classes.stats}>
+                <AccessTime /> campaign sent 2 days ago
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={4}>
+          <Card chart>
+            <CardHeader color="primary">
+              <ChartistGraph
+                className="ct-chart"
+                data={data.Camera_tampering_alerts}
+                type="Line"
+                options={completedTasksChart.options}
+                listener={completedTasksChart.animation}
+              />
+            </CardHeader>
+            <CardBody>
+              <h4 className={classes.cardTitle}>Camera Tampering Alerts</h4>
               <p className={classes.cardCategory}>Last Campaign Performance</p>
             </CardBody>
             <CardFooter chart>
