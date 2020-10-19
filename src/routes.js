@@ -35,6 +35,8 @@ import NotificationsPage from "views/Notifications/Notifications.js";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage.js";
+import ViewBranch from "views/viewBranch/ViewBranch";
+import ViewDetails from "views/viewDetails/ViewDetails";
 
 const dashboardRoutes = [
   {
@@ -52,15 +54,36 @@ const dashboardRoutes = [
     icon: Person,
     component: UserProfile,
     layout: "/admin",
+    invisible: true
+
   },
   {
-    path: "/table",
+    path: "/branch",
     name: "Branches",
     rtlName: "قائمة الجدول",
     icon: "content_paste",
     component: TableList,
     layout: "/admin",
   },
+  {
+    path: "/view/branch/:branch",
+    name: "View Branch",
+    rtlName: "قائمة الجدول",
+    icon: LibraryBooks,
+    component: ViewBranch,
+    layout: "/admin",
+    invisible: true
+  },
+  {
+    path: "/view/:branch/:type/:subtype/:date",
+    name: "View Details",
+    rtlName: "قائمة الجدول",
+    icon: LibraryBooks,
+    component: ViewDetails,
+    layout: "/admin",
+    invisible: true
+  },
+
   // {
   //   path: "/typography",
   //   name: "Typography",

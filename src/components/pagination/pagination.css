@@ -1,0 +1,94 @@
+.paginationContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 80%;
+  border-radius: 0.25253vw;
+  height: 2.92929vw;
+  background: linear-gradient(60deg, #ab47bc, #8e24aa);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 1vw;
+}
+
+.paginationContainer .leftArrow {
+  width: 1.31313vw;
+  height: 1.11111vw;
+  margin-right: 1.11111vw;
+  cursor: pointer;
+}
+
+.paginationContainer .leftArrowDisabled {
+  width: 1.31313vw;
+  height: 1.11111vw;
+  margin-right: 1.11111vw;
+}
+
+.paginationContainer .rightArrow {
+  width: 1.31313vw;
+  height: 1.11111vw;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.paginationContainer .rightArrowDisabled {
+  width: 1.31313vw;
+  height: 1.11111vw;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.paginationContainer .pageStart {
+  width: 2.27273vw;
+  height: 1.31313vw;
+  border-radius: 0.25253vw;
+  background: white;
+  margin-right: 1.11111vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: Segoe UI;
+  font-size: 0.90909vw;
+  color: black;
+}
+
+.paginationContainer .pageEnd {
+  width: 2.27273vw;
+  height: 1.31313vw;
+  border-radius: 0.25253vw;
+  background: white;
+  margin-right: 1.11111vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: Segoe UI;
+  font-size: 0.90909vw;
+  color: black;
+}
+
+.paginationContainer p {
+  margin-right: 1.11111vw;
+  color: white;
+}
+/*# sourceMappingURL=pagination.css.map */

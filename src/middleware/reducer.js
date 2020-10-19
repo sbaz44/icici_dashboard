@@ -5,6 +5,8 @@ import {
   POST_BRANCH_REPORTS,
   GET_DASHBOARD_COUNT,
   GET_GRAPH_DATA,
+  GET_VIEW_BRANCH_DETAIL,
+  GET_VIEW_BRANCH_CARD_DETAIL
 } from "./actions";
 
 const initialState = {
@@ -22,6 +24,7 @@ const initialState = {
     Image: "image1.jpg",
     People_count: 10,
   },
+  viewBranchDetail: []
 };
 
 export default function (state = initialState, action) {
@@ -57,7 +60,16 @@ export default function (state = initialState, action) {
         ...state,
         graph_data: action.payload,
       };
-
+    case GET_VIEW_BRANCH_DETAIL:
+      return {
+        ...state,
+        viewBranchDetail: action.payload,
+      };
+    case GET_VIEW_BRANCH_CARD_DETAIL:
+      return {
+        ...state,
+        viewBranchDetail: action.payload,
+      };
     default:
       return state;
   }

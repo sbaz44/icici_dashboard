@@ -1,0 +1,13 @@
+.viewBranch {
+  position: relative;
+  #header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2vw;
+  }
+  .adjust {
+    background: rgb(219, 219, 219);
+  }
+}

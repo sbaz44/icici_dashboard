@@ -1,0 +1,70 @@
+$desk: 100/1980;
+
+.paginationContainer {
+  display: flex;
+  position: absolute;
+  // bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  border-radius: 5 * $desk + vw;
+  height: 58 * $desk + vw;
+  background: linear-gradient(60deg, #ab47bc, #8e24aa);
+  justify-content: center;
+  align-items: center;
+  margin-top: 1vw;
+  .leftArrow {
+    width: 26 * $desk + vw;
+    height: 22 * $desk + vw;
+    margin-right: 22 * $desk + vw;
+    cursor: pointer;
+  }
+  .leftArrowDisabled {
+    width: 26 * $desk + vw;
+    height: 22 * $desk + vw;
+    margin-right: 22 * $desk + vw;
+    // cursor: pointer;
+  }
+  .rightArrow {
+    width: 26 * $desk + vw;
+    height: 22 * $desk + vw;
+    transform: rotate(180deg);
+    cursor: pointer;
+  }
+  .rightArrowDisabled {
+    width: 26 * $desk + vw;
+    height: 22 * $desk + vw;
+    transform: rotate(180deg);
+    // cursor: pointer;
+  }
+  .pageStart {
+    width: 45 * $desk + vw;
+    height: 26 * $desk + vw;
+    border-radius: 5 * $desk + vw;
+    background: white;
+    margin-right: 22 * $desk + vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Segoe UI;
+    font-size: 18 * $desk + vw;
+    color: black;
+  }
+  .pageEnd {
+    width: 45 * $desk + vw;
+    height: 26 * $desk + vw;
+    border-radius: 5 * $desk + vw;
+    background: white;
+    margin-right: 22 * $desk + vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Segoe UI;
+    font-size: 18 * $desk + vw;
+    color: black;
+  }
+  p {
+    margin-right: 22 * $desk + vw;
+    color: white;
+  }
+}

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAC;EACV,QAAQ,EAAE,QAAQ;CAWnB;;AAZD,AAEE,WAFS,CAET,iBAAiB,CAAC;EAChB,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,aAAa;EAC9B,WAAW,EAAE,MAAM;EACnB,KAAK,EAAE,IAAI;EACX,aAAa,EAAE,GAAG;CACnB;;AARH,AASE,WATS,CAST,OAAO,CAAC;EACN,UAAU,EAAE,OAAkB;CAC/B",
+    "sources": [
+        "viewBranch.scss"
+    ],
+    "names": [],
+    "file": "viewBranch.css"
+}

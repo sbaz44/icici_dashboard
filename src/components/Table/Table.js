@@ -9,6 +9,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 // core components
 import styles from "assets/jss/material-dashboard-react/components/tableStyle.js";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
@@ -17,6 +18,7 @@ export default function CustomTable(props) {
   const { tableHead, tableData, tableHeaderColor } = props;
   return (
     <div className={classes.tableResponsive}>
+      {console.log(tableData)}
       <Table className={classes.table}>
         {tableHead !== undefined ? (
           <TableHead className={classes[tableHeaderColor + "TableHeader"]}>
@@ -27,6 +29,7 @@ export default function CustomTable(props) {
                     className={classes.tableCell + " " + classes.tableHeadCell}
                     key={key}
                     align="center"
+                    style={{ fontWeight: 'bold', }}
                   >
                     {prop}
                   </TableCell>
@@ -51,19 +54,25 @@ export default function CustomTable(props) {
           })} */}
           {tableData.map((row, index) => (
             <TableRow key={row.index} className={classes.tableBodyRow}>
-              <TableCell className={classes.tableCell} align="center">
+              <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
                 {row.Branch}
               </TableCell>
-              <TableCell className={classes.tableCell} align="center">
+              <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
                 {row.Camera_count}
               </TableCell>
-              <TableCell className={classes.tableCell} align="center">
+              <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
                 {row.People_count}
               </TableCell>
-              <TableCell className={classes.tableCell} align="center">
+              <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
                 {row.Alert_count}
               </TableCell>
-              <TableCell className={classes.tableCell} align="center">
+              <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }} >
+                {row.Open_time}
+              </TableCell>
+              <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
+                {row.Close_time}
+              </TableCell>
+              <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
                 {row.Image_link && (
                   <a
                     style={{ color: "black" }}
@@ -82,8 +91,13 @@ export default function CustomTable(props) {
                   </a>
                 )}
               </TableCell>
-              <TableCell className={classes.tableCell} align="center">
+              <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
                 {row.Created}
+              </TableCell>
+              <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
+                <NavLink to={'view/branch/' + row.Branch}>
+                  View
+                </NavLink>
               </TableCell>
             </TableRow>
           ))}

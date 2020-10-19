@@ -108,10 +108,13 @@ export default function TableList() {
               tableHead={[
                 "Branch",
                 "Camera Count",
-                "People_count",
-                "Alert_count",
+                "People Count",
+                "Alert Count",
+                "Open Time",
+                "Close Time",
                 "Image",
                 "Date",
+                "View"
               ]}
               // tableData={[
               //   ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],

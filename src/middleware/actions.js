@@ -5,12 +5,14 @@ export const GET_BRANCH_DETAILS = "GET_BRANCH_DETAILS";
 export const GET_BRANCH_REPORTS = "GET_BRANCH_REPORTS";
 export const GET_DASHBOARD_COUNT = "GET_DASHBOARD_COUNT"; //dashboard/dashboard
 export const GET_GRAPH_DATA = "GET_GRAPH_DATA";
+export const GET_VIEW_BRANCH_DETAIL = "GET_VIEW_BRANCH_DETAIL";
+export const GET_VIEW_BRANCH_CARD_DETAIL = "GET_VIEW_BRANCH_CARD_DETAIL";
 
 //post call
 export const POST_BRANCH_DETAILS = "POST_BRANCH_DETAILS";
 export const POST_BRANCH_REPORTS = "POST_BRANCH_REPORTS";
 
-const URL = "http://10.11.0.4:8000/dashboard";
+const URL = "http://192.168.1.6:8000/dashboard";
 
 //get calls
 export function getbranchDetails() {
@@ -91,6 +93,36 @@ export function graphData(payload) {
       .then((res) =>
         dispatch({
           type: GET_GRAPH_DATA,
+          payload: res.data,
+        })
+      )
+      .catch((err) => console.log("error"));
+  };
+}
+
+export function viewBranchDetail(payload, payload2) {
+  console.log(payload, payload2)
+  return (dispatch) => {
+    axios
+      .post(URL + "/branch/" + payload + "/dashboard?Date=" + payload2)
+      .then((res) =>
+        dispatch({
+          type: GET_VIEW_BRANCH_DETAIL,
+          payload: res.data,
+        })
+      )
+      .catch((err) => console.log("error"));
+  };
+}
+
+export function viewDetail(payload, payload2, payload3, payload4, payload5) {
+  console.log(payload, payload2)
+  return (dispatch) => {
+    axios
+      .get(URL + "/alert/" + payload + "?Type=" + payload2 + "&Subtype=" + payload3 + "&Date=" + payload4 + "&page_no=" + payload5)
+      .then((res) =>
+        dispatch({
+          type: GET_VIEW_BRANCH_CARD_DETAIL,
           payload: res.data,
         })
       )

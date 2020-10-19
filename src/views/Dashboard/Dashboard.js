@@ -23,6 +23,8 @@ import Table from "components/Table/Table.js";
 import Tasks from "components/Tasks/Tasks.js";
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import Danger from "components/Typography/Danger.js";
+import bg from "../../assets/img/bg.jpg";
+import smart from "../../assets/img/smartAI.png";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
@@ -38,15 +40,21 @@ import {
   dashboardCount,
   graphData,
 } from "../../middleware/actions";
-
+import $ from 'jquery'
 import {
   dailySalesChart,
   emailsSubscriptionChart,
   completedTasksChart,
 } from "variables/charts.js";
-
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+import { format } from 'date-fns';
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-
+var result = "";
 const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
@@ -57,11 +65,21 @@ export default function Dashboard() {
   const postBranchResponse = useSelector((state) => state.postBranchResponse);
   const branchReport = useSelector((state) => state.branchReport);
   const dispatch = useDispatch();
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+
+  const handleDateChange = (date) => {
+    result = format(date, 'dd-MM-yyyy')
+    setSelectedDate(date);
+    // dispatch(viewBranchDetail(props.match.params.branch, result));
+
+  };
   let [response, setResponse] = useState("");
   let [data, setData] = useState({
     Total_alerts: {
       labels: ["W", "T", "F", "S", "S", "M", "T"],
-      series: [[478, 8033, 1238, 14776, 0, 0, 120]],
+      series: [[478, 43, 1234, 14776, 0, 0, 1324],
+      [345, 8033, 656, 1244, 5560, 5550, 120],
+      [123, 8033, 3434, 1670, 34350, 3450, 6564]],
     },
     Social_distancing_alerts: {
       labels: ["W", "T", "F", "S", "S", "M", "T"],
@@ -76,9 +94,15 @@ export default function Dashboard() {
       series: [[245, 7729, 1, 14659, 0, 0, 8]],
     },
   });
+
   useEffect(() => {
+    var todaysDate = new Date()
+    result = format(todaysDate, 'dd-MM-yyyy')
     dispatch(dashboardCount());
     dispatch(graphData());
+    $('#root').find('header').hide()
+    $('#root').find('.makeStyles-content-3').css('margin-top', '0')
+    $('#root').find('.makeStyles-content-3').css('padding', '0px 15px')
     console.log(graph_data);
     // return () => {
     //   console.log("cleared");
@@ -86,8 +110,31 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div>
-      {console.log(graph_data)}
+    <div id="dashboard-page">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: "2vw" }}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img src={smart} style={{ width: "2.8vw", height: '2.8vw', objectFit: "contain" }} />
+            <p style={{ fontSize: "1.5vw", marginLeft: "0.5vw", fontWeight: "bold", paddingTop: '0.5vw' }} >
+              Smart Bank Analytics System
+                    </p>
+          </div>
+          <KeyboardDatePicker
+            disableToolbar
+            disableFuture
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date-picker-inline"
+            label="Search by Date"
+            value={selectedDate}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              'aria-label': 'change date',
+            }}
+          />
+        </MuiPickersUtilsProvider>
+      </div>
       <GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
@@ -95,7 +142,7 @@ export default function Dashboard() {
               <CardIcon color="danger">
                 <Icon>info_outline</Icon>
               </CardIcon>
-              <p className={classes.cardCategory}>Alerts</p>
+              <p className={classes.cardCategory} style={{ fontWeight: 'bold', color: '#3C4858' }}> Total Alerts Generated</p>
               <h3 className={classes.cardTitle}>
                 {dashboard_Count.Alert_count}
               </h3>
@@ -115,7 +162,7 @@ export default function Dashboard() {
               <CardIcon color="info">
                 <Accessibility />
               </CardIcon>
-              <p className={classes.cardCategory}>People</p>
+              <p className={classes.cardCategory} style={{ fontWeight: 'bold', color: '#3C4858' }}> Total Customer Visited</p>
               <h3 className={classes.cardTitle}>
                 {dashboard_Count.People_count}
               </h3>
@@ -159,13 +206,13 @@ export default function Dashboard() {
               <CardIcon color="success">
                 <Store />
               </CardIcon>
-              <p className={classes.cardCategory}>Branches</p>
+              <p className={classes.cardCategory} style={{ fontWeight: 'bold', color: '#3C4858' }}>Live Branches</p>
               <h3 className={classes.cardTitle}>
                 {dashboard_Count.Branch_count}
               </h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/table">
+              <a href="/admin/branch">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   {/* <DateRange /> */}
                   View More
@@ -176,22 +223,7 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card chart>
-            <CardHeader color="success">
-              <ChartistGraph
-                className="ct-chart"
-                data={graph_data.Total_alerts}
-                type="Line"
-                options={dailySalesChart.options}
-                listener={dailySalesChart.animation}
-              />
-            </CardHeader>
-            <CardBody>
-              <h4 className={classes.cardTitle}>Total Alerts</h4>
-            </CardBody>
-          </Card>
-        </GridItem>
+
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="warning">
@@ -205,8 +237,15 @@ export default function Dashboard() {
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Social Distancing Alerts</h4>
+              <h4 className={classes.cardTitle} style={{ fontWeight: 'bold', color: '#3C4858' }}>External Threats</h4>
             </CardBody>
+            <CardFooter stats>
+              <a href="http://192.168.1.6:8118/tickets/filter/?f=1&gp=5f89b11c3c5b1a0011662957" target="_blank">
+                <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
+                  View More
+                </div>
+              </a>
+            </CardFooter>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
@@ -221,8 +260,16 @@ export default function Dashboard() {
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Teller Missing Alerts</h4>
+              <h4 className={classes.cardTitle} style={{ fontWeight: 'bold', color: '#3C4858' }}>Business Insights</h4>
             </CardBody>
+            <CardFooter stats>
+              <a href={"/admin/view/All/Business_insights/null/" + result}>
+                <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
+                  {/* <DateRange /> */}
+                  View More
+                </div>
+              </a>
+            </CardFooter>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
@@ -237,11 +284,21 @@ export default function Dashboard() {
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Camera Tampering Alerts</h4>
+              <h4 className={classes.cardTitle} style={{ fontWeight: 'bold', color: '#3C4858' }}>Internal Compliance</h4>
             </CardBody>
+            <CardFooter stats>
+              <a href={"/admin/view/All/Internal_compliance/null/" + result}>
+                <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
+                  {/* <DateRange /> */}
+                  View More
+                </div>
+              </a>
+            </CardFooter>
+
           </Card>
         </GridItem>
       </GridContainer>
+      <img src={bg} alt="" style={{ width: "100%", height: '15vw', objectFit: "cover" }} />
     </div>
   );
 }
