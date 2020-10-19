@@ -10,15 +10,25 @@ import TableCell from "@material-ui/core/TableCell";
 // core components
 import styles from "assets/jss/material-dashboard-react/components/tableStyle.js";
 import { NavLink } from "react-router-dom";
+import Dialog from '@material-ui/core/Dialog';
 
 const useStyles = makeStyles(styles);
 
 export default function CustomTable(props) {
   const classes = useStyles();
   const { tableHead, tableData, tableHeaderColor } = props;
+  const [open, setOpen] = React.useState(false);
+  const [imageLink, setimageLink] = React.useState("");
+  const handleClickOpen = (link) => {
+    setimageLink(link)
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div className={classes.tableResponsive}>
-      {console.log(tableData)}
       <Table className={classes.table}>
         {tableHead !== undefined ? (
           <TableHead className={classes[tableHeaderColor + "TableHeader"]}>
@@ -39,19 +49,7 @@ export default function CustomTable(props) {
           </TableHead>
         ) : null}
         <TableBody>
-          {/* {tableData.map((prop, key) => {
-            return (
-              <TableRow key={key} className={classes.tableBodyRow}>
-                {prop.map((prop, key) => {
-                  return (
-                    <TableCell className={classes.tableCell} key={key}>
-                      {prop}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            );
-          })} */}
+
           {tableData.map((row, index) => (
             <TableRow key={row.index} className={classes.tableBodyRow}>
               <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
@@ -72,36 +70,40 @@ export default function CustomTable(props) {
               <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
                 {row.Close_time}
               </TableCell>
-              <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
+              <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }} onClick={() => handleClickOpen(row.Image_link)}>
                 {row.Image_link && (
-                  <a
-                    style={{ color: "black" }}
-                    href={row.Image_link}
-                    target="_blank"
-                    alt=""
-                  >
-                    <img
-                      src={row.Image_link}
-                      style={{
-                        width: "100px",
-                        height: "100px",
-                        objectFit: "contain",
-                      }}
-                    />
-                  </a>
+                  <img
+                    src={row.Image_link}
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      objectFit: "contain",
+                      cursor: 'pointer'
+                    }}
+                  />
                 )}
               </TableCell>
               <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
                 {row.Created}
               </TableCell>
               <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
-                <NavLink to={'view/branch/' + row.Branch}>
+                <NavLink to={'view/branch/' + row.Branch} onClick={() => {
+                  let data = {
+                    image: row.Image_link,
+                    open: row.Open_time,
+                    close: row.Close_time,
+                  };
+                  localStorage.setItem("smData", JSON.stringify(data));
+                }}>
                   View
                 </NavLink>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
+        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+          <img src={imageLink} style={{ padding: "1vw" }} />
+        </Dialog>
       </Table>
     </div>
   );

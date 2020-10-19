@@ -36,7 +36,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import { useSelector, useDispatch } from "react-redux";
 import { bugs, website, server } from "variables/general.js";
 import CardAvatar from "components/Card/CardAvatar";
-
+import Button from '@material-ui/core/Button';
 import DateFnsUtils from '@date-io/date-fns';
 import { format } from 'date-fns';
 import $ from 'jquery';
@@ -58,9 +58,10 @@ import {
     emailsSubscriptionChart,
     completedTasksChart,
 } from "variables/charts.js";
+import Dialog from '@material-ui/core/Dialog';
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-import avatar from "assets/img/faces/marc.jpg";
+import avatar from "assets/img/dummy.png";
 import { FormControlLabel } from "@material-ui/core";
 var result = "";
 const useStyles = makeStyles(styles);
@@ -94,7 +95,15 @@ export default function ViewBranch(props) {
     const postBranchResponse = useSelector((state) => state.postBranchResponse);
     const branchReport = useSelector((state) => state.branchReport);
     const dispatch = useDispatch();
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = (link) => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
     const [selectedDate, setSelectedDate] = React.useState(new Date());
+    const [localData, setLocalData] = React.useState({});
     const handleDateChange = (date) => {
         result = format(date, 'dd-MM-yyyy')
         setSelectedDate(date);
@@ -116,6 +125,10 @@ export default function ViewBranch(props) {
         $('#root').find('header').hide()
         $('#root').find('.makeStyles-content-3').css('margin-top', '0')
         $('#root').find('.makeStyles-content-3').css('padding', '0px 15px')
+        let obj = JSON.parse(localStorage.getItem("smData"));
+        setLocalData(obj)
+        console.log(localData)
+        // this.setState({ ProfilePic: obj.image, Name: obj.name });
         // return () => {
         //   console.log("cleared");
         // };
@@ -182,7 +195,9 @@ export default function ViewBranch(props) {
     });
     return (
         <div className="viewBranch">
-
+            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+                <img src={localData.image} style={{ padding: "1vw" }} />
+            </Dialog>
             <div id="header-container">
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <p style={{ fontSize: "1.5vw", marginLeft: "0.5vw", fontWeight: "bold", paddingTop: '0.5vw' }}>
@@ -203,6 +218,19 @@ export default function ViewBranch(props) {
                         }}
                     />
                 </MuiPickersUtilsProvider>
+            </div>
+            <div style={{ display: 'flex', width: "25vw", justifyContent: 'space-around', marginBottom: "1vw" }}>
+                <Button variant="contained" color="primary" style={{ marginRight: "0.2vw", marginLeft: "0.2vw", backgroundColor: '#43a047' }}>
+                    Branch Open Time: {localData.open}
+                </Button>
+                <Button variant="contained" color="primary" style={{ marginRight: "0.2vw", marginLeft: "0.2vw", backgroundColor: '#43a047' }}>
+                    Branch Close Time: {localData.close}
+                </Button>
+                <Button variant="contained" color="primary" style={{ marginRight: "0.2vw", marginLeft: "0.2vw", backgroundColor: '#43a047' }}
+                    onClick={handleClickOpen}
+                >
+                    View Heatmap
+      </Button>
             </div>
             <GridContainer>
                 <GridItem xs={12} sm={6} md={3}>
@@ -401,37 +429,61 @@ export default function ViewBranch(props) {
             <GridContainer>
                 <GridItem xs={12} sm={6} md={4}>
                     <Card>
-
-                        <div style={{ width: '100%', height: '17vw' }}>
-                            <ReactSpeedometer
+                        <div style={{ width: '100%', height: '16vw' }}>
+                            {/* <ReactSpeedometer
                                 paddingVertical={10}
                                 fluidWidth={true}
                                 height={200}
                                 needleHeightRatio={0.7}
                                 value={data.Covid_safety}
-                                segments={5555}
-                                customSegmentStops={[0, 1.5, 2.5, 3.5]}
+                                // segments={2222}
+                                // startColor="#fb8c00"
+                                // endColor="#e53935"
+                                // customSegmentStops={[0, 1.5, 2.5, 3.5]}
+                                // maxValue={3.5}
+                                // minValue={0}
                                 // segmentColors={['#9399ff', '#14ffec', '#00bbf0']}
-                                currentValueText="Covid Safety: ${value}"
+                                currentValueText="Covid Safety"
                                 // currentValueText="Covid Safety"
-                                maxValue={3.5}
-                                minValue={0}
-                                maxSegmentLabels={2}
+                                // maxValue={3.5}
+                                // minValue={0}
+                                // maxSegmentLabels={0}
                                 customSegmentLabels={[
+                                    {
+                                        text: 'Very Bad',
+                                        position: 'INSIDE',
+                                        color: '#555',
+                                    },
+                                    {
+                                        text: 'Bad',
+                                        position: 'INSIDE',
+                                        color: '#555',
+                                    },
+                                    {
+                                        text: 'Ok',
+                                        position: 'INSIDE',
+                                        color: '#555',
+                                        fontSize: '19px',
+                                    },
                                     {
                                         text: 'Good',
                                         position: 'INSIDE',
-                                        color: '#d8dee9',
+                                        color: '#555',
                                     },
                                     {
-                                        text: 'Great',
+                                        text: 'Very Good',
                                         position: 'INSIDE',
-                                        color: '#d8dee9',
+                                        color: '#555',
                                     },
                                     {
-                                        text: 'Awesome!',
+                                        text: 'Very Good',
                                         position: 'INSIDE',
-                                        color: '#d8dee9',
+                                        color: '#555',
+                                    },
+                                    {
+                                        text: 'Very Good',
+                                        position: 'INSIDE',
+                                        color: '#555',
                                     },
                                 ]}
                                 ringWidth={47}
@@ -439,8 +491,45 @@ export default function ViewBranch(props) {
                                 needleTransition="easeElastic"
                                 needleColor={'#a7ff83'}
                                 textColor={'black'}
+                            /> */}
+
+                            <ReactSpeedometer
+                                paddingVertical={10}
+                                fluidWidth={true}
+                                height={200}
+                                needleHeightRatio={0.7}
+                                value={data.Covid_safety}
+                                customSegmentStops={[0, 5, 10, 20]}
+                                maxValue={20}
+                                segmentColors={['#0B8500', '#fb8c00', '#FF4433']}
+                                currentValueText="Covid Safety"
+                                customSegmentLabels={[
+                                    {
+                                        text: 'Noraml',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                    {
+                                        text: 'Medium',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                    {
+                                        text: 'High',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                ]}
+                                ringWidth={47}
+                                needleTransitionDuration={3333}
+                                needleTransition="easeElastic"
+                                needleColor={'black'}
+                                textColor={'black'}
                             />
 
+                        </div>
+                        <div style={{ textAlign: 'center', fontSize: "1.3vw", fontWeight: 'bold' }}>
+                            {data.Covid_safety}
                         </div>
                         <CardFooter stats>
                             <a href={"/admin/view/" + props.match.params.branch + "/Business_insights/covid/" + result}>
@@ -454,173 +543,24 @@ export default function ViewBranch(props) {
                 </GridItem>
                 <GridItem xs={12} sm={6} md={4}>
                     <Card>
-                        <div style={{ width: '100%', height: '17vw' }}>
+                        <div style={{ width: '100%', height: '16vw' }}>
 
-                            <ReactSpeedometer
+                            {/* <ReactSpeedometer
                                 paddingVertical={10}
                                 fluidWidth={true}
                                 height={200}
                                 needleHeightRatio={0.7}
                                 value={data.ATM_performance}
-                                customSegmentStops={[0, 1.5, 2.5, 3.5]}
-                                segmentColors={['#9399ff', '#14ffec', '#00bbf0']}
+                                // customSegmentStops={[0, 1.5, 2.5, 3.5]}
+                                // segmentColors={['#9399ff', '#14ffec', '#00bbf0']}
                                 // currentValueText="ATM Lobby Performance"
-                                currentValueText="ATM Lobby Performance: ${value}"
-                                maxValue={3.5}
-                                customSegmentLabels={[
-                                    {
-                                        text: 'Good',
-                                        position: 'INSIDE',
-                                        color: '#d8dee9',
-                                    },
-                                    {
-                                        text: 'Great',
-                                        position: 'INSIDE',
-                                        color: '#d8dee9',
-                                    },
-                                    {
-                                        text: 'Awesome!',
-                                        position: 'INSIDE',
-                                        color: '#d8dee9',
-                                    },
-                                ]}
-                                ringWidth={47}
-                                needleTransitionDuration={3333}
-                                needleTransition="easeElastic"
-                                needleColor={'#a7ff83'}
-                                textColor={'black'}
-                            />
-                        </div>
-                        <CardFooter stats>
-                            <a href={"/admin/view/" + props.match.params.branch + "/External_threats/atm/" + result}>
-                                <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
-                                    {/* <DateRange /> */}
-                  View More
-                </div>
-                            </a>
-                        </CardFooter>
-                    </Card>
-                </GridItem>
-
-                <GridItem xs={12} sm={6} md={4}>
-                    <Card>
-                        <div style={{ width: '100%', height: '17vw' }}>
-
-                            <ReactSpeedometer
-                                paddingVertical={10}
-                                fluidWidth={true}
-                                height={200}
-                                needleHeightRatio={0.7}
-                                value={data.UPS_DG}
-                                customSegmentStops={[0, 1.5, 2.5, 3.5]}
-                                segmentColors={['#b48ead', '#14ffec', '#00bbf0']}
-                                // currentValueText="UPS and DG Performance"
-                                currentValueText="UPS and DG Performance: ${value}"
-                                maxValue={3.5}
-                                customSegmentLabels={[
-                                    {
-                                        text: 'Good',
-                                        position: 'INSIDE',
-                                        color: '#d8dee9',
-                                    },
-                                    {
-                                        text: 'Great',
-                                        position: 'INSIDE',
-                                        color: '#d8dee9',
-                                    },
-                                    {
-                                        text: 'Awesome!',
-                                        position: 'INSIDE',
-                                        color: '#d8dee9',
-                                    },
-                                ]}
-                                ringWidth={47}
-                                needleTransitionDuration={3333}
-                                needleTransition="easeElastic"
-                                needleColor={'#a7ff83'}
-                                textColor={'black'}
-                            />
-                        </div>
-                        <CardFooter stats>
-                            <a href={"/admin/view/" + props.match.params.branch + "/Internal_compliance/ups/" + result}>
-                                <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
-                                    {/* <DateRange /> */}
-                  View More
-                </div>
-                            </a>
-                        </CardFooter>
-                    </Card>
-                </GridItem>
-                <GridItem xs={12} sm={6} md={4}>
-                    <Card>
-                        <div style={{ width: '100%', height: '17vw' }}>
-
-                            <ReactSpeedometer
-                                paddingVertical={10}
-                                fluidWidth={true}
-                                height={200}
-                                needleHeightRatio={0.7}
-                                value={data.Branch_performance}
-                                customSegmentStops={[0, 1.5, 2.5, 3.5]}
-                                segmentColors={['#b48ead', '#14ffec', '#00bbf0']}
-                                // currentValueText="Branch Lobby Performance"
-                                currentValueText="Branch Lobby Performance: ${value}"
-                                maxValue={3.5}
-                                customSegmentLabels={[
-                                    {
-                                        text: 'Good',
-                                        position: 'INSIDE',
-                                        color: '#d8dee9',
-                                    },
-                                    {
-                                        text: 'Great',
-                                        position: 'INSIDE',
-                                        color: '#d8dee9',
-                                    },
-                                    {
-                                        text: 'Awesome!',
-                                        position: 'INSIDE',
-                                        color: '#d8dee9',
-                                    },
-                                ]}
-                                ringWidth={47}
-                                needleTransitionDuration={3333}
-                                needleTransition="easeElastic"
-                                needleColor={'#a7ff83'}
-                                textColor={'black'}
-                            />
-                        </div>
-                        <CardFooter stats>
-                            <a href={"/admin/view/" + props.match.params.branch + "/Business_insights/branch/" + result}>
-                                <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
-                                    {/* <DateRange /> */}
-                  View More
-                </div>
-                            </a>
-                        </CardFooter>
-                    </Card>
-                </GridItem>
-                <GridItem xs={12} sm={6} md={4}>
-                    <Card>
-
-                        <div style={{ width: '100%', height: '17vw' }}>
-                            <ReactSpeedometer
-                                paddingVertical={10}
-                                fluidWidth={true}
-                                height={200}
-                                needleHeightRatio={0.7}
-                                value={data.Average_waiting_time}
-                                // customSegmentStops={[0, 60]}
                                 segments={5555}
                                 startColor="green"
                                 endColor="red"
-                                // segmentColors={['#9399ff', '#14ffec', '#00bbf0']}
-                                // currentValueText="Average Waiting Time"
-                                currentValueText="Average Waiting Time: ${value}"
-
-                                maxValue={60}
+                                currentValueText="ATM Lobby Performance"
+                                maxValue={3.5}
                                 minValue={0}
-                                maxSegmentLabels={2}
+                                maxSegmentLabels={0}
                                 // customSegmentLabels={[
                                 //     {
                                 //         text: 'Good',
@@ -643,8 +583,315 @@ export default function ViewBranch(props) {
                                 needleTransition="easeElastic"
                                 needleColor={'#a7ff83'}
                                 textColor={'black'}
+                            /> */}
+                            <ReactSpeedometer
+                                paddingVertical={10}
+                                fluidWidth={true}
+                                height={200}
+                                needleHeightRatio={0.7}
+                                value={data.ATM_performance}
+                                customSegmentStops={[0, 5, 10, 20]}
+                                maxValue={20}
+                                segmentColors={['#0B8500', '#fb8c00', '#FF4433']}
+                                currentValueText="ATM Lobby Performance"
+                                customSegmentLabels={[
+                                    {
+                                        text: 'Noraml',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                    {
+                                        text: 'Medium',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                    {
+                                        text: 'High',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                ]}
+                                ringWidth={47}
+                                needleTransitionDuration={3333}
+                                needleTransition="easeElastic"
+                                needleColor={'black'}
+                                textColor={'black'}
+                            />
+                        </div>
+                        <div style={{ textAlign: 'center', fontSize: "1.3vw", fontWeight: 'bold' }}>
+                            {data.ATM_performance}
+                        </div>
+                        <CardFooter stats>
+                            <a href={"/admin/view/" + props.match.params.branch + "/External_threats/atm/" + result}>
+                                <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
+                                    {/* <DateRange /> */}
+                  View More
+                </div>
+                            </a>
+                        </CardFooter>
+                    </Card>
+                </GridItem>
+
+                <GridItem xs={12} sm={6} md={4}>
+                    <Card >
+                        <div style={{ width: '100%', height: '16vw' }}>
+
+                            {/* <ReactSpeedometer
+                                paddingVertical={10}
+                                fluidWidth={true}
+                                height={200}
+                                needleHeightRatio={0.7}
+                                value={data.UPS_DG}
+                                segments={5555}
+                                startColor="green"
+                                endColor="red"
+                                // customSegmentStops={[0, 1.5, 2.5, 3.5]}
+                                // segmentColors={['#b48ead', '#14ffec', '#00bbf0']}
+                                // currentValueText="UPS and DG Performance"
+                                currentValueText="UPS and DG Performance"
+                                maxValue={3.5}
+                                minValue={0}
+                                maxSegmentLabels={0}
+                                // customSegmentLabels={[
+                                //     {
+                                //         text: 'Good',
+                                //         position: 'INSIDE',
+                                //         color: '#d8dee9',
+                                //     },
+                                //     {
+                                //         text: 'Great',
+                                //         position: 'INSIDE',
+                                //         color: '#d8dee9',
+                                //     },
+                                //     {
+                                //         text: 'Awesome!',
+                                //         position: 'INSIDE',
+                                //         color: '#d8dee9',
+                                //     },
+                                // ]}
+                                ringWidth={47}
+                                needleTransitionDuration={3333}
+                                needleTransition="easeElastic"
+                                needleColor={'#a7ff83'}
+                                textColor={'black'}
+                            /> */}
+                            <ReactSpeedometer
+                                paddingVertical={10}
+                                fluidWidth={true}
+                                height={200}
+                                needleHeightRatio={0.7}
+                                value={data.UPS_DG}
+                                customSegmentStops={[0, 1.5, 3,]}
+                                maxValue={3}
+                                segmentColors={['#0B8500', '#FF4433']}
+                                currentValueText="UPS and DG Performance"
+                                customSegmentLabels={[
+                                    {
+                                        text: 'ON',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                    {
+                                        text: 'OFF',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+
+                                ]}
+                                ringWidth={47}
+                                needleTransitionDuration={3333}
+                                needleTransition="easeElastic"
+                                needleColor={'black'}
+                                textColor={'black'}
+                            />
+                        </div>
+                        <div style={{ textAlign: 'center', fontSize: "1.3vw", fontWeight: 'bold' }}>
+                            {data.UPS_DG}
+                        </div>
+                        <CardFooter stats>
+                            <a href={"/admin/view/" + props.match.params.branch + "/Internal_compliance/ups/" + result}>
+                                <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
+                                    {/* <DateRange /> */}
+                  View More
+                </div>
+                            </a>
+                        </CardFooter>
+                    </Card>
+                </GridItem>
+                <GridItem xs={12} sm={6} md={4}>
+                    <Card>
+                        <div style={{ width: '100%', height: '16vw' }}>
+
+                            {/* <ReactSpeedometer
+                                paddingVertical={10}
+                                fluidWidth={true}
+                                height={200}
+                                needleHeightRatio={0.7}
+                                value={data.Branch_performance}
+                                segments={5555}
+                                startColor="green"
+                                endColor="red"
+                                // customSegmentStops={[0, 1.5, 2.5, 3.5]}
+                                // segmentColors={['#b48ead', '#14ffec', '#00bbf0']}
+                                // currentValueText="Branch Lobby Performance"
+                                currentValueText="Branch Lobby Performance"
+                                maxValue={3.5}
+                                minValue={0}
+                                maxSegmentLabels={0}
+                                // customSegmentLabels={[
+                                //     {
+                                //         text: 'Good',
+                                //         position: 'INSIDE',
+                                //         color: '#d8dee9',
+                                //     },
+                                //     {
+                                //         text: 'Great',
+                                //         position: 'INSIDE',
+                                //         color: '#d8dee9',
+                                //     },
+                                //     {
+                                //         text: 'Awesome!',
+                                //         position: 'INSIDE',
+                                //         color: '#d8dee9',
+                                //     },
+                                // ]}
+                                ringWidth={47}
+                                needleTransitionDuration={3333}
+                                needleTransition="easeElastic"
+                                needleColor={'#a7ff83'}
+                                textColor={'black'}
+                            /> */}
+
+                            <ReactSpeedometer
+                                paddingVertical={10}
+                                fluidWidth={true}
+                                height={200}
+                                needleHeightRatio={0.7}
+                                value={data.Branch_performance}
+                                customSegmentStops={[0, 5, 10, 20]}
+                                maxValue={20}
+                                segmentColors={['#0B8500', '#fb8c00', '#FF4433']}
+                                currentValueText="Branch Lobby Performance"
+                                customSegmentLabels={[
+                                    {
+                                        text: 'Noraml',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                    {
+                                        text: 'Medium',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                    {
+                                        text: 'High',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                ]}
+                                ringWidth={47}
+                                needleTransitionDuration={3333}
+                                needleTransition="easeElastic"
+                                needleColor={'black'}
+                                textColor={'black'}
                             />
 
+                        </div>
+                        <div style={{ textAlign: 'center', fontSize: "1.3vw", fontWeight: 'bold' }}>
+                            {data.Branch_performance}
+                        </div>
+                        <CardFooter stats>
+                            <a href={"/admin/view/" + props.match.params.branch + "/Business_insights/branch/" + result}>
+                                <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
+                                    {/* <DateRange /> */}
+                  View More
+                </div>
+                            </a>
+                        </CardFooter>
+                    </Card>
+                </GridItem>
+                <GridItem xs={12} sm={6} md={4}>
+                    <Card>
+
+                        <div style={{ width: '100%', height: '16vw' }}>
+                            {/* <ReactSpeedometer
+                                paddingVertical={10}
+                                fluidWidth={true}
+                                height={200}
+                                needleHeightRatio={0.7}
+                                value={data.Average_waiting_time}
+                                // customSegmentStops={[0, 60]}
+                                segments={5555}
+                                startColor="green"
+                                endColor="red"
+                                // segmentColors={['#9399ff', '#14ffec', '#00bbf0']}
+                                // currentValueText="Average Waiting Time"
+                                currentValueText="Average Waiting Time"
+                                maxSegmentLabels={0}
+                                maxValue={60}
+                                minValue={0}
+                                // maxSegmentLabels={2}
+                                // customSegmentLabels={[
+                                //     {
+                                //         text: 'Good',
+                                //         position: 'INSIDE',
+                                //         color: '#d8dee9',
+                                //     },
+                                //     {
+                                //         text: 'Great',
+                                //         position: 'INSIDE',
+                                //         color: '#d8dee9',
+                                //     },
+                                //     {
+                                //         text: 'Awesome!',
+                                //         position: 'INSIDE',
+                                //         color: '#d8dee9',
+                                //     },
+                                // ]}
+                                ringWidth={47}
+                                needleTransitionDuration={3333}
+                                needleTransition="easeElastic"
+                                needleColor={'#a7ff83'}
+                                textColor={'black'}
+                            /> */}
+
+                            <ReactSpeedometer
+                                paddingVertical={10}
+                                fluidWidth={true}
+                                height={200}
+                                needleHeightRatio={0.7}
+                                value={data.Average_waiting_time}
+                                customSegmentStops={[0, 20, 40, 60]}
+                                maxValue={60}
+                                segmentColors={['#0B8500', '#fb8c00', '#FF4433']}
+                                currentValueText="Average Waiting Time"
+                                customSegmentLabels={[
+                                    {
+                                        text: 'Noraml',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                    {
+                                        text: 'Medium',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                    {
+                                        text: 'High',
+                                        position: 'INSIDE',
+                                        color: 'white',
+                                    },
+                                ]}
+                                ringWidth={47}
+                                needleTransitionDuration={3333}
+                                needleTransition="easeElastic"
+                                needleColor={'black'}
+                                textColor={'black'}
+                            />
+
+                        </div>
+                        <div style={{ textAlign: 'center', fontSize: "1.3vw", fontWeight: 'bold' }}>
+                            {data.Average_waiting_time}
                         </div>
                         <CardFooter stats>
                             {/* <a href="/admin/branch">
@@ -671,10 +918,15 @@ export default function ViewBranch(props) {
                     </Card>
                 </GridItem>
             </GridContainer>
-
+            {/* 
             <GridContainer>
+                <GridItem xs={12} sm={6} md={4}>
+                    <Card >
 
-            </GridContainer>
+                        
+                    </Card>
+                </GridItem>
+            </GridContainer> */}
 
         </div >
     );

@@ -11,10 +11,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import {
   getbranchDetails,
-  postBranchDetails,
-  getbranchReports,
-  postBranchReports,
-  dashboardCount,
+
 } from "../../middleware/actions";
 
 const styles = {
@@ -52,11 +49,9 @@ const useStyles = makeStyles(styles);
 export default function TableList() {
   const classes = useStyles();
   const branches = useSelector((state) => state.branches);
-  const dashboard_Count = useSelector((state) => state.dashboard_Count);
-  const postBranchResponse = useSelector((state) => state.postBranchResponse);
-  const branchReport = useSelector((state) => state.branchReport);
+
   const dispatch = useDispatch();
-  let [response, setResponse] = useState("");
+
   useEffect(() => {
     dispatch(getbranchDetails());
     // console.log(branches);
@@ -64,38 +59,9 @@ export default function TableList() {
     //   console.log("cleared");
     // };
   }, []);
-  const data = [
-    {
-      Branch: "string",
-      Camera_count: 10,
-      People_count: 20,
-      Alert_count: 30,
-      Image_link:
-        "https://res.cloudinary.com/dubm0zyx2/image/upload/v1570085339/13497809_1755248361385609_3709209667542308841_o_euhljv.jpg",
-      Date: "string",
-    },
-    {
-      Branch: "string",
-      Camera_count: 30,
-      People_count: 50,
-      Alert_count: 70,
-      Image_link:
-        "https://res.cloudinary.com/dubm0zyx2/image/upload/v1570085339/13497809_1755248361385609_3709209667542308841_o_euhljv.jpg",
-      Date: "string",
-    },
-    {
-      Branch: "string",
-      Camera_count: 20,
-      People_count: 20,
-      Alert_count: 30,
-      Image_link:
-        "https://res.cloudinary.com/dubm0zyx2/image/upload/v1570085339/13497809_1755248361385609_3709209667542308841_o_euhljv.jpg",
-      Date: "string",
-    },
-  ];
+
   return (
     <GridContainer>
-      {console.log(branches)}
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
@@ -116,57 +82,13 @@ export default function TableList() {
                 "Date",
                 "View"
               ]}
-              // tableData={[
-              //   ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
-              //   ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-              //   ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-              //   ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-              //   ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-              //   ["Mason Porter", "Chile", "Gloucester", "$78,615"],
-              // ]}
+
               tableData={branches}
             />
           </CardBody>
         </Card>
       </GridItem>
-      {/* <GridItem xs={12} sm={12} md={12}>
-        <Card plain>
-          <CardHeader plain color="primary">
-            <h4 className={classes.cardTitleWhite}>
-              Table on Plain Background
-            </h4>
-            <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p>
-          </CardHeader>
-          <CardBody>
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["ID", "Name", "Country", "City", "Salary"]}
-              tableData={[
-                ["1", "Dakota Rice", "$36,738", "Niger", "Oud-Turnhout"],
-                ["2", "Minerva Hooper", "$23,789", "Curaçao", "Sinaai-Waas"],
-                ["3", "Sage Rodriguez", "$56,142", "Netherlands", "Baileux"],
-                [
-                  "4",
-                  "Philip Chaney",
-                  "$38,735",
-                  "Korea, South",
-                  "Overland Park"
-                ],
-                [
-                  "5",
-                  "Doris Greene",
-                  "$63,542",
-                  "Malawi",
-                  "Feldkirchen in Kärnten"
-                ],
-                ["6", "Mason Porter", "$78,615", "Chile", "Gloucester"]
-              ]}
-            />
-          </CardBody>
-        </Card>
-      </GridItem> */}
+
     </GridContainer>
   );
 }
