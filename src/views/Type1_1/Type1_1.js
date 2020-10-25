@@ -67,8 +67,13 @@ export default function Type1_1(props) {
   //   let [response, setResponse] = useState("");
 
   useEffect(() => {
-    var todaysDate = new Date();
-    result = format(todaysDate, "dd-MM-yyyy");
+    // var todaysDate = new Date();
+    // result = format(todaysDate, "dd-MM-yyyy");
+    // console.log(props.match.params.date);
+    var datee = props.match.params.date;
+    var newdate = datee.split("-").reverse().join("-");
+    setSelectedDate(newdate);
+    result = props.match.params.date;
     dispatch(getTypeDetail(props.match.params.type, result));
     $("#root").find("header").hide();
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
@@ -103,7 +108,11 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Weapon}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Weapon">
+              <a
+                href={
+                  "/admin/details/threats/External_threats/Weapon/" + result
+                }
+              >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -128,7 +137,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Tampering}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Tampering">
+              <a href="/admin/details/threats/External_threats/Tampering">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -158,7 +167,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Mask}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Mask">
+              <a href="/admin/details/threats/External_threats/Mask">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -184,7 +193,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Fire}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Fire">
+              <a href="/admin/details/threats/External_threats/Fire">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -210,7 +219,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Exceeded}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Exceeded">
+              <a href="/admin/details/threats/External_threats/Exceeded">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -235,7 +244,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Trespass}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Trespass">
+              <a href="/admin/details/threats/External_threats/Trespass">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -264,7 +273,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Loitering}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Loitering">
+              <a href="/admin/details/threats/External_threats/Loitering">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -293,7 +302,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Helmet}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Helmet">
+              <a href="/admin/details/threats/External_threats/Helmet">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -322,7 +331,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Defective}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Defective">
+              <a href="/admin/details/threats/External_threats/Defective">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -357,7 +366,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Loitering}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Loitering">
+              <a href="/admin/details/threats/Business_insights/Loitering">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -382,7 +391,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.People_count}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/People_count">
+              <a href="/admin/details/threats/Business_insights/People_count">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -411,7 +420,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Unattended}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Unattended">
+              <a href="/admin/details/threats/Business_insights/Unattended">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -440,7 +449,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Thermal}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Thermal">
+              <a href="/admin/details/threats/Business_insights/Thermal">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -469,7 +478,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Social}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Social">
+              <a href="/admin/details/threats/Business_insights/Social">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -493,12 +502,12 @@ export default function Type1_1(props) {
                 className={classes.cardCategory}
                 style={{ fontWeight: "bold", color: "#3C4858" }}
               >
-                Vault Realted Alert
+                Vault Related Alert
               </p>
               <h3 className={classes.cardTitle}>{data.Vault}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Vault">
+              <a href="/admin/details/threats/Business_insights/Vault">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -530,7 +539,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.People_count}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/People_count">
+              <a href="/admin/details/threats/Internal_compliance/People_count">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -559,7 +568,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Unattended}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Unattended">
+              <a href="/admin/details/threats/Internal_compliance/Unattended">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -583,12 +592,12 @@ export default function Type1_1(props) {
                 className={classes.cardCategory}
                 style={{ fontWeight: "bold", color: "#3C4858" }}
               >
-                Vault Realted Alert
+                Vault Related Alert
               </p>
               <h3 className={classes.cardTitle}>{data.Vault}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Vault">
+              <a href="/admin/details/threats/Internal_compliance/Vault">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -620,7 +629,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Person}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Person">
+              <a href="/admin/details/threats/Covid_safety/Person">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -649,7 +658,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Social}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Social">
+              <a href="/admin/details/threats/Covid_safety/Social">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -678,7 +687,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Temperature}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href="/admin/details/threats/Temperature">
+              <a href="/admin/details/threats/Covid_safety/Temperature">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>

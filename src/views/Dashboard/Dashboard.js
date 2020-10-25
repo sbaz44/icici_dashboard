@@ -280,7 +280,7 @@ export default function Dashboard() {
               </h4>
             </CardBody>
             <CardFooter stats>
-              <a href="/admin/threats/External_threats">
+              <a href={"/admin/threats/External_threats/" + result}>
                 <div
                   className={classes.stats}
                   style={{ color: "#43a047", textAlign: "center" }}

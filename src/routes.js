@@ -75,6 +75,15 @@ const dashboardRoutes = [
     layout: "/admin",
     invisible: true,
   },
+  // {
+  //   path: "/view/:branch/:type/:subtype/:date",
+  //   name: "View Details",
+  //   rtlName: "قائمة الجدول",
+  //   icon: LibraryBooks,
+  //   component: ViewDetails,
+  //   layout: "/admin",
+  //   invisible: true,
+  // },
   {
     path: "/view/:branch/:type/:subtype/:date",
     name: "View Details",
@@ -85,16 +94,7 @@ const dashboardRoutes = [
     invisible: true,
   },
   {
-    path: "/view/:branch/:type/:subtype/:date",
-    name: "View Details",
-    rtlName: "قائمة الجدول",
-    icon: LibraryBooks,
-    component: ViewDetails,
-    layout: "/admin",
-    invisible: true,
-  },
-  {
-    path: "/threats/:type",
+    path: "/threats/:type/:date",
     name: "Threats Details",
     rtlName: "قائمة الجدول",
     icon: LibraryBooks,
@@ -103,7 +103,7 @@ const dashboardRoutes = [
     invisible: true,
   },
   {
-    path: "/details/threats/:type",
+    path: "/details/threats/:type/:subtype/:date",
     name: "Threats Details",
     rtlName: "قائمة الجدول",
     icon: LibraryBooks,

@@ -54,19 +54,27 @@ export default function Type1_2(props) {
   const classes = useStyles();
   const data = useSelector((state) => state.threatData);
   const dispatch = useDispatch();
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date("2020-10-24T00:00:00")
+  );
+  console.log(props.match.params.date + "T00:00:00");
   const handleDateChange = (date) => {
     result = format(date, "dd-MM-yyyy");
     setSelectedDate(date);
-    dispatch(getThreatDetail(props.match.params.type, result));
+    dispatch(getThreatDetail(props.match.params.subtype, result));
   };
   //   let [response, setResponse] = useState("");
 
   useEffect(() => {
-    var todaysDate = new Date();
-    result = format(todaysDate, "dd-MM-yyyy");
-    dispatch(getThreatDetail(props.match.params.type, result));
+    // var todaysDate = new Date();
+    // result = format(todaysDate, "dd-MM-yyyy");
+
+    var datee = props.match.params.date;
+    var newdate = datee.split("-").reverse().join("-");
+    setSelectedDate(newdate);
+
+    result = props.match.params.date;
+    dispatch(getThreatDetail(props.match.params.subtype, result));
     $("#root").find("header").hide();
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
@@ -79,7 +87,6 @@ export default function Type1_2(props) {
 
   return (
     <div id="dashboard-page">
-      {console.log(data.Data)}
       <div
         style={{
           display: "flex",
@@ -110,15 +117,17 @@ export default function Type1_2(props) {
             disableToolbar
             disableFuture
             variant="inline"
-            format="MM/dd/yyyy"
+            format="dd-MM-yyyy"
             margin="normal"
             id="date-picker-inline"
             label="Search by Date"
             value={selectedDate}
             onChange={handleDateChange}
+            // defaultValue={props.match.params.date}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
+            helperText={""}
           />
         </MuiPickersUtilsProvider>
       </div>
@@ -143,7 +152,18 @@ export default function Type1_2(props) {
                     <h3 className={classes.cardTitle}>{Object.values(item)}</h3>
                   </CardHeader>
                   <CardFooter stats>
-                    <a href={"/admin/view/branch/" + Object.keys(item)}>
+                    <a
+                      href={
+                        "/admin/view/" +
+                        Object.keys(item) +
+                        "/" +
+                        props.match.params.type +
+                        "/" +
+                        props.match.params.subtype +
+                        "/" +
+                        result
+                      }
+                    >
                       <div
                         className={classes.stats}
                         style={{ color: "#43a047" }}
