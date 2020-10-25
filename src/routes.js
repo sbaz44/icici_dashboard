@@ -37,6 +37,8 @@ import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 import RTLPage from "views/RTLPage/RTLPage.js";
 import ViewBranch from "views/viewBranch/ViewBranch";
 import ViewDetails from "views/viewDetails/ViewDetails";
+import Type1_1 from "views/Type1_1/Type1_1";
+import Type1_2 from "views/Type1_2/Type1_2";
 
 const dashboardRoutes = [
   {
@@ -54,8 +56,7 @@ const dashboardRoutes = [
     icon: Person,
     component: UserProfile,
     layout: "/admin",
-    invisible: true
-
+    invisible: true,
   },
   {
     path: "/branch",
@@ -72,7 +73,7 @@ const dashboardRoutes = [
     icon: LibraryBooks,
     component: ViewBranch,
     layout: "/admin",
-    invisible: true
+    invisible: true,
   },
   {
     path: "/view/:branch/:type/:subtype/:date",
@@ -81,9 +82,35 @@ const dashboardRoutes = [
     icon: LibraryBooks,
     component: ViewDetails,
     layout: "/admin",
-    invisible: true
+    invisible: true,
   },
-
+  {
+    path: "/view/:branch/:type/:subtype/:date",
+    name: "View Details",
+    rtlName: "قائمة الجدول",
+    icon: LibraryBooks,
+    component: ViewDetails,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/threats/:type",
+    name: "Threats Details",
+    rtlName: "قائمة الجدول",
+    icon: LibraryBooks,
+    component: Type1_1,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/details/threats/:type",
+    name: "Threats Details",
+    rtlName: "قائمة الجدول",
+    icon: LibraryBooks,
+    component: Type1_2,
+    layout: "/admin",
+    invisible: true,
+  },
   // {
   //   path: "/typography",
   //   name: "Typography",

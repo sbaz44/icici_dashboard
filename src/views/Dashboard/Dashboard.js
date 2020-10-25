@@ -40,7 +40,7 @@ import {
   dashboardCount,
   graphData,
 } from "../../middleware/actions";
-import $ from 'jquery'
+import $ from "jquery";
 import {
   dailySalesChart,
   emailsSubscriptionChart,
@@ -50,9 +50,9 @@ import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import { format } from 'date-fns';
+} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import { format } from "date-fns";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 var result = "";
 const useStyles = makeStyles(styles);
@@ -68,18 +68,19 @@ export default function Dashboard() {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = (date) => {
-    result = format(date, 'dd-MM-yyyy')
+    result = format(date, "dd-MM-yyyy");
     setSelectedDate(date);
     // dispatch(viewBranchDetail(props.match.params.branch, result));
-
   };
   let [response, setResponse] = useState("");
   let [data, setData] = useState({
     Total_alerts: {
       labels: ["W", "T", "F", "S", "S", "M", "T"],
-      series: [[478, 43, 1234, 14776, 0, 0, 1324],
-      [345, 8033, 656, 1244, 5560, 5550, 120],
-      [123, 8033, 3434, 1670, 34350, 3450, 6564]],
+      series: [
+        [478, 43, 1234, 14776, 0, 0, 1324],
+        [345, 8033, 656, 1244, 5560, 5550, 120],
+        [123, 8033, 3434, 1670, 34350, 3450, 6564],
+      ],
     },
     Social_distancing_alerts: {
       labels: ["W", "T", "F", "S", "S", "M", "T"],
@@ -96,13 +97,13 @@ export default function Dashboard() {
   });
 
   useEffect(() => {
-    var todaysDate = new Date()
-    result = format(todaysDate, 'dd-MM-yyyy')
+    var todaysDate = new Date();
+    result = format(todaysDate, "dd-MM-yyyy");
     dispatch(dashboardCount());
     dispatch(graphData());
-    $('#root').find('header').hide()
-    $('#root').find('.makeStyles-content-3').css('margin-top', '0')
-    $('#root').find('.makeStyles-content-3').css('padding', '0px 15px')
+    $("#root").find("header").hide();
+    $("#root").find(".makeStyles-content-3").css("margin-top", "0");
+    $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
     console.log(graph_data);
     // return () => {
     //   console.log("cleared");
@@ -111,13 +112,31 @@ export default function Dashboard() {
 
   return (
     <div id="dashboard-page">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: "2vw" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+          marginBottom: "2vw",
+        }}
+      >
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img src={smart} style={{ width: "2.8vw", height: '2.8vw', objectFit: "contain" }} />
-            <p style={{ fontSize: "1.5vw", marginLeft: "0.5vw", fontWeight: "bold", paddingTop: '0.5vw' }} >
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <img
+              src={smart}
+              style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
+            />
+            <p
+              style={{
+                fontSize: "1.5vw",
+                marginLeft: "0.5vw",
+                fontWeight: "bold",
+                paddingTop: "0.5vw",
+              }}
+            >
               Smart Bank Analytics System
-                    </p>
+            </p>
           </div>
           <KeyboardDatePicker
             disableToolbar
@@ -130,7 +149,7 @@ export default function Dashboard() {
             value={selectedDate}
             onChange={handleDateChange}
             KeyboardButtonProps={{
-              'aria-label': 'change date',
+              "aria-label": "change date",
             }}
           />
         </MuiPickersUtilsProvider>
@@ -142,7 +161,13 @@ export default function Dashboard() {
               <CardIcon color="danger">
                 <Icon>info_outline</Icon>
               </CardIcon>
-              <p className={classes.cardCategory} style={{ fontWeight: 'bold', color: '#3C4858' }}> Total Alerts Generated</p>
+              <p
+                className={classes.cardCategory}
+                style={{ fontWeight: "bold", color: "#3C4858" }}
+              >
+                {" "}
+                Total Alerts Generated
+              </p>
               <h3 className={classes.cardTitle}>
                 {dashboard_Count.Alert_count}
               </h3>
@@ -162,7 +187,13 @@ export default function Dashboard() {
               <CardIcon color="info">
                 <Accessibility />
               </CardIcon>
-              <p className={classes.cardCategory} style={{ fontWeight: 'bold', color: '#3C4858' }}> Total Customer Visited</p>
+              <p
+                className={classes.cardCategory}
+                style={{ fontWeight: "bold", color: "#3C4858" }}
+              >
+                {" "}
+                Total Customer Visited
+              </p>
               <h3 className={classes.cardTitle}>
                 {dashboard_Count.People_count}
               </h3>
@@ -206,7 +237,12 @@ export default function Dashboard() {
               <CardIcon color="success">
                 <Store />
               </CardIcon>
-              <p className={classes.cardCategory} style={{ fontWeight: 'bold', color: '#3C4858' }}>Live Branches</p>
+              <p
+                className={classes.cardCategory}
+                style={{ fontWeight: "bold", color: "#3C4858" }}
+              >
+                Live Branches
+              </p>
               <h3 className={classes.cardTitle}>
                 {dashboard_Count.Branch_count}
               </h3>
@@ -223,8 +259,7 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={12} md={6}>
           <Card chart>
             <CardHeader color="warning">
               <ChartistGraph
@@ -237,18 +272,26 @@ export default function Dashboard() {
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle} style={{ fontWeight: 'bold', color: '#3C4858' }}>External Threats</h4>
+              <h4
+                className={classes.cardTitle}
+                style={{ fontWeight: "bold", color: "#3C4858" }}
+              >
+                External Threats
+              </h4>
             </CardBody>
             <CardFooter stats>
-              <a href="http://192.168.1.6:8118/tickets/filter/?f=1&gp=5f89b11c3c5b1a0011662957" target="_blank">
-                <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
+              <a href="/admin/threats/External_threats">
+                <div
+                  className={classes.stats}
+                  style={{ color: "#43a047", textAlign: "center" }}
+                >
                   View More
                 </div>
               </a>
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={12} md={6}>
           <Card chart>
             <CardHeader color="danger">
               <ChartistGraph
@@ -260,11 +303,19 @@ export default function Dashboard() {
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle} style={{ fontWeight: 'bold', color: '#3C4858' }}>Business Insights</h4>
+              <h4
+                className={classes.cardTitle}
+                style={{ fontWeight: "bold", color: "#3C4858" }}
+              >
+                Business Insights
+              </h4>
             </CardBody>
             <CardFooter stats>
-              <a href={"/admin/view/All/Business_insights/null/" + result}>
-                <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
+              <a href="/admin/threats/Business_insights">
+                <div
+                  className={classes.stats}
+                  style={{ color: "#43a047", textAlign: "center" }}
+                >
                   {/* <DateRange /> */}
                   View More
                 </div>
@@ -272,7 +323,7 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={12} md={6}>
           <Card chart>
             <CardHeader color="primary">
               <ChartistGraph
@@ -284,21 +335,64 @@ export default function Dashboard() {
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle} style={{ fontWeight: 'bold', color: '#3C4858' }}>Internal Compliance</h4>
+              <h4
+                className={classes.cardTitle}
+                style={{ fontWeight: "bold", color: "#3C4858" }}
+              >
+                Internal Compliance
+              </h4>
             </CardBody>
             <CardFooter stats>
-              <a href={"/admin/view/All/Internal_compliance/null/" + result}>
-                <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
+              <a href="/admin/threats/Internal_compliance">
+                <div
+                  className={classes.stats}
+                  style={{ color: "#43a047", textAlign: "center" }}
+                >
                   {/* <DateRange /> */}
                   View More
                 </div>
               </a>
             </CardFooter>
-
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <Card chart>
+            <CardHeader color="success">
+              <ChartistGraph
+                className="ct-chart"
+                data={graph_data.Camera_tampering_alerts}
+                type="Line"
+                options={completedTasksChart.options}
+                listener={completedTasksChart.animation}
+              />
+            </CardHeader>
+            <CardBody>
+              <h4
+                className={classes.cardTitle}
+                style={{ fontWeight: "bold", color: "#3C4858" }}
+              >
+                Covid Safety
+              </h4>
+            </CardBody>
+            <CardFooter stats>
+              <a href="/admin/threats/Covid_safety">
+                <div
+                  className={classes.stats}
+                  style={{ color: "#43a047", textAlign: "center" }}
+                >
+                  {/* <DateRange /> */}
+                  View More
+                </div>
+              </a>
+            </CardFooter>
           </Card>
         </GridItem>
       </GridContainer>
-      <img src={bg} alt="" style={{ width: "100%", height: '15vw', objectFit: "cover" }} />
+      <img
+        src={bg}
+        alt=""
+        style={{ width: "100%", height: "15vw", objectFit: "cover" }}
+      />
     </div>
   );
 }

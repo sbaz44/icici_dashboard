@@ -6,7 +6,9 @@ import {
   GET_DASHBOARD_COUNT,
   GET_GRAPH_DATA,
   GET_VIEW_BRANCH_DETAIL,
-  GET_VIEW_BRANCH_CARD_DETAIL
+  GET_VIEW_BRANCH_CARD_DETAIL,
+  GET_TYPE_DETAIL,
+  GET_THREAT_DETAIL,
 } from "./actions";
 
 const initialState = {
@@ -24,7 +26,9 @@ const initialState = {
     Image: "image1.jpg",
     People_count: 10,
   },
-  viewBranchDetail: []
+  viewBranchDetail: [],
+  typeData: {},
+  threatData: [],
 };
 
 export default function (state = initialState, action) {
@@ -69,6 +73,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         viewBranchDetail: action.payload,
+      };
+    case GET_TYPE_DETAIL:
+      return {
+        ...state,
+        typeData: action.payload,
+      };
+    case GET_THREAT_DETAIL:
+      return {
+        ...state,
+        threatData: action.payload,
       };
     default:
       return state;
