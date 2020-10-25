@@ -10,18 +10,30 @@ import TableCell from "@material-ui/core/TableCell";
 // core components
 import styles from "assets/jss/material-dashboard-react/components/tableStyle.js";
 import { NavLink } from "react-router-dom";
+import Dialog from "@material-ui/core/Dialog";
 
 const useStyles = makeStyles(styles);
 
 export default function CustomTable(props) {
   const classes = useStyles();
-  let [response, setResponse] = useState([{
-    "Type": "string",
-    "Message": "string",
-    "Branch": "string",
-    "Camera_id": "string",
-    "Image": "string"
-  }]);
+  let [response, setResponse] = useState([
+    {
+      Type: "string",
+      Message: "string",
+      Branch: "string",
+      Camera_id: "string",
+      Image: "string",
+    },
+  ]);
+  const [imageLink, setimageLink] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = (link) => {
+    setimageLink(link);
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const { tableHead, tableData, tableHeaderColor } = props;
   // useEffect(() => {
   //   setResponse(tableData)
@@ -38,7 +50,9 @@ export default function CustomTable(props) {
                   <TableCell
                     className={classes.tableCell + " " + classes.tableHeadCell}
                     key={key}
-                    align="center" style={{ fontWeight: 'bold', }}>
+                    align="center"
+                    style={{ fontWeight: "bold" }}
+                  >
                     {prop}
                   </TableCell>
                 );
@@ -48,50 +62,77 @@ export default function CustomTable(props) {
         ) : null}
         <TableBody>
           {/* {response!==null || response!==undefined ? } */}
-          {tableData != null || tableData != undefined ? tableData.map((row, index) => {
-            return (
-              <TableRow key={row.index} className={classes.tableBodyRow}>
-                <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
-                  {row.Type}
-                </TableCell>
-                <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
-                  {row.Message}
-                </TableCell>
-
-                <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
-                  {row.Created.substring(0, 10)}
-                </TableCell>
-                <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
-                  {row.Created.substring(11, 19)}
-                </TableCell>
-                <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
-                  {row.Camera_id}
-                </TableCell>
-                <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
-                  {row.Image && (
-                    <a
-                      style={{ color: "black" }}
-                      href={row.Image}
-                      target="_blank"
-                      alt=""
+          {tableData != null || tableData != undefined
+            ? tableData.map((row, index) => {
+                return (
+                  <TableRow key={row.index} className={classes.tableBodyRow}>
+                    <TableCell
+                      className={classes.tableCell}
+                      align="center"
+                      style={{ fontWeight: "bold", color: "#3C4858" }}
                     >
-                      <img
-                        src={row.Image}
-                        style={{
-                          width: "100px",
-                          height: "100px",
-                          objectFit: "contain",
-                        }}
-                      />
-                    </a>
-                  )}
-                </TableCell>
-              </TableRow>
-            )
-          }
-          ) : null}
+                      {row.Type}
+                    </TableCell>
+                    <TableCell
+                      className={classes.tableCell}
+                      align="center"
+                      style={{ fontWeight: "bold", color: "#3C4858" }}
+                    >
+                      {row.Message}
+                    </TableCell>
+
+                    <TableCell
+                      className={classes.tableCell}
+                      align="center"
+                      style={{ fontWeight: "bold", color: "#3C4858" }}
+                    >
+                      {row.Created.substring(0, 10)}
+                    </TableCell>
+                    <TableCell
+                      className={classes.tableCell}
+                      align="center"
+                      style={{ fontWeight: "bold", color: "#3C4858" }}
+                    >
+                      {row.Created.substring(11, 19)}
+                    </TableCell>
+                    <TableCell
+                      className={classes.tableCell}
+                      align="center"
+                      style={{ fontWeight: "bold", color: "#3C4858" }}
+                    >
+                      {row.Camera_id}
+                    </TableCell>
+                    <TableCell
+                      className={classes.tableCell}
+                      align="center"
+                      style={{ fontWeight: "bold", color: "#3C4858" }}
+                      onClick={() => handleClickOpen(row.Image)}
+                    >
+                      {row.Image && (
+                        <img
+                          src={row.Image}
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            objectFit: "contain",
+                            cursor: "pointer",
+                          }}
+                        />
+                      )}
+                    </TableCell>
+                  </TableRow>
+                );
+              })
+            : null}
         </TableBody>
       </Table>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <img src={imageLink} style={{ padding: "1vw" }} />
+      </Dialog>
     </div>
   );
 }
