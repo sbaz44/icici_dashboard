@@ -424,7 +424,7 @@ export default function Type1_1(props) {
               >
                 People Count Alert
               </p>
-              <h3 className={classes.cardTitle}>{data.People_count}</h3>
+              <h3 className={classes.cardTitle}>{data.People}</h3>
             </CardHeader>
             <CardFooter stats>
               <a
@@ -493,11 +493,12 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Thermal}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a
+              {/* <a
                 href={
                   "/admin/details/threats/Business_insights/Thermal/" + result
                 }
-              >
+              > */}
+              <a href="http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032" target="_blank">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -592,7 +593,7 @@ export default function Type1_1(props) {
               >
                 People Count Alert
               </p>
-              <h3 className={classes.cardTitle}>{data.People_count}</h3>
+              <h3 className={classes.cardTitle}>{data.People}</h3>
             </CardHeader>
             <CardFooter stats>
               <a
@@ -764,11 +765,12 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Temperature}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a
+              {/* <a  http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032
                 href={
                   "/admin/details/threats/Covid_safety/Temperature/" + result
                 }
-              >
+              > */}
+              <a href="http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032" target="_blank">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -793,10 +795,10 @@ export default function Type1_1(props) {
       >
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            {/* <img
+            <img
               src={smart}
               style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
-            /> */}
+            />
             <p
               style={{
                 fontSize: "1.5vw",
@@ -805,7 +807,10 @@ export default function Type1_1(props) {
                 paddingTop: "0.5vw",
               }}
             >
-              Smart Bank Analytics System
+              {props.match.params.type == "External_threats" && "External Threat Alerts"}
+              {props.match.params.type == "Business_insights" && "Business Insights Alerts"}
+              {props.match.params.type == "Internal_compliance" && "Internal Compliance Alerts"}
+              {props.match.params.type == "Covid_safety" && "Covid Safety Alerts"}
             </p>
           </div>
           <KeyboardDatePicker

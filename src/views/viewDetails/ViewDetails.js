@@ -8,6 +8,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Table2 from "components/Table2/Table2.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
+import smart from "../../assets/img/smartAI.png";
 import CardBody from "components/Card/CardBody.js";
 import {
   getbranchDetails,
@@ -54,6 +55,12 @@ export default function ViewDetails(props) {
       dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, currentPage))
     }
   };
+  const threats = {
+    External_threats: "External Threat Alerts",
+    Business_insights: "Business Insights Alerts",
+    Internal_compliance: "Internal Compliance Alerts",
+    Covid_safety: "Covid Safety Alerts",
+  }
   useEffect(() => {
     $("#root").find("header").hide();
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
@@ -62,10 +69,7 @@ export default function ViewDetails(props) {
     setType(props.match.params.type)
     dispatch(getbranchDetails());
     dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, currentPage));
-    // console.log(branches);
-    // return () => {
-    //   console.log("cleared");
-    // };
+
   }, []);
 
   return (
@@ -80,10 +84,10 @@ export default function ViewDetails(props) {
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
-          {/* <img
-              src={smart}
-              style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
-            /> */}
+          <img
+            src={smart}
+            style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
+          />
           <p
             style={{
               fontSize: "1.5vw",
@@ -92,11 +96,11 @@ export default function ViewDetails(props) {
               paddingTop: "0.5vw",
             }}
           >
-            Smart Bank Analytics System
+            {props.match.params.branch} Branch
             </p>
         </div>
         <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Age</InputLabel>
+          <InputLabel id="demo-simple-select-label">Select Type</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -114,7 +118,7 @@ export default function ViewDetails(props) {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>{props.match.params.branch ? "All" : props.match.params.branch} Branch</h4>
+              <h4 className={classes.cardTitleWhite}>{props.match.params.type != "null" ? threats[typee] : "Alerts"} </h4>
               {/* <p className={classes.cardCategoryWhite}>List of all branches</p> */}
             </CardHeader>
             <CardBody>

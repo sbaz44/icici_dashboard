@@ -98,10 +98,10 @@ export default function Type1_2(props) {
       >
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            {/* <img
+            <img
               src={smart}
               style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
-            /> */}
+            />
             <p
               style={{
                 fontSize: "1.5vw",
@@ -110,7 +110,7 @@ export default function Type1_2(props) {
                 paddingTop: "0.5vw",
               }}
             >
-              Smart Bank Analytics System
+              Branches
             </p>
           </div>
           <KeyboardDatePicker

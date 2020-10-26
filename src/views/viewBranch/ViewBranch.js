@@ -89,7 +89,8 @@ export default function ViewBranch(props) {
     const classes = useStyles();
     // const classess = useStyless();
     const branches = useSelector((state) => state.branches);
-    const data = useSelector((state) => state.viewBranchDetail);
+    let data = [];
+    data = useSelector((state) => state.viewBranchDetail);
     const contactData = useSelector((state) => state.viewBranchDetail.Contact);
     const graph_data = useSelector((state) => state.graph_data);
     const postBranchResponse = useSelector((state) => state.postBranchResponse);
@@ -424,88 +425,24 @@ export default function ViewBranch(props) {
 
             </GridContainer>
 
-
-
             <GridContainer>
                 <GridItem xs={12} sm={6} md={4}>
                     <Card>
                         <div style={{ width: '100%', height: '16vw' }}>
-                            {/* <ReactSpeedometer
-                                paddingVertical={10}
-                                fluidWidth={true}
-                                height={200}
-                                needleHeightRatio={0.7}
-                                value={data.Covid_safety}
-                                // segments={2222}
-                                // startColor="#fb8c00"
-                                // endColor="#e53935"
-                                // customSegmentStops={[0, 1.5, 2.5, 3.5]}
-                                // maxValue={3.5}
-                                // minValue={0}
-                                // segmentColors={['#9399ff', '#14ffec', '#00bbf0']}
-                                currentValueText="Covid Safety"
-                                // currentValueText="Covid Safety"
-                                // maxValue={3.5}
-                                // minValue={0}
-                                // maxSegmentLabels={0}
-                                customSegmentLabels={[
-                                    {
-                                        text: 'Very Bad',
-                                        position: 'INSIDE',
-                                        color: '#555',
-                                    },
-                                    {
-                                        text: 'Bad',
-                                        position: 'INSIDE',
-                                        color: '#555',
-                                    },
-                                    {
-                                        text: 'Ok',
-                                        position: 'INSIDE',
-                                        color: '#555',
-                                        fontSize: '19px',
-                                    },
-                                    {
-                                        text: 'Good',
-                                        position: 'INSIDE',
-                                        color: '#555',
-                                    },
-                                    {
-                                        text: 'Very Good',
-                                        position: 'INSIDE',
-                                        color: '#555',
-                                    },
-                                    {
-                                        text: 'Very Good',
-                                        position: 'INSIDE',
-                                        color: '#555',
-                                    },
-                                    {
-                                        text: 'Very Good',
-                                        position: 'INSIDE',
-                                        color: '#555',
-                                    },
-                                ]}
-                                ringWidth={47}
-                                needleTransitionDuration={3333}
-                                needleTransition="easeElastic"
-                                needleColor={'#a7ff83'}
-                                textColor={'black'}
-                            /> */}
-
                             <ReactSpeedometer
                                 paddingVertical={10}
                                 fluidWidth={true}
                                 height={200}
                                 needleHeightRatio={0.7}
-                                value={data.Covid_safety}
+                                value={Object.keys(data).length > 0 ? data.Covid_safety[0] : 0}
                                 customSegmentStops={[0, 5, 10, 20]}
                                 maxValue={20}
                                 segmentColors={['#0B8500', '#fb8c00', '#FF4433']}
-                                currentValueText="Covid Safety"
+                                // currentValueText="Covid Safety"
+                                currentValueText={Object.keys(data).length > 0 ? data.Covid_safety[0] <= 5 ? "Covid Safety: Good" : data.Covid_safety[0] <= 10 && data.Covid_safety[0] > 5 ? "Covid Safety: Average" : "Covid Safety: Worst" : ""}
                                 customSegmentLabels={[
                                     {
-                                        text: 'Noraml',
+                                        text: 'Normal',
                                         position: 'INSIDE',
                                         color: 'white',
                                     },
@@ -526,10 +463,10 @@ export default function ViewBranch(props) {
                                 needleColor={'black'}
                                 textColor={'black'}
                             />
-
                         </div>
+
                         <div style={{ textAlign: 'center', fontSize: "1.3vw", fontWeight: 'bold' }}>
-                            {data.Covid_safety}
+                            {Object.keys(data).length > 0 && data.Covid_safety[1]}
                         </div>
                         <CardFooter stats>
                             <a href={"/admin/view/" + props.match.params.branch + "/Business_insights/covid/" + result}>
@@ -544,59 +481,21 @@ export default function ViewBranch(props) {
                 <GridItem xs={12} sm={6} md={4}>
                     <Card>
                         <div style={{ width: '100%', height: '16vw' }}>
-
-                            {/* <ReactSpeedometer
-                                paddingVertical={10}
-                                fluidWidth={true}
-                                height={200}
-                                needleHeightRatio={0.7}
-                                value={data.ATM_performance}
-                                // customSegmentStops={[0, 1.5, 2.5, 3.5]}
-                                // segmentColors={['#9399ff', '#14ffec', '#00bbf0']}
-                                // currentValueText="ATM Lobby Performance"
-                                segments={5555}
-                                startColor="green"
-                                endColor="red"
-                                currentValueText="ATM Lobby Performance"
-                                maxValue={3.5}
-                                minValue={0}
-                                maxSegmentLabels={0}
-                                // customSegmentLabels={[
-                                //     {
-                                //         text: 'Good',
-                                //         position: 'INSIDE',
-                                //         color: '#d8dee9',
-                                //     },
-                                //     {
-                                //         text: 'Great',
-                                //         position: 'INSIDE',
-                                //         color: '#d8dee9',
-                                //     },
-                                //     {
-                                //         text: 'Awesome!',
-                                //         position: 'INSIDE',
-                                //         color: '#d8dee9',
-                                //     },
-                                // ]}
-                                ringWidth={47}
-                                needleTransitionDuration={3333}
-                                needleTransition="easeElastic"
-                                needleColor={'#a7ff83'}
-                                textColor={'black'}
-                            /> */}
                             <ReactSpeedometer
                                 paddingVertical={10}
                                 fluidWidth={true}
                                 height={200}
                                 needleHeightRatio={0.7}
-                                value={data.ATM_performance}
+                                value={Object.keys(data).length > 0 ? data.ATM_performance[0] : 0}
                                 customSegmentStops={[0, 5, 10, 20]}
                                 maxValue={20}
                                 segmentColors={['#0B8500', '#fb8c00', '#FF4433']}
                                 currentValueText="ATM Lobby Performance"
+                                currentValueText={Object.keys(data).length > 0 ? data.ATM_performance[0] <= 5 ? "ATM Lobby Performance: Good" : data.ATM_performance[0] <= 10 && data.ATM_performance[0] > 5 ? "ATM Lobby Performance: Average" : "ATM Lobby Performance: Worst" : ""}
+
                                 customSegmentLabels={[
                                     {
-                                        text: 'Noraml',
+                                        text: 'Normal',
                                         position: 'INSIDE',
                                         color: 'white',
                                     },
@@ -619,7 +518,7 @@ export default function ViewBranch(props) {
                             />
                         </div>
                         <div style={{ textAlign: 'center', fontSize: "1.3vw", fontWeight: 'bold' }}>
-                            {data.ATM_performance}
+                            {Object.keys(data).length > 0 && data.ATM_performance[1]}
                         </div>
                         <CardFooter stats>
                             <a href={"/admin/view/" + props.match.params.branch + "/External_threats/atm/" + result}>
@@ -631,60 +530,19 @@ export default function ViewBranch(props) {
                         </CardFooter>
                     </Card>
                 </GridItem>
-
                 <GridItem xs={12} sm={6} md={4}>
                     <Card >
                         <div style={{ width: '100%', height: '16vw' }}>
-
-                            {/* <ReactSpeedometer
-                                paddingVertical={10}
-                                fluidWidth={true}
-                                height={200}
-                                needleHeightRatio={0.7}
-                                value={data.UPS_DG}
-                                segments={5555}
-                                startColor="green"
-                                endColor="red"
-                                // customSegmentStops={[0, 1.5, 2.5, 3.5]}
-                                // segmentColors={['#b48ead', '#14ffec', '#00bbf0']}
-                                // currentValueText="UPS and DG Performance"
-                                currentValueText="UPS and DG Performance"
-                                maxValue={3.5}
-                                minValue={0}
-                                maxSegmentLabels={0}
-                                // customSegmentLabels={[
-                                //     {
-                                //         text: 'Good',
-                                //         position: 'INSIDE',
-                                //         color: '#d8dee9',
-                                //     },
-                                //     {
-                                //         text: 'Great',
-                                //         position: 'INSIDE',
-                                //         color: '#d8dee9',
-                                //     },
-                                //     {
-                                //         text: 'Awesome!',
-                                //         position: 'INSIDE',
-                                //         color: '#d8dee9',
-                                //     },
-                                // ]}
-                                ringWidth={47}
-                                needleTransitionDuration={3333}
-                                needleTransition="easeElastic"
-                                needleColor={'#a7ff83'}
-                                textColor={'black'}
-                            /> */}
                             <ReactSpeedometer
                                 paddingVertical={10}
                                 fluidWidth={true}
                                 height={200}
                                 needleHeightRatio={0.7}
                                 value={data.UPS_DG}
-                                customSegmentStops={[0, 1.5, 3,]}
-                                maxValue={3}
+                                customSegmentStops={[0, 2, 4,]}
+                                maxValue={4}
                                 segmentColors={['#0B8500', '#FF4433']}
-                                currentValueText="UPS and DG Performance"
+                                currentValueText="UPS and DG Health Check"
                                 customSegmentLabels={[
                                     {
                                         text: 'ON',
@@ -706,7 +564,7 @@ export default function ViewBranch(props) {
                             />
                         </div>
                         <div style={{ textAlign: 'center', fontSize: "1.3vw", fontWeight: 'bold' }}>
-                            {data.UPS_DG}
+                            Status: {data.UPS_DG == 1 ? "Good" : "Bad"}
                         </div>
                         <CardFooter stats>
                             <a href={"/admin/view/" + props.match.params.branch + "/Internal_compliance/ups/" + result}>
@@ -721,60 +579,20 @@ export default function ViewBranch(props) {
                 <GridItem xs={12} sm={6} md={4}>
                     <Card>
                         <div style={{ width: '100%', height: '16vw' }}>
-
-                            {/* <ReactSpeedometer
-                                paddingVertical={10}
-                                fluidWidth={true}
-                                height={200}
-                                needleHeightRatio={0.7}
-                                value={data.Branch_performance}
-                                segments={5555}
-                                startColor="green"
-                                endColor="red"
-                                // customSegmentStops={[0, 1.5, 2.5, 3.5]}
-                                // segmentColors={['#b48ead', '#14ffec', '#00bbf0']}
-                                // currentValueText="Branch Lobby Performance"
-                                currentValueText="Branch Lobby Performance"
-                                maxValue={3.5}
-                                minValue={0}
-                                maxSegmentLabels={0}
-                                // customSegmentLabels={[
-                                //     {
-                                //         text: 'Good',
-                                //         position: 'INSIDE',
-                                //         color: '#d8dee9',
-                                //     },
-                                //     {
-                                //         text: 'Great',
-                                //         position: 'INSIDE',
-                                //         color: '#d8dee9',
-                                //     },
-                                //     {
-                                //         text: 'Awesome!',
-                                //         position: 'INSIDE',
-                                //         color: '#d8dee9',
-                                //     },
-                                // ]}
-                                ringWidth={47}
-                                needleTransitionDuration={3333}
-                                needleTransition="easeElastic"
-                                needleColor={'#a7ff83'}
-                                textColor={'black'}
-                            /> */}
-
                             <ReactSpeedometer
                                 paddingVertical={10}
                                 fluidWidth={true}
                                 height={200}
                                 needleHeightRatio={0.7}
-                                value={data.Branch_performance}
+                                value={Object.keys(data).length > 0 ? data.Branch_performance[0] : 0}
+                                currentValueText={Object.keys(data).length > 0 ? data.Branch_performance[0] <= 5 ? "Branch Lobby Performance: Good" : data.Branch_performance[0] <= 10 && data.Branch_performance[0] > 5 ? "Branch Lobby Performance: Average" : "Branch Lobby Performance: Worst" : ""}
                                 customSegmentStops={[0, 5, 10, 20]}
                                 maxValue={20}
                                 segmentColors={['#0B8500', '#fb8c00', '#FF4433']}
-                                currentValueText="Branch Lobby Performance"
+                                // currentValueText="Branch Lobby Performance"
                                 customSegmentLabels={[
                                     {
-                                        text: 'Noraml',
+                                        text: 'Normal',
                                         position: 'INSIDE',
                                         color: 'white',
                                     },
@@ -798,7 +616,7 @@ export default function ViewBranch(props) {
 
                         </div>
                         <div style={{ textAlign: 'center', fontSize: "1.3vw", fontWeight: 'bold' }}>
-                            {data.Branch_performance}
+                            {Object.keys(data).length > 0 && data.Branch_performance[1]}
                         </div>
                         <CardFooter stats>
                             <a href={"/admin/view/" + props.match.params.branch + "/Business_insights/branch/" + result}>
@@ -814,60 +632,19 @@ export default function ViewBranch(props) {
                     <Card>
 
                         <div style={{ width: '100%', height: '16vw' }}>
-                            {/* <ReactSpeedometer
-                                paddingVertical={10}
-                                fluidWidth={true}
-                                height={200}
-                                needleHeightRatio={0.7}
-                                value={data.Average_waiting_time}
-                                // customSegmentStops={[0, 60]}
-                                segments={5555}
-                                startColor="green"
-                                endColor="red"
-                                // segmentColors={['#9399ff', '#14ffec', '#00bbf0']}
-                                // currentValueText="Average Waiting Time"
-                                currentValueText="Average Waiting Time"
-                                maxSegmentLabels={0}
-                                maxValue={60}
-                                minValue={0}
-                                // maxSegmentLabels={2}
-                                // customSegmentLabels={[
-                                //     {
-                                //         text: 'Good',
-                                //         position: 'INSIDE',
-                                //         color: '#d8dee9',
-                                //     },
-                                //     {
-                                //         text: 'Great',
-                                //         position: 'INSIDE',
-                                //         color: '#d8dee9',
-                                //     },
-                                //     {
-                                //         text: 'Awesome!',
-                                //         position: 'INSIDE',
-                                //         color: '#d8dee9',
-                                //     },
-                                // ]}
-                                ringWidth={47}
-                                needleTransitionDuration={3333}
-                                needleTransition="easeElastic"
-                                needleColor={'#a7ff83'}
-                                textColor={'black'}
-                            /> */}
-
                             <ReactSpeedometer
                                 paddingVertical={10}
                                 fluidWidth={true}
                                 height={200}
                                 needleHeightRatio={0.7}
-                                value={data.Average_waiting_time}
+                                value={Object.keys(data).length > 0 ? data.Average_waiting_time[0] : 0}
                                 customSegmentStops={[0, 20, 40, 60]}
                                 maxValue={60}
                                 segmentColors={['#0B8500', '#fb8c00', '#FF4433']}
-                                currentValueText="Average Waiting Time"
+                                currentValueText={Object.keys(data).length > 0 ? data.Average_waiting_time[0] <= 20 ? "Average Waiting Time: Good" : data.Average_waiting_time[0] <= 40 && data.Average_waiting_time[0] > 20 ? "Average Waiting Time: Average" : "Average Waiting Time: Worst" : ""}
                                 customSegmentLabels={[
                                     {
-                                        text: 'Noraml',
+                                        text: 'Normal',
                                         position: 'INSIDE',
                                         color: 'white',
                                     },
@@ -891,7 +668,7 @@ export default function ViewBranch(props) {
 
                         </div>
                         <div style={{ textAlign: 'center', fontSize: "1.3vw", fontWeight: 'bold' }}>
-                            {data.Average_waiting_time}
+                            {Object.keys(data).length > 0 && data.Average_waiting_time[1]} mins
                         </div>
                         <CardFooter stats>
                             {/* <a href="/admin/branch">
