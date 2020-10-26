@@ -165,7 +165,6 @@ export default function Dashboard() {
                 className={classes.cardCategory}
                 style={{ fontWeight: "bold", color: "#3C4858" }}
               >
-                {" "}
                 Total Alerts Generated
               </p>
               <h3 className={classes.cardTitle}>
@@ -191,7 +190,6 @@ export default function Dashboard() {
                 className={classes.cardCategory}
                 style={{ fontWeight: "bold", color: "#3C4858" }}
               >
-                {" "}
                 Total Customer Visited
               </p>
               <h3 className={classes.cardTitle}>
@@ -264,8 +262,8 @@ export default function Dashboard() {
             <CardHeader color="warning">
               <ChartistGraph
                 className="ct-chart"
-                data={graph_data.Social_distancing_alerts}
-                type="Bar"
+                data={graph_data.External_threats}
+                type="Line"
                 options={emailsSubscriptionChart.options}
                 responsiveOptions={emailsSubscriptionChart.responsiveOptions}
                 listener={emailsSubscriptionChart.animation}
@@ -296,7 +294,7 @@ export default function Dashboard() {
             <CardHeader color="danger">
               <ChartistGraph
                 className="ct-chart"
-                data={graph_data.Teller_missing_alerts}
+                data={graph_data.Business_insights}
                 type="Line"
                 options={completedTasksChart.options}
                 listener={completedTasksChart.animation}
@@ -311,7 +309,7 @@ export default function Dashboard() {
               </h4>
             </CardBody>
             <CardFooter stats>
-              <a href="/admin/threats/Business_insights">
+              <a href={"/admin/threats/Business_insights/" + result}>
                 <div
                   className={classes.stats}
                   style={{ color: "#43a047", textAlign: "center" }}
@@ -328,7 +326,7 @@ export default function Dashboard() {
             <CardHeader color="primary">
               <ChartistGraph
                 className="ct-chart"
-                data={graph_data.Camera_tampering_alerts}
+                data={graph_data.Internal_compliance}
                 type="Line"
                 options={completedTasksChart.options}
                 listener={completedTasksChart.animation}
@@ -343,7 +341,7 @@ export default function Dashboard() {
               </h4>
             </CardBody>
             <CardFooter stats>
-              <a href="/admin/threats/Internal_compliance">
+              <a href={"/admin/threats/Internal_compliance/" + result}>
                 <div
                   className={classes.stats}
                   style={{ color: "#43a047", textAlign: "center" }}
@@ -360,7 +358,7 @@ export default function Dashboard() {
             <CardHeader color="success">
               <ChartistGraph
                 className="ct-chart"
-                data={graph_data.Camera_tampering_alerts}
+                data={graph_data.Covid_safety}
                 type="Line"
                 options={completedTasksChart.options}
                 listener={completedTasksChart.animation}
@@ -375,7 +373,7 @@ export default function Dashboard() {
               </h4>
             </CardBody>
             <CardFooter stats>
-              <a href="/admin/threats/Covid_safety">
+              <a href={"/admin/threats/Covid_safety/" + result}>
                 <div
                   className={classes.stats}
                   style={{ color: "#43a047", textAlign: "center" }}
@@ -388,11 +386,11 @@ export default function Dashboard() {
           </Card>
         </GridItem>
       </GridContainer>
-      <img
+      {/* <img
         src={bg}
         alt=""
         style={{ width: "100%", height: "15vw", objectFit: "cover" }}
-      />
+      /> */}
     </div>
   );
 }

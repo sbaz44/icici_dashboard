@@ -74,7 +74,7 @@ export default function Type1_2(props) {
     setSelectedDate(newdate);
 
     result = props.match.params.date;
-    dispatch(getThreatDetail(props.match.params.subtype, result));
+    dispatch(getThreatDetail(props.match.params.subtype, result, props.match.params.type));
     $("#root").find("header").hide();
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
