@@ -14,13 +14,13 @@ export const GET_THREAT_DETAIL = "GET_THREAT_DETAIL";
 export const POST_BRANCH_DETAILS = "POST_BRANCH_DETAILS";
 export const POST_BRANCH_REPORTS = "POST_BRANCH_REPORTS";
 
-const URL = "http://192.168.2.113:8000/dashboard";
+export const URL = "http://192.168.2.113:8000/dashboard";
 
 //get calls
-export function getbranchDetails() {
+export function getbranchDetails(date) {
   return (dispatch) => {
     axios
-      .get(URL + "/branch")
+      .get(URL + "/branch/?Date=" + date)
       .then((res) =>
         dispatch({
           type: GET_BRANCH_DETAILS,

@@ -67,7 +67,7 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/view/branch/:branch",
+    path: "/view/branch/:branch/:date",
     name: "View Branch",
     rtlName: "قائمة الجدول",
     icon: LibraryBooks,

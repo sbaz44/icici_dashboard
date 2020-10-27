@@ -16,7 +16,7 @@ const useStyles = makeStyles(styles);
 
 export default function CustomTable(props) {
   const classes = useStyles();
-  const { tableHead, tableData, tableHeaderColor } = props;
+  const { tableHead, tableData, tableHeaderColor, date } = props;
   const [open, setOpen] = React.useState(false);
   const [imageLink, setimageLink] = React.useState("");
   const handleClickOpen = (link) => {
@@ -87,7 +87,7 @@ export default function CustomTable(props) {
                 {row.Created}
               </TableCell>
               <TableCell className={classes.tableCell} align="center" style={{ fontWeight: 'bold', color: '#3C4858' }}>
-                <NavLink to={'view/branch/' + row.Branch} onClick={() => {
+                <NavLink to={'view/branch/' + row.Branch + "/" + date} onClick={() => {
                   let data = {
                     image: row.Image_link,
                     open: row.Open_time,

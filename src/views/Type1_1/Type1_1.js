@@ -429,7 +429,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Business_insights/People_count/" + result
+                  "/admin/details/threats/Business_insights/Person/" + result
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
@@ -490,7 +490,7 @@ export default function Type1_1(props) {
               >
                 Thermal Scanning Alert
               </p>
-              <h3 className={classes.cardTitle}>{data.Thermal}</h3>
+              {/* <h3 className={classes.cardTitle}>{data.Thermal}</h3> */}
             </CardHeader>
             <CardFooter stats>
               {/* <a
@@ -744,40 +744,7 @@ export default function Type1_1(props) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
-          <Card>
-            <CardHeader color="danger" stats icon>
-              <CardIcon color="danger">
-                <Icon>
-                  <span
-                    class="iconify"
-                    data-icon="ri:body-scan-fill"
-                    data-inline="false"
-                  ></span>
-                </Icon>
-              </CardIcon>
-              <p
-                className={classes.cardCategory}
-                style={{ fontWeight: "bold", color: "#3C4858" }}
-              >
-                Temperature Scanning Alert
-              </p>
-              <h3 className={classes.cardTitle}>{data.Temperature}</h3>
-            </CardHeader>
-            <CardFooter stats>
-              {/* <a  http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032
-                href={
-                  "/admin/details/threats/Covid_safety/Temperature/" + result
-                }
-              > */}
-              <a href="http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032" target="_blank">
-                <div className={classes.stats} style={{ color: "#43a047" }}>
-                  View More
-                </div>
-              </a>
-            </CardFooter>
-          </Card>
-        </GridItem>
+
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="danger" stats icon>
@@ -805,6 +772,40 @@ export default function Type1_1(props) {
                   "/admin/details/threats/Covid_safety/no/" + result
                 }
               >
+                <div className={classes.stats} style={{ color: "#43a047" }}>
+                  View More
+                </div>
+              </a>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="danger" stats icon>
+              <CardIcon color="danger">
+                <Icon>
+                  <span
+                    class="iconify"
+                    data-icon="ri:body-scan-fill"
+                    data-inline="false"
+                  ></span>
+                </Icon>
+              </CardIcon>
+              <p
+                className={classes.cardCategory}
+                style={{ fontWeight: "bold", color: "#3C4858" }}
+              >
+                Temperature Scanning Alert
+              </p>
+              {/* <h3 className={classes.cardTitle}>{data.Temperature}</h3> */}
+            </CardHeader>
+            <CardFooter stats>
+              {/* <a  http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032
+                href={
+                  "/admin/details/threats/Covid_safety/Temperature/" + result
+                }
+              > */}
+              <a href="http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032" target="_blank">
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
