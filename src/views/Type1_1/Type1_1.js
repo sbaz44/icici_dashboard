@@ -424,7 +424,7 @@ export default function Type1_1(props) {
               >
                 People Count Alert
               </p>
-              <h3 className={classes.cardTitle}>{data.People}</h3>
+              <h3 className={classes.cardTitle}>{data.Person}</h3>
             </CardHeader>
             <CardFooter stats>
               <a
