@@ -439,7 +439,7 @@ export default function ViewBranch(props) {
                                 maxValue={20}
                                 segmentColors={['#0B8500', '#fb8c00', '#FF4433']}
                                 // currentValueText="Covid Safety"
-                                currentValueText={Object.keys(data).length > 0 ? data.Covid_safety[0] <= 5 ? "Covid Safety: Good" : data.Covid_safety[0] <= 10 && data.Covid_safety[0] > 5 ? "Covid Safety: Average" : "Covid Safety: Worst" : ""}
+                                currentValueText={Object.keys(data).length > 0 ? data.Covid_safety[0] <= 5 ? "Covid Safety: Good" : data.Covid_safety[0] <= 10 && data.Covid_safety[0] > 5 ? "Covid Safety: Average" : "Covid Safety: Critical" : ""}
                                 customSegmentLabels={[
                                     {
                                         text: 'Normal',
@@ -469,7 +469,7 @@ export default function ViewBranch(props) {
                             {Object.keys(data).length > 0 && data.Covid_safety[1]}
                         </div>
                         <CardFooter stats>
-                            <a href={"/admin/view/" + props.match.params.branch + "/Business_insights/covid/" + result}>
+                            <a href={"/admin/view/" + props.match.params.branch + "/Covid_safety/null/" + result}>
                                 <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
                                     {/* <DateRange /> */}
                   View More
@@ -491,7 +491,7 @@ export default function ViewBranch(props) {
                                 maxValue={20}
                                 segmentColors={['#0B8500', '#fb8c00', '#FF4433']}
                                 currentValueText="ATM Lobby Performance"
-                                currentValueText={Object.keys(data).length > 0 ? data.ATM_performance[0] <= 5 ? "ATM Lobby Performance: Good" : data.ATM_performance[0] <= 10 && data.ATM_performance[0] > 5 ? "ATM Lobby Performance: Average" : "ATM Lobby Performance: Worst" : ""}
+                                currentValueText={Object.keys(data).length > 0 ? data.ATM_performance[0] <= 5 ? "ATM Lobby Performance: Good" : data.ATM_performance[0] <= 10 && data.ATM_performance[0] > 5 ? "ATM Lobby Performance: Average" : "ATM Lobby Performance: Critical" : ""}
 
                                 customSegmentLabels={[
                                     {
@@ -521,7 +521,7 @@ export default function ViewBranch(props) {
                             {Object.keys(data).length > 0 && data.ATM_performance[1]}
                         </div>
                         <CardFooter stats>
-                            <a href={"/admin/view/" + props.match.params.branch + "/External_threats/atm/" + result}>
+                            <a href={"/admin/view/" + props.match.params.branch + "/null/atm/" + result}>
                                 <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
                                     {/* <DateRange /> */}
                   View More
@@ -585,7 +585,7 @@ export default function ViewBranch(props) {
                                 height={200}
                                 needleHeightRatio={0.7}
                                 value={Object.keys(data).length > 0 ? data.Branch_performance[0] : 0}
-                                currentValueText={Object.keys(data).length > 0 ? data.Branch_performance[0] <= 5 ? "Branch Lobby Performance: Good" : data.Branch_performance[0] <= 10 && data.Branch_performance[0] > 5 ? "Branch Lobby Performance: Average" : "Branch Lobby Performance: Worst" : ""}
+                                currentValueText={Object.keys(data).length > 0 ? data.Branch_performance[0] <= 5 ? "Branch Lobby Performance: Good" : data.Branch_performance[0] <= 10 && data.Branch_performance[0] > 5 ? "Branch Lobby Performance: Average" : "Branch Lobby Performance: Critical" : ""}
                                 customSegmentStops={[0, 5, 10, 20]}
                                 maxValue={20}
                                 segmentColors={['#0B8500', '#fb8c00', '#FF4433']}
@@ -619,7 +619,7 @@ export default function ViewBranch(props) {
                             {Object.keys(data).length > 0 && data.Branch_performance[1]}
                         </div>
                         <CardFooter stats>
-                            <a href={"/admin/view/" + props.match.params.branch + "/Business_insights/branch/" + result}>
+                            <a href={"/admin/view/" + props.match.params.branch + "/null/branch/" + result}>
                                 <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
                                     {/* <DateRange /> */}
                   View More
@@ -641,7 +641,7 @@ export default function ViewBranch(props) {
                                 customSegmentStops={[0, 20, 40, 60]}
                                 maxValue={60}
                                 segmentColors={['#0B8500', '#fb8c00', '#FF4433']}
-                                currentValueText={Object.keys(data).length > 0 ? data.Average_waiting_time[0] <= 20 ? "Average Waiting Time: Good" : data.Average_waiting_time[0] <= 40 && data.Average_waiting_time[0] > 20 ? "Average Waiting Time: Average" : "Average Waiting Time: Worst" : ""}
+                                currentValueText={Object.keys(data).length > 0 ? data.Average_waiting_time[0] <= 20 ? "Average Waiting Time: Good" : data.Average_waiting_time[0] <= 40 && data.Average_waiting_time[0] > 20 ? "Average Waiting Time: Average" : "Average Waiting Time: Critical" : ""}
                                 customSegmentLabels={[
                                     {
                                         text: 'Normal',
