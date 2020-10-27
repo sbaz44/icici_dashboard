@@ -595,12 +595,11 @@ export default function ViewBranch(props) {
                                     Status: {data.UPS_DG == 1 ? "Good" : "Bad"}
                                 </div>
                                 <CardFooter stats>
-                                    <a href={"/admin/view/" + props.match.params.branch + "/Internal_compliance/ups/" + result}>
+                                    {/* <a href={"/admin/view/" + props.match.params.branch + "/Internal_compliance/ups/" + result}>
                                         <div className={classes.stats} style={{ color: "#43a047", textAlign: 'center' }}>
-                                            {/* <DateRange /> */}
                   View More
                 </div>
-                                    </a>
+                                    </a> */}
                                 </CardFooter>
                             </Card>
                         </GridItem>
