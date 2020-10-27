@@ -579,7 +579,7 @@ export default function Type1_1(props) {
   const InternalCompliance = () => {
     return (
       <GridContainer>
-        <GridItem xs={12} sm={6} md={3}>
+        {/* <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
@@ -608,7 +608,7 @@ export default function Type1_1(props) {
               </a>
             </CardFooter>
           </Card>
-        </GridItem>
+        </GridItem> */}
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="danger" stats icon>
