@@ -103,6 +103,7 @@ export default function ViewBranch(props) {
     const [isLoading, setisLoading] = React.useState(false);
     const [data, setData] = React.useState([]);
     const handleClickOpen = (link) => {
+        setImage(link)
         setOpen(true);
     };
     const handleClose = () => {
@@ -110,6 +111,7 @@ export default function ViewBranch(props) {
     };
     const [selectedDate, setSelectedDate] = React.useState(new Date());
     const [localData, setLocalData] = React.useState({});
+    const [image, setImage] = React.useState('');
     const handleDateChange = (date) => {
         result = format(date, 'dd-MM-yyyy')
         setSelectedDate(date);
@@ -221,7 +223,7 @@ export default function ViewBranch(props) {
     return (
         <div className="viewBranch">
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                <img src={localData.image} style={{ padding: "1vw" }} />
+                <img src={image} style={{ padding: "1vw" }} />
             </Dialog>
 
             {isLoading ? <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: "40vw" }}>
@@ -249,14 +251,14 @@ export default function ViewBranch(props) {
                         </MuiPickersUtilsProvider>
                     </div>
                     <div style={{ display: 'flex', width: "25vw", justifyContent: 'space-around', marginBottom: "1vw" }}>
-                        <Button variant="contained" color="primary" style={{ marginRight: "0.2vw", marginLeft: "0.2vw", backgroundColor: '#43a047' }}>
+                        <Button variant="contained" color="primary" style={{ marginRight: "0.2vw", marginLeft: "0.2vw", backgroundColor: '#43a047' }}  onClick={()=>handleClickOpen(localData.open_image)}>
                             Branch Open Time: {localData.open}
                         </Button>
-                        <Button variant="contained" color="primary" style={{ marginRight: "0.2vw", marginLeft: "0.2vw", backgroundColor: '#43a047' }}>
+                        <Button variant="contained" color="primary" style={{ marginRight: "0.2vw", marginLeft: "0.2vw", backgroundColor: '#43a047' }}  onClick={()=>handleClickOpen(localData.close_image)}>
                             Branch Close Time: {localData.close}
                         </Button>
                         <Button variant="contained" color="primary" style={{ marginRight: "0.2vw", marginLeft: "0.2vw", backgroundColor: '#43a047' }}
-                            onClick={handleClickOpen}
+                            onClick={()=>handleClickOpen(localData.image)}
                         >
                             View Heatmap
       </Button>
