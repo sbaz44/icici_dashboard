@@ -10,10 +10,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import $ from "jquery";
-import {
-  getbranchDetails,
-
-} from "../../middleware/actions";
+import { getbranchDetails } from "../../middleware/actions";
 import smart from "../../assets/img/smartAI.png";
 import {
   MuiPickersUtilsProvider,
@@ -22,6 +19,7 @@ import {
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { format } from "date-fns";
+import Pagination from "components/pagination/Pagination";
 const styles = {
   cardCategoryWhite: {
     "&,& a,& a:hover,& a:focus": {
@@ -60,9 +58,7 @@ export default function TableList() {
   const branches = useSelector((state) => state.branches);
 
   const dispatch = useDispatch();
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date()
-  );
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
   const handleDateChange = (date) => {
     result = format(date, "dd-MM-yyyy");
     setSelectedDate(date);
@@ -147,7 +143,7 @@ export default function TableList() {
                   "Close Time",
                   "Image",
                   "Date",
-                  "View"
+                  "View",
                 ]}
                 date={result}
                 tableData={branches}
@@ -156,6 +152,7 @@ export default function TableList() {
           </Card>
         </GridItem>
       </GridContainer>
+      {/* <Pagination currentPage={1} lastPage={Math.ceil(12 / 10)} /> */}
     </div>
   );
 }

@@ -14,32 +14,32 @@ $desk: 100/1980;
   align-items: center;
   margin-top: 1vw;
   .leftArrow {
-    width: 26 * $desk + vw;
-    height: 22 * $desk + vw;
+    width: 30 * $desk + vw;
+    height: 26 * $desk + vw;
     margin-right: 22 * $desk + vw;
     cursor: pointer;
   }
   .leftArrowDisabled {
-    width: 26 * $desk + vw;
-    height: 22 * $desk + vw;
+    width: 30 * $desk + vw;
+    height: 26 * $desk + vw;
     margin-right: 22 * $desk + vw;
     // cursor: pointer;
   }
   .rightArrow {
-    width: 26 * $desk + vw;
-    height: 22 * $desk + vw;
+    width: 30 * $desk + vw;
+    height: 26 * $desk + vw;
     transform: rotate(180deg);
     cursor: pointer;
   }
   .rightArrowDisabled {
-    width: 26 * $desk + vw;
-    height: 22 * $desk + vw;
+    width: 30 * $desk + vw;
+    height: 26 * $desk + vw;
     transform: rotate(180deg);
     // cursor: pointer;
   }
   .pageStart {
-    width: 45 * $desk + vw;
-    height: 26 * $desk + vw;
+    width: 50 * $desk + vw;
+    height: 35 * $desk + vw;
     border-radius: 5 * $desk + vw;
     background: white;
     margin-right: 22 * $desk + vw;
@@ -47,12 +47,13 @@ $desk: 100/1980;
     justify-content: center;
     align-items: center;
     font-family: Segoe UI;
-    font-size: 18 * $desk + vw;
-    color: black;
+    font-weight: 500;
+    font-size: 21 * $desk + vw;
+    color: rgb(61, 59, 59);
   }
   .pageEnd {
-    width: 45 * $desk + vw;
-    height: 26 * $desk + vw;
+    width: 50 * $desk + vw;
+    height: 35 * $desk + vw;
     border-radius: 5 * $desk + vw;
     background: white;
     margin-right: 22 * $desk + vw;
@@ -60,8 +61,9 @@ $desk: 100/1980;
     justify-content: center;
     align-items: center;
     font-family: Segoe UI;
-    font-size: 18 * $desk + vw;
-    color: black;
+    font-weight: 500;
+    font-size: 21 * $desk + vw;
+    color: rgb(61, 59, 59);
   }
   p {
     margin-right: 22 * $desk + vw;

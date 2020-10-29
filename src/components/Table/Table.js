@@ -39,7 +39,7 @@ export default function CustomTable(props) {
                     className={classes.tableCell + " " + classes.tableHeadCell}
                     key={key}
                     align="center"
-                    style={{ fontWeight: "bold" }}
+                    style={{ fontWeight: "bold", fontSize: "0.93vw" }}
                   >
                     {prop}
                   </TableCell>
@@ -54,28 +54,44 @@ export default function CustomTable(props) {
               <TableCell
                 className={classes.tableCell}
                 align="center"
-                style={{ fontWeight: "bold", color: "#3C4858" }}
+                style={{
+                  fontWeight: "bold",
+                  color: "#3C4858",
+                  fontSize: "0.8vw",
+                }}
               >
                 {row.Branch}
               </TableCell>
               <TableCell
                 className={classes.tableCell}
                 align="center"
-                style={{ fontWeight: "bold", color: "#3C4858" }}
+                style={{
+                  fontWeight: "bold",
+                  color: "#3C4858",
+                  fontSize: "0.8vw",
+                }}
               >
                 {row.Camera_count}
               </TableCell>
               <TableCell
                 className={classes.tableCell}
                 align="center"
-                style={{ fontWeight: "bold", color: "#3C4858" }}
+                style={{
+                  fontWeight: "bold",
+                  color: "#3C4858",
+                  fontSize: "0.8vw",
+                }}
               >
                 {row.People_count}
               </TableCell>
               <TableCell
                 className={classes.tableCell}
                 align="center"
-                style={{ fontWeight: "bold", color: "#3C4858" }}
+                style={{
+                  fontWeight: "bold",
+                  color: "#3C4858",
+                  fontSize: "0.8vw",
+                }}
               >
                 {row.Alert_count}
               </TableCell>
@@ -84,8 +100,10 @@ export default function CustomTable(props) {
                 align="center"
                 style={{
                   fontWeight: "bold",
-                  color: "#3C4858",
+                  color: "#9c27b0",
                   cursor: "pointer",
+                  fontSize: "0.8vw",
+                  textDecoration: "underline",
                 }}
                 onClick={() => handleClickOpen(row.Open_time_image)}
               >
@@ -96,8 +114,10 @@ export default function CustomTable(props) {
                 align="center"
                 style={{
                   fontWeight: "bold",
-                  color: "#3C4858",
+                  color: "#9c27b0",
                   cursor: "pointer",
+                  fontSize: "0.8vw",
+                  textDecoration: "underline",
                 }}
                 onClick={() => handleClickOpen(row.Close_time_image)}
               >
@@ -110,6 +130,7 @@ export default function CustomTable(props) {
                   fontWeight: "bold",
                   color: "#3C4858",
                   cursor: "pointer",
+                  fontSize: "0.8vw",
                 }}
                 onClick={() => handleClickOpen(row.Image_link)}
               >
@@ -127,14 +148,22 @@ export default function CustomTable(props) {
               <TableCell
                 className={classes.tableCell}
                 align="center"
-                style={{ fontWeight: "bold", color: "#3C4858" }}
+                style={{
+                  fontWeight: "bold",
+                  color: "#3C4858",
+                  fontSize: "0.8vw",
+                }}
               >
                 {row.Created}
               </TableCell>
               <TableCell
                 className={classes.tableCell}
                 align="center"
-                style={{ fontWeight: "bold", color: "#3C4858" }}
+                style={{
+                  fontWeight: "bold",
+                  color: "#3C4858",
+                  fontSize: "0.8vw",
+                }}
               >
                 <NavLink
                   to={"view/branch/" + row.Branch + "/" + date}

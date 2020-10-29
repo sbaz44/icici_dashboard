@@ -20,36 +20,36 @@
 }
 
 .paginationContainer .leftArrow {
-  width: 1.31313vw;
-  height: 1.11111vw;
+  width: 1.51515vw;
+  height: 1.31313vw;
   margin-right: 1.11111vw;
   cursor: pointer;
 }
 
 .paginationContainer .leftArrowDisabled {
-  width: 1.31313vw;
-  height: 1.11111vw;
+  width: 1.51515vw;
+  height: 1.31313vw;
   margin-right: 1.11111vw;
 }
 
 .paginationContainer .rightArrow {
-  width: 1.31313vw;
-  height: 1.11111vw;
+  width: 1.51515vw;
+  height: 1.31313vw;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
   cursor: pointer;
 }
 
 .paginationContainer .rightArrowDisabled {
-  width: 1.31313vw;
-  height: 1.11111vw;
+  width: 1.51515vw;
+  height: 1.31313vw;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
 }
 
 .paginationContainer .pageStart {
-  width: 2.27273vw;
-  height: 1.31313vw;
+  width: 2.52525vw;
+  height: 1.76768vw;
   border-radius: 0.25253vw;
   background: white;
   margin-right: 1.11111vw;
@@ -63,13 +63,14 @@
       -ms-flex-align: center;
           align-items: center;
   font-family: Segoe UI;
-  font-size: 0.90909vw;
-  color: black;
+  font-weight: 500;
+  font-size: 1.06061vw;
+  color: #3d3b3b;
 }
 
 .paginationContainer .pageEnd {
-  width: 2.27273vw;
-  height: 1.31313vw;
+  width: 2.52525vw;
+  height: 1.76768vw;
   border-radius: 0.25253vw;
   background: white;
   margin-right: 1.11111vw;
@@ -83,8 +84,9 @@
       -ms-flex-align: center;
           align-items: center;
   font-family: Segoe UI;
-  font-size: 0.90909vw;
-  color: black;
+  font-weight: 500;
+  font-size: 1.06061vw;
+  color: #3d3b3b;
 }
 
 .paginationContainer p {

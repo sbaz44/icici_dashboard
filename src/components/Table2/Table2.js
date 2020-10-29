@@ -51,7 +51,7 @@ export default function CustomTable(props) {
                     className={classes.tableCell + " " + classes.tableHeadCell}
                     key={key}
                     align="center"
-                    style={{ fontWeight: "bold" }}
+                    style={{ fontWeight: "bold", fontSize: "0.93vw" }}
                   >
                     {prop}
                   </TableCell>
@@ -69,14 +69,22 @@ export default function CustomTable(props) {
                     <TableCell
                       className={classes.tableCell}
                       align="center"
-                      style={{ fontWeight: "bold", color: "#3C4858" }}
+                      style={{
+                        fontWeight: "bold",
+                        color: "#3C4858",
+                        fontSize: "0.8vw",
+                      }}
                     >
                       {row.Type}
                     </TableCell>
                     <TableCell
                       className={classes.tableCell}
                       align="center"
-                      style={{ fontWeight: "bold", color: "#3C4858" }}
+                      style={{
+                        fontWeight: "bold",
+                        color: "#3C4858",
+                        fontSize: "0.8vw",
+                      }}
                     >
                       {row.Message}
                     </TableCell>
@@ -84,28 +92,44 @@ export default function CustomTable(props) {
                     <TableCell
                       className={classes.tableCell}
                       align="center"
-                      style={{ fontWeight: "bold", color: "#3C4858" }}
+                      style={{
+                        fontWeight: "bold",
+                        color: "#3C4858",
+                        fontSize: "0.8vw",
+                      }}
                     >
                       {row.Created.substring(0, 10)}
                     </TableCell>
                     <TableCell
                       className={classes.tableCell}
                       align="center"
-                      style={{ fontWeight: "bold", color: "#3C4858" }}
+                      style={{
+                        fontWeight: "bold",
+                        color: "#3C4858",
+                        fontSize: "0.8vw",
+                      }}
                     >
                       {row.Created.substring(11, 19)}
                     </TableCell>
                     <TableCell
                       className={classes.tableCell}
                       align="center"
-                      style={{ fontWeight: "bold", color: "#3C4858" }}
+                      style={{
+                        fontWeight: "bold",
+                        color: "#3C4858",
+                        fontSize: "0.8vw",
+                      }}
                     >
                       {row.Camera_id}
                     </TableCell>
                     <TableCell
                       className={classes.tableCell}
                       align="center"
-                      style={{ fontWeight: "bold", color: "#3C4858" }}
+                      style={{
+                        fontWeight: "bold",
+                        color: "#3C4858",
+                        fontSize: "0.8vw",
+                      }}
                       onClick={() => handleClickOpen(row.Image)}
                     >
                       {row.Image && (
