@@ -67,8 +67,12 @@ export default function ViewDetails(props) {
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
     currentPage = 1;
     setType(props.match.params.type)
-    dispatch(getbranchDetails());
-    dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, currentPage));
+    if (props.match.params.subtype == "null") {
+      dispatch(getbranchDetails(props.match.params.date));
+    }
+    else if (props.match.params.subtype != "null") {
+      dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, currentPage));
+    }
 
   }, []);
 

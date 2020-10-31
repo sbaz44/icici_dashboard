@@ -16,10 +16,10 @@ import Accessibility from "@material-ui/icons/Accessibility";
 import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
+import './dashboard.css'
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
-import Table from "components/Table/Table.js";
 import Tasks from "components/Tasks/Tasks.js";
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import Danger from "components/Typography/Danger.js";
@@ -31,6 +31,7 @@ import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import { useSelector, useDispatch } from "react-redux";
+import Select from '@material-ui/core/Select';
 import { bugs, website, server } from "variables/general.js";
 import {
   getbranchDetails,
@@ -54,64 +55,117 @@ import {
 import DateFnsUtils from "@date-io/date-fns";
 import { format } from "date-fns";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import Table from "@material-ui/core/Table";
+import TableRow from "@material-ui/core/TableRow";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
 var result = "";
+var result2 = "";
 const useStyles = makeStyles(styles);
+const useStyles2 = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 export default function Dashboard() {
   const classes = useStyles();
+  const classes2 = useStyles2();
   const branches = useSelector((state) => state.branches);
   const dashboard_Count = useSelector((state) => state.dashboard_Count);
   const graph_data = useSelector((state) => state.graph_data);
   const postBranchResponse = useSelector((state) => state.postBranchResponse);
   const branchReport = useSelector((state) => state.branchReport);
   const dispatch = useDispatch();
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [selectedToDate, setToDate] = React.useState(new Date());
+  const [selectedFromDate, setFromDate] = React.useState(new Date());
+  const [selectedCity, setselectedCity] = useState("");
+  const [selectedBranch, setselectedBranch] = useState("");
 
-  const handleDateChange = (date) => {
-    result = format(date, "dd-MM-yyyy");
-    setSelectedDate(date);
+  const handleToChange = (date) => {
+    result2 = format(date, "dd-MM-yyyy");
+    setToDate(date);
+    dispatch(graphData(selectedCity, selectedBranch, result, result2));
+    dispatch(dashboardCount(selectedCity, selectedBranch, result, result2));
     // dispatch(viewBranchDetail(props.match.params.branch, result));
   };
-  let [response, setResponse] = useState("");
-  let [data, setData] = useState({
-    Total_alerts: {
-      labels: ["W", "T", "F", "S", "S", "M", "T"],
-      series: [
-        [478, 43, 1234, 14776, 0, 0, 1324],
-        [345, 8033, 656, 1244, 5560, 5550, 120],
-        [123, 8033, 3434, 1670, 34350, 3450, 6564],
-      ],
-    },
-    Social_distancing_alerts: {
-      labels: ["W", "T", "F", "S", "S", "M", "T"],
-      series: [[43, 97, 526, 0, 0, 0, 0]],
-    },
-    Teller_missing_alerts: {
-      labels: ["W", "T", "F", "S", "S", "M", "T"],
-      series: [[38, 12, 181, 2, 0, 0, 104]],
-    },
-    Camera_tampering_alerts: {
-      labels: ["W", "T", "F", "S", "S", "M", "T"],
-      series: [[245, 7729, 1, 14659, 0, 0, 8]],
-    },
-  });
+  const handleFromChange = (date) => {
+    result = format(date, "dd-MM-yyyy");
+    setFromDate(date);
+    dispatch(graphData(selectedCity, selectedBranch, result, result2));
+    dispatch(dashboardCount(selectedCity, selectedBranch, result, result2));
+    // dispatch(viewBranchDetail(props.match.params.branch, result));
+  };
+  const handleCityChange = (event) => {
+    setselectedCity(event.target.value);
+    dispatch(graphData(event.target.value, selectedBranch, result, result2));
+    dispatch(dashboardCount(event.target.value, selectedBranch, result, result2));
+    // dispatch(viewDetail(props.match.params.branch, event.target.value, props.match.params.subtype, props.match.params.date, currentPage));
+  };
+
+  const handleBranchChange = (event) => {
+    setselectedBranch(event.target.value);
+    dispatch(graphData(selectedCity, event.target.value, result, result2));
+    dispatch(dashboardCount(selectedCity, event.target.value, result, result2));
+
+    // dispatch(viewDetail(props.match.params.branch, event.target.value, props.match.params.subtype, props.match.params.date, currentPage));
+  };
 
   useEffect(() => {
     var todaysDate = new Date();
-    result = format(todaysDate, "dd-MM-yyyy");
-    dispatch(dashboardCount());
-    dispatch(graphData());
+    var todaysDate2 = new Date();
+    todaysDate2.setDate(todaysDate2.getDate() - 7);
+    result2 = format(todaysDate, "dd-MM-yyyy");
+    result = format(todaysDate2, "dd-MM-yyyy");
+    console.log(result2)
+    var newdate = result.split("-").reverse().join("-");
+    setFromDate(newdate)
+    dispatch(dashboardCount("", "", "", ""));
+    dispatch(graphData("", "", "", ""));
     $("#root").find("header").hide();
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
-    console.log(graph_data);
+    // console.log(graph_data);
     // return () => {
     //   console.log("cleared");
     // };
-  }, []);
 
+
+    var obj = {
+      "Weapon": 0,
+      "Tampering": 0,
+      "Mask": 0,
+      "Fire": 0,
+      "Exceeded": 0,
+      "Trespass": 8,
+      "Loitering": 0,
+      "Helmet": 0,
+      "Defective": 0
+    }
+    var sortable = [];
+    for (var vehicle in obj) {
+      sortable.push([vehicle, obj[vehicle]]);
+    }
+
+    sortable.sort(function (a, b) {
+      return a[1] - b[1];
+    }).reverse();
+
+    console.log(sortable)
+  }, []);
+  const Maharashtra = ['Mumbai', 'Nagpur', 'Pune']
+  const Haryana = ['Dulhe', 'Mumbai', 'Nagpur']
+  const Delhi = ['Dwarka', 'Najafgarh', 'TagoreGarden']
   return (
     <div id="dashboard-page">
+      {console.log(selectedCity)}
       <div
         style={{
           display: "flex",
@@ -121,23 +175,62 @@ export default function Dashboard() {
           marginBottom: "2vw",
         }}
       >
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <img
-              src={smart}
-              style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
-            />
-            <p
-              style={{
-                fontSize: "1.5vw",
-                marginLeft: "0.5vw",
-                fontWeight: "bold",
-                paddingTop: "0.5vw",
-              }}
-            >
-              Smart Bank Analytics System
+
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <img
+            src={smart}
+            style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
+          />
+          <p
+            style={{
+              fontSize: "1.3em",
+              marginLeft: "0.5vw",
+              fontWeight: "bold",
+              paddingTop: "0.5vw",
+            }}
+          >
+            Smart Bank Analytics System
             </p>
-          </div>
+        </div>
+        <FormControl className={classes2.formControl}>
+          <InputLabel id="demo-simple-select-label">State</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={selectedCity}
+            onChange={handleCityChange}
+          >
+            <MenuItem value={'Delhi'}>Delhi</MenuItem>
+            <MenuItem value={'Maharashtra'}>Maharashtra</MenuItem>
+            <MenuItem value={'Haryana'}>Haryana</MenuItem>
+
+          </Select>
+        </FormControl>
+        <FormControl className={classes2.formControl}>
+          <InputLabel id="demo-simple-select-label">Branch</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={selectedBranch}
+            onChange={handleBranchChange}
+          >
+            {selectedCity === 'Maharashtra' && Maharashtra.map((item, index) => {
+              return <MenuItem value={item}>{item}</MenuItem>
+            })}
+
+            {selectedCity === 'Delhi' && Delhi.map((item, index) => {
+              return <MenuItem value={item}>{item}</MenuItem>
+            })}
+            {selectedCity === 'Haryana' && Haryana.map((item, index) => {
+              return <MenuItem value={item}>{item}</MenuItem>
+            })}
+            {/* 
+              <MenuItem value={'Business_insights'}>Business Insights</MenuItem>
+              <MenuItem value={'Internal_compliance'}>Internal Compliance</MenuItem>
+              <MenuItem value={'Covid_safety'}>Covid Safety</MenuItem> */}
+          </Select>
+        </FormControl>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
             disableToolbar
             disableFuture
@@ -145,9 +238,25 @@ export default function Dashboard() {
             format="MM/dd/yyyy"
             margin="normal"
             id="date-picker-inline"
-            label="Search by Date"
-            value={selectedDate}
-            onChange={handleDateChange}
+            label="From"
+            value={selectedFromDate}
+            onChange={handleFromChange}
+            KeyboardButtonProps={{
+              "aria-label": "change date",
+            }}
+          />
+        </MuiPickersUtilsProvider>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            disableToolbar
+            disableFuture
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date-picker-inline"
+            label="To"
+            value={selectedToDate}
+            onChange={handleToChange}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
@@ -242,7 +351,7 @@ export default function Dashboard() {
                 Live Branches
               </p>
               <h3 className={classes.cardTitle}>
-                {dashboard_Count.Branch_count}
+                {dashboard_Count.Total_Branch_count}
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -385,6 +494,287 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
+      </GridContainer>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={6}>
+          <Card>
+            <CardHeader color="warning">
+              <ChartistGraph
+                className="ct-chart"
+                data={graph_data.External_threats}
+                type="Line"
+                options={completedTasksChart.options}
+                listener={completedTasksChart.animation}
+              />
+            </CardHeader>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', padding: "0 16px", marginTop: "1em" }}>
+              <h4 style={{ fontWeight: "bold", color: "#3C4858", margin: 0, lineHeight: "1.5em" }}>External Threats</h4>
+              {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
+              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>View More</div>
+            </div>
+            <CardBody>
+              {Object.keys(graph_data).length > 0 && <Table>
+                <TableBody>
+                  {graph_data.External_threats.dataList.map((row, index) => (
+                    <TableRow key={row.age} className={classes.tableBodyRow}>
+                      <TableCell
+                        className={classes.tableCell}
+                        align="center"
+                        style={{
+                          fontWeight: "bold",
+                          color: "#3C4858",
+                          fontSize: "0.8125rem",
+                          textAlign: 'left'
+                        }}
+                      >
+                        {row.Type}
+                      </TableCell>
+                      <TableCell
+                        className={classes.tableCell}
+                        align="center"
+                        style={{
+                          fontWeight: "bold",
+                          color: "#3C4858",
+                          fontSize: "0.8125rem",
+                          textAlign: 'left'
+                        }}
+                      >
+                        {row.Count}
+                      </TableCell>
+
+
+                      <TableCell
+                        className={classes.tableCell}
+                        align="center"
+                        style={{
+                          fontWeight: "bold",
+                          color: "#3C4858",
+                          fontSize: "0.8125rem",
+                          textAlign: 'right'
+                        }}
+                      >
+                        <a href={"view/branch/"}>
+                          View
+                </a>
+                      </TableCell>
+                    </TableRow>))}
+                </TableBody>
+              </Table>}
+            </CardBody>
+          </Card>
+        </GridItem>
+
+        <GridItem xs={12} sm={12} md={6}>
+          <Card>
+            <CardHeader color="danger">
+              <ChartistGraph
+                className="ct-chart"
+                data={graph_data.Business_insights}
+                type="Line"
+                options={completedTasksChart.options}
+                listener={completedTasksChart.animation}
+              />
+            </CardHeader>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', padding: "0 16px", marginTop: "1em" }}>
+              <h4 style={{ fontWeight: "bold", color: "#3C4858", margin: 0, lineHeight: "1.5em" }}> Business Insights</h4>
+              {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
+              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>View More</div>
+            </div>
+            <CardBody>
+              {Object.keys(graph_data).length > 0 && <Table>
+                <TableBody>
+                  {graph_data.Business_insights.dataList.map((row, index) => (
+                    <TableRow key={row.age} className={classes.tableBodyRow}>
+                      <TableCell
+                        className={classes.tableCell}
+                        align="center"
+                        style={{
+                          fontWeight: "bold",
+                          color: "#3C4858",
+                          fontSize: "0.8125rem",
+                          textAlign: 'left'
+                        }}
+                      >
+                        {row.Type}
+                      </TableCell>
+                      <TableCell
+                        className={classes.tableCell}
+                        align="center"
+                        style={{
+                          fontWeight: "bold",
+                          color: "#3C4858",
+                          fontSize: "0.8125rem",
+                          textAlign: 'left'
+                        }}
+                      >
+                        {row.Count}
+                      </TableCell>
+
+
+                      <TableCell
+                        className={classes.tableCell}
+                        align="center"
+                        style={{
+                          fontWeight: "bold",
+                          color: "#3C4858",
+                          fontSize: "0.8125rem",
+                          textAlign: 'right'
+                        }}
+                      >
+                        <a href={"view/branch/"}>
+                          View
+                </a>
+                      </TableCell>
+                    </TableRow>))}
+                </TableBody>
+              </Table>}
+            </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <Card>
+            <CardHeader color="primary">
+              <ChartistGraph
+                className="ct-chart"
+                data={graph_data.Internal_compliance}
+                type="Line"
+                options={completedTasksChart.options}
+                listener={completedTasksChart.animation}
+              />
+            </CardHeader>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', padding: "0 16px", marginTop: "1em" }}>
+              <h4 style={{ fontWeight: "bold", color: "#3C4858", margin: 0, lineHeight: "1.5em" }}>Internal Compliance</h4>
+              {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
+              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>View More</div>
+            </div>
+            <CardBody>
+              {Object.keys(graph_data).length > 0 && <Table>
+                <TableBody>
+                  {graph_data.Internal_compliance.dataList.map((row, index) => (
+                    <TableRow key={row.age} className={classes.tableBodyRow}>
+                      <TableCell
+                        className={classes.tableCell}
+                        align="center"
+                        style={{
+                          fontWeight: "bold",
+                          color: "#3C4858",
+                          fontSize: "0.8125rem",
+                          textAlign: 'left'
+                        }}
+                      >
+                        {row.Type}
+                      </TableCell>
+                      <TableCell
+                        className={classes.tableCell}
+                        align="center"
+                        style={{
+                          fontWeight: "bold",
+                          color: "#3C4858",
+                          fontSize: "0.8125rem",
+                          textAlign: 'left'
+                        }}
+                      >
+                        {row.Count}
+                      </TableCell>
+
+
+                      <TableCell
+                        className={classes.tableCell}
+                        align="center"
+                        style={{
+                          fontWeight: "bold",
+                          color: "#3C4858",
+                          fontSize: "0.8125rem",
+                          textAlign: 'right'
+                        }}
+                      >
+                        <a href={"view/branch/"}>
+                          View
+                </a>
+                      </TableCell>
+                    </TableRow>))}
+                </TableBody>
+              </Table>}
+            </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <Card>
+            <CardHeader color="success">
+              <ChartistGraph
+                className="ct-chart"
+                data={graph_data.Covid_safety}
+                type="Line"
+                options={completedTasksChart.options}
+                listener={completedTasksChart.animation}
+              />
+            </CardHeader>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', padding: "0 16px", marginTop: "1em" }}>
+              <h4 style={{ fontWeight: "bold", color: "#3C4858", margin: 0, lineHeight: "1.5em" }}>  Covid Safety</h4>
+              {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
+              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>View More</div>
+            </div>
+            <CardBody>
+              {Object.keys(graph_data).length > 0 && <Table>
+                <TableBody>
+                  {graph_data.Covid_safety.dataList.map((row, index) => {
+                    if (index < 4) {
+                      return <TableRow key={row.age} className={classes.tableBodyRow}>
+                        <TableCell
+                          className={classes.tableCell}
+                          align="center"
+                          style={{
+                            fontWeight: "bold",
+                            color: "#3C4858",
+                            fontSize: "0.8125rem",
+                            textAlign: 'left'
+                          }}
+                        >
+                          {row.Type}
+                        </TableCell>
+                        <TableCell
+                          className={classes.tableCell}
+                          align="center"
+                          style={{
+                            fontWeight: "bold",
+                            color: "#3C4858",
+                            fontSize: "0.8125rem",
+                            textAlign: 'left'
+                          }}
+                        >
+                          {row.Count}
+                        </TableCell>
+
+
+                        <TableCell
+                          className={classes.tableCell}
+                          align="center"
+                          style={{
+                            fontWeight: "bold",
+                            color: "#3C4858",
+                            fontSize: "0.8125rem",
+                            textAlign: 'right'
+                          }}
+                        >
+                          <a href={"view/branch/"}>
+                            View
+                    </a>
+                        </TableCell>
+                      </TableRow>
+                    }
+                  })}
+                </TableBody>
+              </Table>}
+            </CardBody>
+          </Card>
+        </GridItem>
+
+
+
       </GridContainer>
       {/* <img
         src={bg}

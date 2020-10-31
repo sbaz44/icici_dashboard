@@ -14,7 +14,8 @@ export const GET_THREAT_DETAIL = "GET_THREAT_DETAIL";
 export const POST_BRANCH_DETAILS = "POST_BRANCH_DETAILS";
 export const POST_BRANCH_REPORTS = "POST_BRANCH_REPORTS";
 
-export const URL = "http://13.127.202.106:8000/dashboard";
+export const URL = "http://192.168.2.113:8000/dashboard";
+// export const URL = "http://13.127.202.106:8000/dashboard";
 
 //get calls
 export function getbranchDetails(date) {
@@ -74,10 +75,10 @@ export function postBranchDetails(payload) {
   };
 }
 
-export function dashboardCount(payload) {
+export function dashboardCount(state, city, from, to) {
   return (dispatch) => {
     axios
-      .get(URL + "/dashboard ")
+      .get(URL + "/dashboard?State=" + state + "&City=" + city + "&From=" + from + "&To=" + to)
       .then((res) =>
         dispatch({
           type: GET_DASHBOARD_COUNT,
@@ -88,10 +89,10 @@ export function dashboardCount(payload) {
   };
 }
 
-export function graphData(payload) {
+export function graphData(state, city, from, to) {
   return (dispatch) => {
     axios
-      .get(URL + "/analytics")
+      .get(URL + "/analytics?State=" + state + "&City=" + city + "&From=" + from + "&To=" + to)
       .then((res) =>
         dispatch({
           type: GET_GRAPH_DATA,
@@ -118,21 +119,21 @@ export function viewBranchDetail(payload, payload2) {
 }
 
 export function viewDetail(payload, payload2, payload3, payload4, payload5) {
-  console.log(payload, payload2);
+  console.log(payload, payload4);
   return (dispatch) => {
     axios
       .get(
         URL +
-          "/alert/" +
-          payload +
-          "?Type=" +
-          payload2 +
-          "&Subtype=" +
-          payload3 +
-          "&Date=" +
-          payload4 +
-          "&page_no=" +
-          payload5
+        "/alert/" +
+        payload +
+        "?Type=" +
+        payload2 +
+        "&Subtype=" +
+        payload3 +
+        "&Date=" +
+        payload4 +
+        "&page_no=" +
+        payload5
       )
       .then((res) =>
         dispatch({
@@ -165,12 +166,12 @@ export function getThreatDetail(payload, payload2, payload3) {
     axios
       .get(
         URL +
-          "/alerts/branches?Message=" +
-          payload +
-          "&Type=" +
-          payload3 +
-          "&Date=" +
-          payload2
+        "/alerts/branches?Message=" +
+        payload +
+        "&Type=" +
+        payload3 +
+        "&Date=" +
+        payload2
       )
       .then((res) =>
         dispatch({
