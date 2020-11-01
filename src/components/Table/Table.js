@@ -39,7 +39,7 @@ export default function CustomTable(props) {
                     className={classes.tableCell + " " + classes.tableHeadCell}
                     key={key}
                     align="center"
-                    style={{ fontWeight: "bold", fontSize: "0.93vw" }}
+                    style={{ fontWeight: "bold", fontSize: "1.03em" }}
                   >
                     {prop}
                   </TableCell>
@@ -57,7 +57,7 @@ export default function CustomTable(props) {
                 style={{
                   fontWeight: "bold",
                   color: "#3C4858",
-                  fontSize: "0.8vw",
+                  fontSize: "0.9em",
                 }}
               >
                 {row.Branch}
@@ -68,7 +68,7 @@ export default function CustomTable(props) {
                 style={{
                   fontWeight: "bold",
                   color: "#3C4858",
-                  fontSize: "0.8vw",
+                  fontSize: "0.9em",
                 }}
               >
                 {row.Camera_count}
@@ -79,7 +79,7 @@ export default function CustomTable(props) {
                 style={{
                   fontWeight: "bold",
                   color: "#3C4858",
-                  fontSize: "0.8vw",
+                  fontSize: "0.9em",
                 }}
               >
                 {row.People_count}
@@ -90,7 +90,7 @@ export default function CustomTable(props) {
                 style={{
                   fontWeight: "bold",
                   color: "#3C4858",
-                  fontSize: "0.8vw",
+                  fontSize: "0.9em",
                 }}
               >
                 {row.Alert_count}
@@ -102,7 +102,7 @@ export default function CustomTable(props) {
                   fontWeight: "bold",
                   color: "#9c27b0",
                   cursor: "pointer",
-                  fontSize: "0.8vw",
+                  fontSize: "0.9em",
                   textDecoration: "underline",
                 }}
                 onClick={() => handleClickOpen(row.Open_time_image)}
@@ -116,7 +116,7 @@ export default function CustomTable(props) {
                   fontWeight: "bold",
                   color: "#9c27b0",
                   cursor: "pointer",
-                  fontSize: "0.8vw",
+                  fontSize: "0.9em",
                   textDecoration: "underline",
                 }}
                 onClick={() => handleClickOpen(row.Close_time_image)}
@@ -130,7 +130,7 @@ export default function CustomTable(props) {
                   fontWeight: "bold",
                   color: "#3C4858",
                   cursor: "pointer",
-                  fontSize: "0.8vw",
+                  fontSize: "0.9em",
                 }}
                 onClick={() => handleClickOpen(row.Image_link)}
               >
@@ -151,7 +151,7 @@ export default function CustomTable(props) {
                 style={{
                   fontWeight: "bold",
                   color: "#3C4858",
-                  fontSize: "0.8vw",
+                  fontSize: "0.9em",
                 }}
               >
                 {row.Created}
@@ -162,7 +162,7 @@ export default function CustomTable(props) {
                 style={{
                   fontWeight: "bold",
                   color: "#3C4858",
-                  fontSize: "0.8vw",
+                  fontSize: "0.9em",
                 }}
               >
                 <NavLink
@@ -174,6 +174,7 @@ export default function CustomTable(props) {
                       close: row.Close_time,
                       open_image: row.Open_time_image,
                       close_image: row.Close_time_image,
+                      type: row.Type,
                     };
                     localStorage.setItem("smData", JSON.stringify(data));
                   }}

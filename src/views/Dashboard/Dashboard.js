@@ -16,7 +16,7 @@ import Accessibility from "@material-ui/icons/Accessibility";
 import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
-import './dashboard.css'
+import "./dashboard.css";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -31,7 +31,7 @@ import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import { useSelector, useDispatch } from "react-redux";
-import Select from '@material-ui/core/Select';
+import Select from "@material-ui/core/Select";
 import { bugs, website, server } from "variables/general.js";
 import {
   getbranchDetails,
@@ -59,9 +59,9 @@ import Table from "@material-ui/core/Table";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
 var result = "";
 var result2 = "";
 const useStyles = makeStyles(styles);
@@ -86,34 +86,36 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const [selectedToDate, setToDate] = React.useState(new Date());
   const [selectedFromDate, setFromDate] = React.useState(new Date());
+  const [selectedState, setselectedState] = useState("");
   const [selectedCity, setselectedCity] = useState("");
-  const [selectedBranch, setselectedBranch] = useState("");
 
   const handleToChange = (date) => {
     result2 = format(date, "dd-MM-yyyy");
     setToDate(date);
-    dispatch(graphData(selectedCity, selectedBranch, result, result2));
-    dispatch(dashboardCount(selectedCity, selectedBranch, result, result2));
+    dispatch(graphData(selectedState, selectedCity, result, result2));
+    dispatch(dashboardCount(selectedState, selectedCity, result, result2));
     // dispatch(viewBranchDetail(props.match.params.branch, result));
   };
   const handleFromChange = (date) => {
     result = format(date, "dd-MM-yyyy");
     setFromDate(date);
-    dispatch(graphData(selectedCity, selectedBranch, result, result2));
-    dispatch(dashboardCount(selectedCity, selectedBranch, result, result2));
+    dispatch(graphData(selectedState, selectedCity, result, result2));
+    dispatch(dashboardCount(selectedState, selectedCity, result, result2));
     // dispatch(viewBranchDetail(props.match.params.branch, result));
   };
   const handleCityChange = (event) => {
-    setselectedCity(event.target.value);
-    dispatch(graphData(event.target.value, selectedBranch, result, result2));
-    dispatch(dashboardCount(event.target.value, selectedBranch, result, result2));
+    setselectedState(event.target.value);
+    dispatch(graphData(event.target.value, selectedCity, result, result2));
+    dispatch(dashboardCount(event.target.value, selectedCity, result, result2));
     // dispatch(viewDetail(props.match.params.branch, event.target.value, props.match.params.subtype, props.match.params.date, currentPage));
   };
 
   const handleBranchChange = (event) => {
-    setselectedBranch(event.target.value);
-    dispatch(graphData(selectedCity, event.target.value, result, result2));
-    dispatch(dashboardCount(selectedCity, event.target.value, result, result2));
+    setselectedCity(event.target.value);
+    dispatch(graphData(selectedState, event.target.value, result, result2));
+    dispatch(
+      dashboardCount(selectedState, event.target.value, result, result2)
+    );
 
     // dispatch(viewDetail(props.match.params.branch, event.target.value, props.match.params.subtype, props.match.params.date, currentPage));
   };
@@ -124,9 +126,9 @@ export default function Dashboard() {
     todaysDate2.setDate(todaysDate2.getDate() - 7);
     result2 = format(todaysDate, "dd-MM-yyyy");
     result = format(todaysDate2, "dd-MM-yyyy");
-    console.log(result2)
+    console.log(result2);
     var newdate = result.split("-").reverse().join("-");
-    setFromDate(newdate)
+    setFromDate(newdate);
     dispatch(dashboardCount("", "", "", ""));
     dispatch(graphData("", "", "", ""));
     $("#root").find("header").hide();
@@ -137,35 +139,36 @@ export default function Dashboard() {
     //   console.log("cleared");
     // };
 
-
     var obj = {
-      "Weapon": 0,
-      "Tampering": 0,
-      "Mask": 0,
-      "Fire": 0,
-      "Exceeded": 0,
-      "Trespass": 8,
-      "Loitering": 0,
-      "Helmet": 0,
-      "Defective": 0
-    }
+      Weapon: 0,
+      Tampering: 0,
+      Mask: 0,
+      Fire: 0,
+      Exceeded: 0,
+      Trespass: 8,
+      Loitering: 0,
+      Helmet: 0,
+      Defective: 0,
+    };
     var sortable = [];
     for (var vehicle in obj) {
       sortable.push([vehicle, obj[vehicle]]);
     }
 
-    sortable.sort(function (a, b) {
-      return a[1] - b[1];
-    }).reverse();
+    sortable
+      .sort(function (a, b) {
+        return a[1] - b[1];
+      })
+      .reverse();
 
-    console.log(sortable)
+    console.log(sortable);
   }, []);
-  const Maharashtra = ['Mumbai', 'Nagpur', 'Pune']
-  const Haryana = ['Dulhe', 'Mumbai', 'Nagpur']
-  const Delhi = ['Dwarka', 'Najafgarh', 'TagoreGarden']
+  const Maharashtra = ["Mumbai", "Nagpur", "Pune"];
+  const Haryana = ["Dulhe", "Mumbai", "Nagpur"];
+  const Delhi = ["Dwarka", "Najafgarh", "TagoreGarden"];
   return (
     <div id="dashboard-page">
-      {console.log(selectedCity)}
+      {console.log(selectedState)}
       <div
         style={{
           display: "flex",
@@ -175,7 +178,6 @@ export default function Dashboard() {
           marginBottom: "2vw",
         }}
       >
-
         <div style={{ display: "flex", alignItems: "center" }}>
           <img
             src={smart}
@@ -190,40 +192,42 @@ export default function Dashboard() {
             }}
           >
             Smart Bank Analytics System
-            </p>
+          </p>
         </div>
         <FormControl className={classes2.formControl}>
           <InputLabel id="demo-simple-select-label">State</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={selectedCity}
+            value={selectedState}
             onChange={handleCityChange}
           >
-            <MenuItem value={'Delhi'}>Delhi</MenuItem>
-            <MenuItem value={'Maharashtra'}>Maharashtra</MenuItem>
-            <MenuItem value={'Haryana'}>Haryana</MenuItem>
-
+            <MenuItem value={"Delhi"}>Delhi</MenuItem>
+            <MenuItem value={"Maharashtra"}>Maharashtra</MenuItem>
+            <MenuItem value={"Haryana"}>Haryana</MenuItem>
           </Select>
         </FormControl>
         <FormControl className={classes2.formControl}>
-          <InputLabel id="demo-simple-select-label">Branch</InputLabel>
+          <InputLabel id="demo-simple-select-label">City</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={selectedBranch}
+            value={selectedCity}
             onChange={handleBranchChange}
           >
-            {selectedCity === 'Maharashtra' && Maharashtra.map((item, index) => {
-              return <MenuItem value={item}>{item}</MenuItem>
-            })}
+            {selectedState === "Maharashtra" &&
+              Maharashtra.map((item, index) => {
+                return <MenuItem value={item}>{item}</MenuItem>;
+              })}
 
-            {selectedCity === 'Delhi' && Delhi.map((item, index) => {
-              return <MenuItem value={item}>{item}</MenuItem>
-            })}
-            {selectedCity === 'Haryana' && Haryana.map((item, index) => {
-              return <MenuItem value={item}>{item}</MenuItem>
-            })}
+            {selectedState === "Delhi" &&
+              Delhi.map((item, index) => {
+                return <MenuItem value={item}>{item}</MenuItem>;
+              })}
+            {selectedState === "Haryana" &&
+              Haryana.map((item, index) => {
+                return <MenuItem value={item}>{item}</MenuItem>;
+              })}
             {/* 
               <MenuItem value={'Business_insights'}>Business Insights</MenuItem>
               <MenuItem value={'Internal_compliance'}>Internal Compliance</MenuItem>
@@ -508,59 +512,93 @@ export default function Dashboard() {
               />
             </CardHeader>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: "0 16px", marginTop: "1em" }}>
-              <h4 style={{ fontWeight: "bold", color: "#3C4858", margin: 0, lineHeight: "1.5em" }}>External Threats</h4>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                padding: "0 16px",
+                marginTop: "1em",
+              }}
+            >
+              <h4
+                style={{
+                  fontWeight: "bold",
+                  color: "#3C4858",
+                  margin: 0,
+                  lineHeight: "1.5em",
+                }}
+              >
+                External Threats
+              </h4>
               {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
-              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>View More</div>
+              <a
+                href={
+                  "/admin/threats/External_threats/" +
+                  selectedState +
+                  "/" +
+                  selectedCity +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
+                }
+              >
+                <div
+                  className="makeStyles-stats-98"
+                  style={{ color: "#43a047" }}
+                >
+                  View More
+                </div>
+              </a>
             </div>
             <CardBody>
-              {Object.keys(graph_data).length > 0 && <Table>
-                <TableBody>
-                  {graph_data.External_threats.dataList.map((row, index) => (
-                    <TableRow key={row.age} className={classes.tableBodyRow}>
-                      <TableCell
-                        className={classes.tableCell}
-                        align="center"
-                        style={{
-                          fontWeight: "bold",
-                          color: "#3C4858",
-                          fontSize: "0.8125rem",
-                          textAlign: 'left'
-                        }}
-                      >
-                        {row.Type}
-                      </TableCell>
-                      <TableCell
-                        className={classes.tableCell}
-                        align="center"
-                        style={{
-                          fontWeight: "bold",
-                          color: "#3C4858",
-                          fontSize: "0.8125rem",
-                          textAlign: 'left'
-                        }}
-                      >
-                        {row.Count}
-                      </TableCell>
+              {Object.keys(graph_data).length > 0 && (
+                <Table>
+                  <TableBody>
+                    {graph_data.External_threats.dataList.map((row, index) => (
+                      <TableRow key={row.age} className={classes.tableBodyRow}>
+                        <TableCell
+                          className={classes.tableCell}
+                          align="center"
+                          style={{
+                            fontWeight: "bold",
+                            color: "#3C4858",
+                            fontSize: "0.8125rem",
+                            textAlign: "left",
+                          }}
+                        >
+                          {row.Type}
+                        </TableCell>
+                        <TableCell
+                          className={classes.tableCell}
+                          align="center"
+                          style={{
+                            fontWeight: "bold",
+                            color: "#3C4858",
+                            fontSize: "0.8125rem",
+                            textAlign: "left",
+                          }}
+                        >
+                          {row.Count}
+                        </TableCell>
 
-
-                      <TableCell
-                        className={classes.tableCell}
-                        align="center"
-                        style={{
-                          fontWeight: "bold",
-                          color: "#3C4858",
-                          fontSize: "0.8125rem",
-                          textAlign: 'right'
-                        }}
-                      >
-                        <a href={"view/branch/"}>
-                          View
-                </a>
-                      </TableCell>
-                    </TableRow>))}
-                </TableBody>
-              </Table>}
+                        <TableCell
+                          className={classes.tableCell}
+                          align="center"
+                          style={{
+                            fontWeight: "bold",
+                            color: "#3C4858",
+                            fontSize: "0.8125rem",
+                            textAlign: "right",
+                          }}
+                        >
+                          <a href={"view/branch/"}>View</a>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
             </CardBody>
           </Card>
         </GridItem>
@@ -577,59 +615,78 @@ export default function Dashboard() {
               />
             </CardHeader>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: "0 16px", marginTop: "1em" }}>
-              <h4 style={{ fontWeight: "bold", color: "#3C4858", margin: 0, lineHeight: "1.5em" }}> Business Insights</h4>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                padding: "0 16px",
+                marginTop: "1em",
+              }}
+            >
+              <h4
+                style={{
+                  fontWeight: "bold",
+                  color: "#3C4858",
+                  margin: 0,
+                  lineHeight: "1.5em",
+                }}
+              >
+                {" "}
+                Business Insights
+              </h4>
               {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
-              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>View More</div>
+              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>
+                View More
+              </div>
             </div>
             <CardBody>
-              {Object.keys(graph_data).length > 0 && <Table>
-                <TableBody>
-                  {graph_data.Business_insights.dataList.map((row, index) => (
-                    <TableRow key={row.age} className={classes.tableBodyRow}>
-                      <TableCell
-                        className={classes.tableCell}
-                        align="center"
-                        style={{
-                          fontWeight: "bold",
-                          color: "#3C4858",
-                          fontSize: "0.8125rem",
-                          textAlign: 'left'
-                        }}
-                      >
-                        {row.Type}
-                      </TableCell>
-                      <TableCell
-                        className={classes.tableCell}
-                        align="center"
-                        style={{
-                          fontWeight: "bold",
-                          color: "#3C4858",
-                          fontSize: "0.8125rem",
-                          textAlign: 'left'
-                        }}
-                      >
-                        {row.Count}
-                      </TableCell>
+              {Object.keys(graph_data).length > 0 && (
+                <Table>
+                  <TableBody>
+                    {graph_data.Business_insights.dataList.map((row, index) => (
+                      <TableRow key={row.age} className={classes.tableBodyRow}>
+                        <TableCell
+                          className={classes.tableCell}
+                          align="center"
+                          style={{
+                            fontWeight: "bold",
+                            color: "#3C4858",
+                            fontSize: "0.8125rem",
+                            textAlign: "left",
+                          }}
+                        >
+                          {row.Type}
+                        </TableCell>
+                        <TableCell
+                          className={classes.tableCell}
+                          align="center"
+                          style={{
+                            fontWeight: "bold",
+                            color: "#3C4858",
+                            fontSize: "0.8125rem",
+                            textAlign: "left",
+                          }}
+                        >
+                          {row.Count}
+                        </TableCell>
 
-
-                      <TableCell
-                        className={classes.tableCell}
-                        align="center"
-                        style={{
-                          fontWeight: "bold",
-                          color: "#3C4858",
-                          fontSize: "0.8125rem",
-                          textAlign: 'right'
-                        }}
-                      >
-                        <a href={"view/branch/"}>
-                          View
-                </a>
-                      </TableCell>
-                    </TableRow>))}
-                </TableBody>
-              </Table>}
+                        <TableCell
+                          className={classes.tableCell}
+                          align="center"
+                          style={{
+                            fontWeight: "bold",
+                            color: "#3C4858",
+                            fontSize: "0.8125rem",
+                            textAlign: "right",
+                          }}
+                        >
+                          <a href={"view/branch/"}>View</a>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
             </CardBody>
           </Card>
         </GridItem>
@@ -645,59 +702,82 @@ export default function Dashboard() {
               />
             </CardHeader>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: "0 16px", marginTop: "1em" }}>
-              <h4 style={{ fontWeight: "bold", color: "#3C4858", margin: 0, lineHeight: "1.5em" }}>Internal Compliance</h4>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                padding: "0 16px",
+                marginTop: "1em",
+              }}
+            >
+              <h4
+                style={{
+                  fontWeight: "bold",
+                  color: "#3C4858",
+                  margin: 0,
+                  lineHeight: "1.5em",
+                }}
+              >
+                Internal Compliance
+              </h4>
               {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
-              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>View More</div>
+              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>
+                View More
+              </div>
             </div>
             <CardBody>
-              {Object.keys(graph_data).length > 0 && <Table>
-                <TableBody>
-                  {graph_data.Internal_compliance.dataList.map((row, index) => (
-                    <TableRow key={row.age} className={classes.tableBodyRow}>
-                      <TableCell
-                        className={classes.tableCell}
-                        align="center"
-                        style={{
-                          fontWeight: "bold",
-                          color: "#3C4858",
-                          fontSize: "0.8125rem",
-                          textAlign: 'left'
-                        }}
-                      >
-                        {row.Type}
-                      </TableCell>
-                      <TableCell
-                        className={classes.tableCell}
-                        align="center"
-                        style={{
-                          fontWeight: "bold",
-                          color: "#3C4858",
-                          fontSize: "0.8125rem",
-                          textAlign: 'left'
-                        }}
-                      >
-                        {row.Count}
-                      </TableCell>
+              {Object.keys(graph_data).length > 0 && (
+                <Table>
+                  <TableBody>
+                    {graph_data.Internal_compliance.dataList.map(
+                      (row, index) => (
+                        <TableRow
+                          key={row.age}
+                          className={classes.tableBodyRow}
+                        >
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "left",
+                            }}
+                          >
+                            {row.Type}
+                          </TableCell>
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "left",
+                            }}
+                          >
+                            {row.Count}
+                          </TableCell>
 
-
-                      <TableCell
-                        className={classes.tableCell}
-                        align="center"
-                        style={{
-                          fontWeight: "bold",
-                          color: "#3C4858",
-                          fontSize: "0.8125rem",
-                          textAlign: 'right'
-                        }}
-                      >
-                        <a href={"view/branch/"}>
-                          View
-                </a>
-                      </TableCell>
-                    </TableRow>))}
-                </TableBody>
-              </Table>}
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "right",
+                            }}
+                          >
+                            <a href={"view/branch/"}>View</a>
+                          </TableCell>
+                        </TableRow>
+                      )
+                    )}
+                  </TableBody>
+                </Table>
+              )}
             </CardBody>
           </Card>
         </GridItem>
@@ -713,68 +793,88 @@ export default function Dashboard() {
               />
             </CardHeader>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: "0 16px", marginTop: "1em" }}>
-              <h4 style={{ fontWeight: "bold", color: "#3C4858", margin: 0, lineHeight: "1.5em" }}>  Covid Safety</h4>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                padding: "0 16px",
+                marginTop: "1em",
+              }}
+            >
+              <h4
+                style={{
+                  fontWeight: "bold",
+                  color: "#3C4858",
+                  margin: 0,
+                  lineHeight: "1.5em",
+                }}
+              >
+                {" "}
+                Covid Safety
+              </h4>
               {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
-              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>View More</div>
+              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>
+                View More
+              </div>
             </div>
             <CardBody>
-              {Object.keys(graph_data).length > 0 && <Table>
-                <TableBody>
-                  {graph_data.Covid_safety.dataList.map((row, index) => {
-                    if (index < 4) {
-                      return <TableRow key={row.age} className={classes.tableBodyRow}>
-                        <TableCell
-                          className={classes.tableCell}
-                          align="center"
-                          style={{
-                            fontWeight: "bold",
-                            color: "#3C4858",
-                            fontSize: "0.8125rem",
-                            textAlign: 'left'
-                          }}
-                        >
-                          {row.Type}
-                        </TableCell>
-                        <TableCell
-                          className={classes.tableCell}
-                          align="center"
-                          style={{
-                            fontWeight: "bold",
-                            color: "#3C4858",
-                            fontSize: "0.8125rem",
-                            textAlign: 'left'
-                          }}
-                        >
-                          {row.Count}
-                        </TableCell>
+              {Object.keys(graph_data).length > 0 && (
+                <Table>
+                  <TableBody>
+                    {graph_data.Covid_safety.dataList.map((row, index) => {
+                      if (index < 4) {
+                        return (
+                          <TableRow
+                            key={row.age}
+                            className={classes.tableBodyRow}
+                          >
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
+                            >
+                              {row.Type}
+                            </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
+                            >
+                              {row.Count}
+                            </TableCell>
 
-
-                        <TableCell
-                          className={classes.tableCell}
-                          align="center"
-                          style={{
-                            fontWeight: "bold",
-                            color: "#3C4858",
-                            fontSize: "0.8125rem",
-                            textAlign: 'right'
-                          }}
-                        >
-                          <a href={"view/branch/"}>
-                            View
-                    </a>
-                        </TableCell>
-                      </TableRow>
-                    }
-                  })}
-                </TableBody>
-              </Table>}
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "right",
+                              }}
+                            >
+                              <a href={"view/branch/"}>View</a>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      }
+                    })}
+                  </TableBody>
+                </Table>
+              )}
             </CardBody>
           </Card>
         </GridItem>
-
-
-
       </GridContainer>
       {/* <img
         src={bg}

@@ -39,6 +39,7 @@ import ViewBranch from "views/viewBranch/ViewBranch";
 import ViewDetails from "views/viewDetails/ViewDetails";
 import Type1_1 from "views/Type1_1/Type1_1";
 import Type1_2 from "views/Type1_2/Type1_2";
+import Type1_3 from "views/Type1_3/Type1_3";
 
 const dashboardRoutes = [
   {
@@ -94,7 +95,7 @@ const dashboardRoutes = [
     invisible: true,
   },
   {
-    path: "/threats/:type/:date",
+    path: "/threats/:type/:state/:city/:date/:date2",
     name: "Threats Details",
     rtlName: "قائمة الجدول",
     icon: LibraryBooks,
@@ -103,11 +104,20 @@ const dashboardRoutes = [
     invisible: true,
   },
   {
-    path: "/details/threats/:type/:subtype/:date",
+    path: "/details/threats/:type/:subtype/:state/:city/:date/:date2",
     name: "Threats Details",
     rtlName: "قائمة الجدول",
     icon: LibraryBooks,
     component: Type1_2,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/detail/threats/:branch/:type/:subtype/:state/:city/:date/:date2",
+    name: "Threats Details",
+    rtlName: "قائمة الجدول",
+    icon: LibraryBooks,
+    component: Type1_3,
     layout: "/admin",
     invisible: true,
   },

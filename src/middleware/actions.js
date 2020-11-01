@@ -14,8 +14,8 @@ export const GET_THREAT_DETAIL = "GET_THREAT_DETAIL";
 export const POST_BRANCH_DETAILS = "POST_BRANCH_DETAILS";
 export const POST_BRANCH_REPORTS = "POST_BRANCH_REPORTS";
 
-export const URL = "http://192.168.2.113:8000/dashboard";
-// export const URL = "http://13.127.202.106:8000/dashboard";
+// export const URL = "http://192.168.2.113:8000/dashboard";
+export const URL = "http://13.127.202.106:8000/dashboard";
 
 //get calls
 export function getbranchDetails(date) {
@@ -78,7 +78,17 @@ export function postBranchDetails(payload) {
 export function dashboardCount(state, city, from, to) {
   return (dispatch) => {
     axios
-      .get(URL + "/dashboard?State=" + state + "&City=" + city + "&From=" + from + "&To=" + to)
+      .get(
+        URL +
+          "/dashboard?State=" +
+          state +
+          "&City=" +
+          city +
+          "&From=" +
+          from +
+          "&To=" +
+          to
+      )
       .then((res) =>
         dispatch({
           type: GET_DASHBOARD_COUNT,
@@ -92,7 +102,17 @@ export function dashboardCount(state, city, from, to) {
 export function graphData(state, city, from, to) {
   return (dispatch) => {
     axios
-      .get(URL + "/analytics?State=" + state + "&City=" + city + "&From=" + from + "&To=" + to)
+      .get(
+        URL +
+          "/analytics?State=" +
+          state +
+          "&City=" +
+          city +
+          "&From=" +
+          from +
+          "&To=" +
+          to
+      )
       .then((res) =>
         dispatch({
           type: GET_GRAPH_DATA,
@@ -104,7 +124,6 @@ export function graphData(state, city, from, to) {
 }
 
 export function viewBranchDetail(payload, payload2) {
-  console.log(payload, payload2);
   return (dispatch) => {
     axios
       .post(URL + "/branch/" + payload + "/dashboard?Date=" + payload2)
@@ -118,22 +137,23 @@ export function viewBranchDetail(payload, payload2) {
   };
 }
 
-export function viewDetail(payload, payload2, payload3, payload4, payload5) {
-  console.log(payload, payload4);
+export function viewDetail(branch, type, subtype, from, to, page_no) {
   return (dispatch) => {
     axios
       .get(
         URL +
-        "/alert/" +
-        payload +
-        "?Type=" +
-        payload2 +
-        "&Subtype=" +
-        payload3 +
-        "&Date=" +
-        payload4 +
-        "&page_no=" +
-        payload5
+          "/alert/" +
+          branch +
+          "?Type=" +
+          type +
+          "&Subtype=" +
+          subtype +
+          "&From=" +
+          from +
+          "&To=" +
+          to +
+          "&page_no=" +
+          page_no
       )
       .then((res) =>
         dispatch({
@@ -145,11 +165,22 @@ export function viewDetail(payload, payload2, payload3, payload4, payload5) {
   };
 }
 
-export function getTypeDetail(payload, payload2) {
-  // console.log(payload);
+export function getTypeDetail(type, state, city, from, to) {
   return (dispatch) => {
     axios
-      .get(URL + "/alerts/groups?Type=" + payload + "&Date=" + payload2)
+      .get(
+        URL +
+          "/alerts/groups?Type=" +
+          type +
+          "&State=" +
+          state +
+          "&City=" +
+          city +
+          "&From=" +
+          from +
+          "&To=" +
+          to
+      )
       .then((res) =>
         dispatch({
           type: GET_TYPE_DETAIL,
@@ -160,18 +191,34 @@ export function getTypeDetail(payload, payload2) {
   };
 }
 
-export function getThreatDetail(payload, payload2, payload3) {
-  // console.log(payload);
+export function getThreatDetail(message, type, state, city, from, to) {
   return (dispatch) => {
+    // alerts/branches?Message=fsdf&Type=sdfsd&State=fsfsdf&City=sdfs&From=dfsdf&To=sdf
+    // axios
+    //   .get(
+    //     URL +
+    //       "/alerts/branches?Message=" +
+    //       payload +
+    //       "&Type=" +
+    //       payload3 +
+    //       "&Date=" +
+    //       payload2
+    //   )
     axios
       .get(
         URL +
-        "/alerts/branches?Message=" +
-        payload +
-        "&Type=" +
-        payload3 +
-        "&Date=" +
-        payload2
+          "/alerts/branches?Message=" +
+          message +
+          "&Type=" +
+          type +
+          "&State=" +
+          state +
+          "&City=" +
+          city +
+          "&From=" +
+          from +
+          "&To=" +
+          to
       )
       .then((res) =>
         dispatch({

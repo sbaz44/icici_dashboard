@@ -48,33 +48,70 @@ import { format } from "date-fns";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import { TransferWithinAStationSharp } from "@material-ui/icons";
 var result = "";
+var result2 = "";
 const useStyles = makeStyles(styles);
 
 export default function Type1_2(props) {
   const classes = useStyles();
   const data = useSelector((state) => state.threatData);
   const dispatch = useDispatch();
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date("2020-10-24T00:00:00")
-  );
-  console.log(props.match.params.date + "T00:00:00");
-  const handleDateChange = (date) => {
-    result = format(date, "dd-MM-yyyy");
-    setSelectedDate(date);
-    dispatch(getThreatDetail(props.match.params.subtype, result));
+
+  const [selectedToDate, setToDate] = React.useState(new Date());
+  const [selectedFromDate, setFromDate] = React.useState(new Date());
+
+  const handleToChange = (date) => {
+    result2 = format(date, "dd-MM-yyyy");
+    setToDate(date);
+    dispatch(
+      getThreatDetail(
+        props.match.params.type,
+        props.match.params.subtype,
+        props.match.params.state,
+        props.match.params.city,
+        result,
+        result2
+      )
+    );
   };
-  //   let [response, setResponse] = useState("");
+  const handleFromChange = (date) => {
+    result = format(date, "dd-MM-yyyy");
+    setFromDate(date);
+    dispatch(
+      getThreatDetail(
+        props.match.params.type,
+        props.match.params.subtype,
+        props.match.params.state,
+        props.match.params.city,
+        result,
+        result2
+      )
+    );
+  };
 
   useEffect(() => {
     // var todaysDate = new Date();
     // result = format(todaysDate, "dd-MM-yyyy");
 
     var datee = props.match.params.date;
+    var datee2 = props.match.params.date2;
     var newdate = datee.split("-").reverse().join("-");
-    setSelectedDate(newdate);
-
+    var newdate2 = datee2.split("-").reverse().join("-");
+    setFromDate(newdate);
+    setToDate(newdate2);
     result = props.match.params.date;
-    dispatch(getThreatDetail(props.match.params.subtype, result, props.match.params.type));
+    result2 = props.match.params.date2;
+
+    // dispatch(getThreatDetail(props.match.params.subtype, result, props.match.params.type));
+    dispatch(
+      getThreatDetail(
+        props.match.params.type,
+        props.match.params.subtype,
+        props.match.params.state,
+        props.match.params.city,
+        props.match.params.date,
+        props.match.params.date2
+      )
+    );
     $("#root").find("header").hide();
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
@@ -96,40 +133,57 @@ export default function Type1_2(props) {
           marginBottom: "2vw",
         }}
       >
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <img
-              src={smart}
-              style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
-            />
-            <p
-              style={{
-                fontSize: "1.5vw",
-                marginLeft: "0.5vw",
-                fontWeight: "bold",
-                paddingTop: "0.5vw",
-              }}
-            >
-              Branches
-            </p>
-          </div>
-          <KeyboardDatePicker
-            disableToolbar
-            disableFuture
-            variant="inline"
-            format="dd-MM-yyyy"
-            margin="normal"
-            id="date-picker-inline"
-            label="Search by Date"
-            value={selectedDate}
-            onChange={handleDateChange}
-            // defaultValue={props.match.params.date}
-            KeyboardButtonProps={{
-              "aria-label": "change date",
-            }}
-            helperText={""}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <img
+            src={smart}
+            style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
           />
-        </MuiPickersUtilsProvider>
+          <p
+            style={{
+              fontSize: "1.5vw",
+              marginLeft: "0.5vw",
+              fontWeight: "bold",
+              paddingTop: "0.5vw",
+            }}
+          >
+            Branches
+          </p>
+        </div>
+        <div>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              disableFuture
+              variant="inline"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              label="From"
+              value={selectedFromDate}
+              onChange={handleFromChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+              style={{ marginRight: "25px" }}
+            />
+          </MuiPickersUtilsProvider>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              disableFuture
+              variant="inline"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              label="To"
+              value={selectedToDate}
+              onChange={handleToChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
+        </div>
       </div>
       <GridContainer>
         {data.Data &&
@@ -154,14 +208,20 @@ export default function Type1_2(props) {
                   <CardFooter stats>
                     <a
                       href={
-                        "/admin/view/" +
+                        "/admin/detail/threats/" +
                         Object.keys(item) +
                         "/" +
                         props.match.params.type +
                         "/" +
                         props.match.params.subtype +
                         "/" +
-                        result
+                        props.match.params.state +
+                        "/" +
+                        props.match.params.city +
+                        "/" +
+                        result +
+                        "/" +
+                        result2
                       }
                     >
                       <div

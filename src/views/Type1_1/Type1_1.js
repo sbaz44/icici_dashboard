@@ -51,35 +51,72 @@ import { format } from "date-fns";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import { TransferWithinAStationSharp } from "@material-ui/icons";
 var result = "";
+var result2 = "";
+var state = "";
+var city = "";
 const useStyles = makeStyles(styles);
 
 export default function Type1_1(props) {
   const classes = useStyles();
   const data = useSelector((state) => state.typeData);
   const dispatch = useDispatch();
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [selectedToDate, setToDate] = React.useState(new Date());
+  const [selectedFromDate, setFromDate] = React.useState(new Date());
 
-  const handleDateChange = (date) => {
-    result = format(date, "dd-MM-yyyy");
-    setSelectedDate(date);
-    dispatch(getTypeDetail(props.match.params.type, result));
+  const handleToChange = (date) => {
+    result2 = format(date, "dd-MM-yyyy");
+    setToDate(date);
+    dispatch(
+      getTypeDetail(
+        props.match.params.type,
+        props.match.params.state,
+        props.match.params.city,
+        result,
+        result2
+      )
+    );
   };
-  //   let [response, setResponse] = useState("");
+  const handleFromChange = (date) => {
+    result = format(date, "dd-MM-yyyy");
+    setFromDate(date);
+    dispatch(
+      getTypeDetail(
+        props.match.params.type,
+        props.match.params.state,
+        props.match.params.city,
+        result,
+        result2
+      )
+    );
+  };
 
   useEffect(() => {
     // var todaysDate = new Date();
     // result = format(todaysDate, "dd-MM-yyyy");
     // console.log(props.match.params.date);
     var datee = props.match.params.date;
+    var datee2 = props.match.params.date2;
     var newdate = datee.split("-").reverse().join("-");
-    setSelectedDate(newdate);
+    var newdate2 = datee2.split("-").reverse().join("-");
+    setFromDate(newdate);
+    setToDate(newdate2);
     result = props.match.params.date;
-    dispatch(getTypeDetail(props.match.params.type, result));
+    result2 = props.match.params.date2;
+    state = props.match.params.state;
+    city = props.match.params.city;
+    dispatch(
+      getTypeDetail(
+        props.match.params.type,
+        props.match.params.state,
+        props.match.params.city,
+        props.match.params.date,
+        props.match.params.date2
+      )
+    );
     $("#root").find("header").hide();
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
-    console.log("data");
-    console.log(data);
+
     // return () => {
     //   console.log("cleared");
     // };
@@ -110,7 +147,14 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Weapon/" + result
+                  "/admin/details/threats/External_threats/Weapon/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
@@ -172,9 +216,7 @@ export default function Type1_1(props) {
             </CardHeader>
             <CardFooter stats>
               <a
-                href={
-                  "/admin/details/threats/External_threats/Mask/" + result
-                }
+                href={"/admin/details/threats/External_threats/Mask/" + result}
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
@@ -202,9 +244,7 @@ export default function Type1_1(props) {
             </CardHeader>
             <CardFooter stats>
               <a
-                href={
-                  "/admin/details/threats/External_threats/Fire/" + result
-                }
+                href={"/admin/details/threats/External_threats/Fire/" + result}
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
@@ -462,7 +502,8 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Business_insights/Unattended/" + result
+                  "/admin/details/threats/Business_insights/Unattended/" +
+                  result
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
@@ -498,7 +539,10 @@ export default function Type1_1(props) {
                   "/admin/details/threats/Business_insights/Thermal/" + result
                 }
               > */}
-              <a href="http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032" target="_blank">
+              <a
+                href="http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032"
+                target="_blank"
+              >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -632,7 +676,8 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Internal_compliance/Unattended/" + result
+                  "/admin/details/threats/Internal_compliance/Unattended/" +
+                  result
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
@@ -699,11 +744,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Person}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a
-                href={
-                  "/admin/details/threats/Covid_safety/Person/" + result
-                }
-              >
+              <a href={"/admin/details/threats/Covid_safety/Person/" + result}>
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -732,11 +773,7 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Social}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a
-                href={
-                  "/admin/details/threats/Covid_safety/Social/" + result
-                }
-              >
+              <a href={"/admin/details/threats/Covid_safety/Social/" + result}>
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -750,7 +787,11 @@ export default function Type1_1(props) {
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
                 <Icon>
-                  <span class="iconify" data-icon="emojione-monotone:man" data-inline="false"></span>
+                  <span
+                    class="iconify"
+                    data-icon="emojione-monotone:man"
+                    data-inline="false"
+                  ></span>
                 </Icon>
               </CardIcon>
               <p
@@ -767,11 +808,7 @@ export default function Type1_1(props) {
                   "/admin/details/threats/Covid_safety/Temperature/" + result
                 }
               > */}
-              <a
-                href={
-                  "/admin/details/threats/Covid_safety/no/" + result
-                }
-              >
+              <a href={"/admin/details/threats/Covid_safety/no/" + result}>
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -805,7 +842,10 @@ export default function Type1_1(props) {
                   "/admin/details/threats/Covid_safety/Temperature/" + result
                 }
               > */}
-              <a href="http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032" target="_blank">
+              <a
+                href="http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032"
+                target="_blank"
+              >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -828,41 +868,64 @@ export default function Type1_1(props) {
           marginBottom: "2vw",
         }}
       >
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <img
-              src={smart}
-              style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
-            />
-            <p
-              style={{
-                fontSize: "1.5vw",
-                marginLeft: "0.5vw",
-                fontWeight: "bold",
-                paddingTop: "0.5vw",
-              }}
-            >
-              {props.match.params.type == "External_threats" && "External Threat Alerts"}
-              {props.match.params.type == "Business_insights" && "Business Insights Alerts"}
-              {props.match.params.type == "Internal_compliance" && "Internal Compliance Alerts"}
-              {props.match.params.type == "Covid_safety" && "Covid Safety Alerts"}
-            </p>
-          </div>
-          <KeyboardDatePicker
-            disableToolbar
-            disableFuture
-            variant="inline"
-            format="MM/dd/yyyy"
-            margin="normal"
-            id="date-picker-inline"
-            label="Search by Date"
-            value={selectedDate}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-              "aria-label": "change date",
-            }}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <img
+            src={smart}
+            style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
           />
-        </MuiPickersUtilsProvider>
+          <p
+            style={{
+              fontSize: "1.5vw",
+              marginLeft: "0.5vw",
+              fontWeight: "bold",
+              paddingTop: "0.5vw",
+            }}
+          >
+            {props.match.params.type == "External_threats" &&
+              "External Threat Alerts"}
+            {props.match.params.type == "Business_insights" &&
+              "Business Insights Alerts"}
+            {props.match.params.type == "Internal_compliance" &&
+              "Internal Compliance Alerts"}
+            {props.match.params.type == "Covid_safety" && "Covid Safety Alerts"}
+          </p>
+        </div>
+        <div>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              disableFuture
+              variant="inline"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              label="From"
+              value={selectedFromDate}
+              onChange={handleFromChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+              style={{ marginRight: "25px" }}
+            />
+          </MuiPickersUtilsProvider>
+          {/* <div style={{ marginLeft: "5px", marginRight: "5px" }} /> */}
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              disableFuture
+              variant="inline"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              label="To"
+              value={selectedToDate}
+              onChange={handleToChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
+        </div>
       </div>
       {props.match.params.type === "External_threats" && ExternalThreats()}
       {props.match.params.type === "Business_insights" && BusinessInsights()}
