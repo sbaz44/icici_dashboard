@@ -183,7 +183,14 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Tampering/" + result
+                  "/admin/details/threats/External_threats/Tampering/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
@@ -216,12 +223,22 @@ export default function Type1_1(props) {
             </CardHeader>
             <CardFooter stats>
               <a
-                href={"/admin/details/threats/External_threats/Mask/" + result}
+                href={
+                  "/admin/details/threats/External_threats/Mask/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
+                }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
               </a>
+
             </CardFooter>
           </Card>
         </GridItem>
@@ -244,7 +261,16 @@ export default function Type1_1(props) {
             </CardHeader>
             <CardFooter stats>
               <a
-                href={"/admin/details/threats/External_threats/Fire/" + result}
+                href={
+                  "/admin/details/threats/External_threats/Fire/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
+                }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
@@ -273,13 +299,21 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Exceeded/" + result
+                  "/admin/details/threats/External_threats/Exceeded/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
               </a>
+
             </CardFooter>
           </Card>
         </GridItem>
@@ -302,7 +336,14 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Trespass/" + result
+                  "/admin/details/threats/External_threats/Trespass/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
@@ -335,13 +376,21 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Loitering/" + result
+                  "/admin/details/threats/External_threats/Loitering/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
               </a>
+
             </CardFooter>
           </Card>
         </GridItem>
@@ -368,13 +417,21 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Helmet/" + result
+                  "/admin/details/threats/External_threats/Helmet/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
               </a>
+
             </CardFooter>
           </Card>
         </GridItem>
@@ -401,13 +458,22 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Defective/" + result
+                  "/admin/details/threats/External_threats/Defective/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
               </a>
+
+
             </CardFooter>
           </Card>
         </GridItem>
@@ -440,7 +506,14 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Business_insights/Loitering/" + result
+                  "/admin/details/threats/Business_insights/Loitering/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
@@ -469,13 +542,21 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Business_insights/Person/" + result
+                  "/admin/details/threats/Business_insights/Person/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
               </a>
+
             </CardFooter>
           </Card>
         </GridItem>
@@ -503,13 +584,20 @@ export default function Type1_1(props) {
               <a
                 href={
                   "/admin/details/threats/Business_insights/Unattended/" +
-                  result
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
               </a>
+
             </CardFooter>
           </Card>
         </GridItem>
@@ -573,7 +661,14 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Business_insights/Social/" + result
+                  "/admin/details/threats/Business_insights/Social/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
@@ -606,13 +701,21 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Business_insights/Vault/" + result
+                  "/admin/details/threats/Business_insights/Vault/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
               </a>
+
             </CardFooter>
           </Card>
         </GridItem>
@@ -677,13 +780,20 @@ export default function Type1_1(props) {
               <a
                 href={
                   "/admin/details/threats/Internal_compliance/Unattended/" +
-                  result
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
               </a>
+
             </CardFooter>
           </Card>
         </GridItem>
@@ -710,13 +820,21 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Internal_compliance/Vault/" + result
+                  "/admin/details/threats/Internal_compliance/Vault/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
                 }
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
               </a>
+
             </CardFooter>
           </Card>
         </GridItem>
@@ -744,7 +862,18 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Person}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href={"/admin/details/threats/Covid_safety/Person/" + result}>
+              <a
+                href={
+                  "/admin/details/threats/Covid_safety/Person/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
+                }
+              >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
@@ -773,11 +902,23 @@ export default function Type1_1(props) {
               <h3 className={classes.cardTitle}>{data.Social}</h3>
             </CardHeader>
             <CardFooter stats>
-              <a href={"/admin/details/threats/Covid_safety/Social/" + result}>
+              <a
+                href={
+                  "/admin/details/threats/Covid_safety/Social/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
+                }
+              >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
               </a>
+
             </CardFooter>
           </Card>
         </GridItem>
@@ -808,11 +949,23 @@ export default function Type1_1(props) {
                   "/admin/details/threats/Covid_safety/Temperature/" + result
                 }
               > */}
-              <a href={"/admin/details/threats/Covid_safety/no/" + result}>
+              <a
+                href={
+                  "/admin/details/threats/Covid_safety/no/" +
+                  state +
+                  "/" +
+                  city +
+                  "/" +
+                  result +
+                  "/" +
+                  result2
+                }
+              >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
                   View More
                 </div>
               </a>
+
             </CardFooter>
           </Card>
         </GridItem>

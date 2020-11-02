@@ -123,7 +123,7 @@ export default function Dashboard() {
   useEffect(() => {
     var todaysDate = new Date();
     var todaysDate2 = new Date();
-    todaysDate2.setDate(todaysDate2.getDate() - 7);
+    todaysDate2.setDate(todaysDate2.getDate() - 6);
     result2 = format(todaysDate, "dd-MM-yyyy");
     result = format(todaysDate2, "dd-MM-yyyy");
     console.log(result2);
@@ -369,136 +369,7 @@ export default function Dashboard() {
           </Card>
         </GridItem>
       </GridContainer>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card chart>
-            <CardHeader color="warning">
-              <ChartistGraph
-                className="ct-chart"
-                data={graph_data.External_threats}
-                type="Line"
-                options={emailsSubscriptionChart.options}
-                responsiveOptions={emailsSubscriptionChart.responsiveOptions}
-                listener={emailsSubscriptionChart.animation}
-              />
-            </CardHeader>
-            <CardBody>
-              <h4
-                className={classes.cardTitle}
-                style={{ fontWeight: "bold", color: "#3C4858" }}
-              >
-                External Threats
-              </h4>
-            </CardBody>
-            <CardFooter stats>
-              <a href={"/admin/threats/External_threats/" + result}>
-                <div
-                  className={classes.stats}
-                  style={{ color: "#43a047", textAlign: "center" }}
-                >
-                  View More
-                </div>
-              </a>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card chart>
-            <CardHeader color="danger">
-              <ChartistGraph
-                className="ct-chart"
-                data={graph_data.Business_insights}
-                type="Line"
-                options={completedTasksChart.options}
-                listener={completedTasksChart.animation}
-              />
-            </CardHeader>
-            <CardBody>
-              <h4
-                className={classes.cardTitle}
-                style={{ fontWeight: "bold", color: "#3C4858" }}
-              >
-                Business Insights
-              </h4>
-            </CardBody>
-            <CardFooter stats>
-              <a href={"/admin/threats/Business_insights/" + result}>
-                <div
-                  className={classes.stats}
-                  style={{ color: "#43a047", textAlign: "center" }}
-                >
-                  {/* <DateRange /> */}
-                  View More
-                </div>
-              </a>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card chart>
-            <CardHeader color="primary">
-              <ChartistGraph
-                className="ct-chart"
-                data={graph_data.Internal_compliance}
-                type="Line"
-                options={completedTasksChart.options}
-                listener={completedTasksChart.animation}
-              />
-            </CardHeader>
-            <CardBody>
-              <h4
-                className={classes.cardTitle}
-                style={{ fontWeight: "bold", color: "#3C4858" }}
-              >
-                Internal Compliance
-              </h4>
-            </CardBody>
-            <CardFooter stats>
-              <a href={"/admin/threats/Internal_compliance/" + result}>
-                <div
-                  className={classes.stats}
-                  style={{ color: "#43a047", textAlign: "center" }}
-                >
-                  {/* <DateRange /> */}
-                  View More
-                </div>
-              </a>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card chart>
-            <CardHeader color="success">
-              <ChartistGraph
-                className="ct-chart"
-                data={graph_data.Covid_safety}
-                type="Line"
-                options={completedTasksChart.options}
-                listener={completedTasksChart.animation}
-              />
-            </CardHeader>
-            <CardBody>
-              <h4
-                className={classes.cardTitle}
-                style={{ fontWeight: "bold", color: "#3C4858" }}
-              >
-                Covid Safety
-              </h4>
-            </CardBody>
-            <CardFooter stats>
-              <a href={"/admin/threats/Covid_safety/" + result}>
-                <div
-                  className={classes.stats}
-                  style={{ color: "#43a047", textAlign: "center" }}
-                >
-                  {/* <DateRange /> */}
-                  View More
-                </div>
-              </a>
-            </CardFooter>
-          </Card>
-        </GridItem>
-      </GridContainer>
+
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <Card>
@@ -533,14 +404,14 @@ export default function Dashboard() {
               {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
               <a
                 href={
-                  "/admin/threats/External_threats/" +
-                  selectedState +
-                  "/" +
-                  selectedCity +
-                  "/" +
-                  result +
-                  "/" +
-                  result2
+                  selectedCity == "" || selectedState == "" ? () => { alert('Please select the State and city') } : "/admin/threats/External_threats/" +
+                    selectedState +
+                    "/" +
+                    selectedCity +
+                    "/" +
+                    result +
+                    "/" +
+                    result2
                 }
               >
                 <div
@@ -634,10 +505,22 @@ export default function Dashboard() {
                 {" "}
                 Business Insights
               </h4>
-              {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
-              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>
-                View More
+              <a
+                href={
+                  selectedCity == "" || selectedState == "" ? () => { alert('Please select the State and city') } : "/admin/threats/Business_insights/" +
+                    selectedState +
+                    "/" +
+                    selectedCity +
+                    "/" +
+                    result +
+                    "/" +
+                    result2
+                }
+              >
+                <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>
+                  View More
               </div>
+              </a>
             </div>
             <CardBody>
               {Object.keys(graph_data).length > 0 && (
@@ -720,10 +603,22 @@ export default function Dashboard() {
               >
                 Internal Compliance
               </h4>
-              {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
-              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>
-                View More
+              <a
+                href={
+                  selectedCity == "" || selectedState == "" ? () => { alert('Please select the State and city') } : "/admin/threats/Internal_compliance/" +
+                    selectedState +
+                    "/" +
+                    selectedCity +
+                    "/" +
+                    result +
+                    "/" +
+                    result2
+                }
+              >
+                <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>
+                  View More
               </div>
+              </a>
             </div>
             <CardBody>
               {Object.keys(graph_data).length > 0 && (
@@ -809,13 +704,26 @@ export default function Dashboard() {
                   lineHeight: "1.5em",
                 }}
               >
-                {" "}
                 Covid Safety
               </h4>
-              {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
-              <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>
-                View More
+
+              <a
+                href={
+                  selectedCity == "" || selectedState == "" ? () => { alert('Please select the State and city') } : "/admin/threats/Covid_safety/" +
+                    selectedState +
+                    "/" +
+                    selectedCity +
+                    "/" +
+                    result +
+                    "/" +
+                    result2
+                }
+              >
+
+                <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>
+                  View More
               </div>
+              </a>
             </div>
             <CardBody>
               {Object.keys(graph_data).length > 0 && (
@@ -881,6 +789,6 @@ export default function Dashboard() {
         alt=""
         style={{ width: "100%", height: "15vw", objectFit: "cover" }}
       /> */}
-    </div>
+    </div >
   );
 }
