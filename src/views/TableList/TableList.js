@@ -135,13 +135,14 @@ export default function TableList() {
               <Table
                 tableHeaderColor="primary"
                 tableHead={[
+                  "Status",
                   "Branch",
                   "Camera Count",
                   "People Count",
                   "Alert Count",
                   "Open Time",
                   "Close Time",
-                  "Image",
+                  // "Image",
                   "Date",
                   "View",
                 ]}

@@ -60,6 +60,20 @@ export default function CustomTable(props) {
                   fontSize: "0.9em",
                 }}
               >
+                {row.Status === 0 && <span class="iconify" data-icon="teenyicons:tick-circle-outline" data-inline="false" style={{ color: 'red' }}></span>}
+                {row.Status === 1 && <span class="iconify" data-icon="teenyicons:tick-circle-outline" data-inline="false" style={{ color: 'green' }}></span>}
+                {row.Status === 2 && <span class="iconify" data-icon="teenyicons:tick-circle-outline" data-inline="false" style={{ color: 'gray' }}></span>}
+
+              </TableCell>
+              <TableCell
+                className={classes.tableCell}
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  color: "#3C4858",
+                  fontSize: "0.9em",
+                }}
+              >
                 {row.Branch}
               </TableCell>
               <TableCell
@@ -123,7 +137,7 @@ export default function CustomTable(props) {
               >
                 {row.Close_time}
               </TableCell>
-              <TableCell
+              {/* <TableCell
                 className={classes.tableCell}
                 align="center"
                 style={{
@@ -144,7 +158,7 @@ export default function CustomTable(props) {
                     }}
                   />
                 )}
-              </TableCell>
+              </TableCell> */}
               <TableCell
                 className={classes.tableCell}
                 align="center"

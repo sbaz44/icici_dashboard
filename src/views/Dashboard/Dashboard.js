@@ -33,6 +33,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import { useSelector, useDispatch } from "react-redux";
 import Select from "@material-ui/core/Select";
 import { bugs, website, server } from "variables/general.js";
+import Skeleton from '@material-ui/lab/Skeleton';
 import {
   getbranchDetails,
   postBranchDetails,
@@ -63,7 +64,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 var result = "";
-var result2 = "";
+var result2 = ""; var result3 = "";
+var result4 = "";
 const useStyles = makeStyles(styles);
 const useStyles2 = makeStyles((theme) => ({
   formControl: {
@@ -86,11 +88,12 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const [selectedToDate, setToDate] = React.useState(new Date());
   const [selectedFromDate, setFromDate] = React.useState(new Date());
-  const [selectedState, setselectedState] = useState("");
-  const [selectedCity, setselectedCity] = useState("");
+  const [selectedState, setselectedState] = useState("null");
+  const [selectedCity, setselectedCity] = useState("null");
 
   const handleToChange = (date) => {
     result2 = format(date, "dd-MM-yyyy");
+    result4 = format(date, "MM/dd/yyyy");
     setToDate(date);
     dispatch(graphData(selectedState, selectedCity, result, result2));
     dispatch(dashboardCount(selectedState, selectedCity, result, result2));
@@ -98,7 +101,10 @@ export default function Dashboard() {
   };
   const handleFromChange = (date) => {
     result = format(date, "dd-MM-yyyy");
+    result3 = format(date, "MM/dd/yyyy");
+
     setFromDate(date);
+
     dispatch(graphData(selectedState, selectedCity, result, result2));
     dispatch(dashboardCount(selectedState, selectedCity, result, result2));
     // dispatch(viewBranchDetail(props.match.params.branch, result));
@@ -126,6 +132,8 @@ export default function Dashboard() {
     todaysDate2.setDate(todaysDate2.getDate() - 6);
     result2 = format(todaysDate, "dd-MM-yyyy");
     result = format(todaysDate2, "dd-MM-yyyy");
+    result4 = format(todaysDate, "MM/dd/yyyy");
+    result3 = format(todaysDate2, "MM/dd/yyyy");
     console.log(result2);
     var newdate = result.split("-").reverse().join("-");
     setFromDate(newdate);
@@ -164,7 +172,7 @@ export default function Dashboard() {
     console.log(sortable);
   }, []);
   const Maharashtra = ["Mumbai", "Nagpur", "Pune"];
-  const Haryana = ["Dulhe", "Mumbai", "Nagpur"];
+  const Haryana = ["Padla"];
   const Delhi = ["Dwarka", "Najafgarh", "TagoreGarden"];
   return (
     <div id="dashboard-page">
@@ -378,8 +386,9 @@ export default function Dashboard() {
                 className="ct-chart"
                 data={graph_data.External_threats}
                 type="Line"
-                options={completedTasksChart.options}
-                listener={completedTasksChart.animation}
+                options={emailsSubscriptionChart.options}
+                listener={emailsSubscriptionChart.animation}
+                responsiveOptions={emailsSubscriptionChart.responsiveOptions}
               />
             </CardHeader>
 
@@ -401,10 +410,16 @@ export default function Dashboard() {
               >
                 External Threats
               </h4>
-              {/* <p style={{ color: "#43a047", textAlign: "center", margin: 0 }}>View More</p> */}
               <a
                 href={
-                  selectedCity == "" || selectedState == "" ? () => { alert('Please select the State and city') } : "/admin/threats/External_threats/" +
+                  selectedCity == "" || selectedState == "" ? "/admin/threats/External_threats/" +
+                    null +
+                    "/" +
+                    null +
+                    "/" +
+                    result +
+                    "/" +
+                    result2 : "/admin/threats/External_threats/" +
                     selectedState +
                     "/" +
                     selectedCity +
@@ -463,7 +478,7 @@ export default function Dashboard() {
                             textAlign: "right",
                           }}
                         >
-                          <a href={"view/branch/"}>View</a>
+                          <a href={"/admin/detail/threats/All/External_threats/" + row.Type.replace("alert", "").replace(/\s+/, "") + "/" + selectedState + "/" + selectedCity + "/" + result + "/" + result2}>View</a>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -481,8 +496,9 @@ export default function Dashboard() {
                 className="ct-chart"
                 data={graph_data.Business_insights}
                 type="Line"
-                options={completedTasksChart.options}
-                listener={completedTasksChart.animation}
+                options={emailsSubscriptionChart.options}
+                listener={emailsSubscriptionChart.animation}
+                responsiveOptions={emailsSubscriptionChart.responsiveOptions}
               />
             </CardHeader>
 
@@ -502,12 +518,18 @@ export default function Dashboard() {
                   lineHeight: "1.5em",
                 }}
               >
-                {" "}
                 Business Insights
               </h4>
               <a
                 href={
-                  selectedCity == "" || selectedState == "" ? () => { alert('Please select the State and city') } : "/admin/threats/Business_insights/" +
+                  selectedCity == "" || selectedState == "" ? "/admin/threats/Business_insights/" +
+                    null +
+                    "/" +
+                    null +
+                    "/" +
+                    result +
+                    "/" +
+                    result2 : "/admin/threats/Business_insights/" +
                     selectedState +
                     "/" +
                     selectedCity +
@@ -517,56 +539,102 @@ export default function Dashboard() {
                     result2
                 }
               >
-                <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>
+                <div
+                  className="makeStyles-stats-98"
+                  style={{ color: "#43a047" }}
+                >
                   View More
-              </div>
+                </div>
               </a>
             </div>
             <CardBody>
               {Object.keys(graph_data).length > 0 && (
                 <Table>
                   <TableBody>
-                    {graph_data.Business_insights.dataList.map((row, index) => (
-                      <TableRow key={row.age} className={classes.tableBodyRow}>
-                        <TableCell
-                          className={classes.tableCell}
-                          align="center"
-                          style={{
-                            fontWeight: "bold",
-                            color: "#3C4858",
-                            fontSize: "0.8125rem",
-                            textAlign: "left",
-                          }}
-                        >
-                          {row.Type}
-                        </TableCell>
-                        <TableCell
-                          className={classes.tableCell}
-                          align="center"
-                          style={{
-                            fontWeight: "bold",
-                            color: "#3C4858",
-                            fontSize: "0.8125rem",
-                            textAlign: "left",
-                          }}
-                        >
-                          {row.Count}
-                        </TableCell>
+                    {graph_data.Business_insights.dataList.map((row, index) => {
+                      if (row.Type === "Temperature alert") {
+                        return <TableRow key={row.age} className={classes.tableBodyRow}>
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "left",
+                            }}
+                          >
+                            {row.Type}
+                          </TableCell>
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "left",
+                            }}
+                          >
+                            {row.Count}
+                          </TableCell>
 
-                        <TableCell
-                          className={classes.tableCell}
-                          align="center"
-                          style={{
-                            fontWeight: "bold",
-                            color: "#3C4858",
-                            fontSize: "0.8125rem",
-                            textAlign: "right",
-                          }}
-                        >
-                          <a href={"view/branch/"}>View</a>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "right",
+                            }}
+                          >
+                            <a href={"http://10.11.0.4:8118/tickets/filter/?f=1&ds=" + result3 + "&de=" + result4 + "&fs=High%20temperature&gp=5f9fc190afc8700011a17f9c"}>View</a>
+                          </TableCell>
+                        </TableRow>
+                      }
+                      else {
+                        return <TableRow key={row.age} className={classes.tableBodyRow}>
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "left",
+                            }}
+                          >
+                            {row.Type}
+                          </TableCell>
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "left",
+                            }}
+                          >
+                            {row.Count}
+                          </TableCell>
+
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "right",
+                            }}
+                          >
+                            <a href={"/admin/detail/threats/All/Business_insights/" + row.Type.replace("alert", "").replace(/\s+/, "") + "/" + selectedState + "/" + selectedCity + "/" + result + "/" + result2}>View</a>
+                          </TableCell>
+                        </TableRow>
+                      }
+                    })}
                   </TableBody>
                 </Table>
               )}
@@ -580,8 +648,9 @@ export default function Dashboard() {
                 className="ct-chart"
                 data={graph_data.Internal_compliance}
                 type="Line"
-                options={completedTasksChart.options}
-                listener={completedTasksChart.animation}
+                options={emailsSubscriptionChart.options}
+                listener={emailsSubscriptionChart.animation}
+                responsiveOptions={emailsSubscriptionChart.responsiveOptions}
               />
             </CardHeader>
 
@@ -605,7 +674,14 @@ export default function Dashboard() {
               </h4>
               <a
                 href={
-                  selectedCity == "" || selectedState == "" ? () => { alert('Please select the State and city') } : "/admin/threats/Internal_compliance/" +
+                  selectedCity == "" || selectedState == "" ? "/admin/threats/Internal_compliance/" +
+                    null +
+                    "/" +
+                    null +
+                    "/" +
+                    result +
+                    "/" +
+                    result2 : "/admin/threats/Internal_compliance/" +
                     selectedState +
                     "/" +
                     selectedCity +
@@ -615,9 +691,12 @@ export default function Dashboard() {
                     result2
                 }
               >
-                <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>
+                <div
+                  className="makeStyles-stats-98"
+                  style={{ color: "#43a047" }}
+                >
                   View More
-              </div>
+                </div>
               </a>
             </div>
             <CardBody>
@@ -665,7 +744,7 @@ export default function Dashboard() {
                               textAlign: "right",
                             }}
                           >
-                            <a href={"view/branch/"}>View</a>
+                            <a href={"/admin/detail/threats/All/Internal_compliance/" + row.Type.replace("alert", "").replace(/\s+/, "") + "/" + selectedState + "/" + selectedCity + "/" + result + "/" + result2}>View</a>
                           </TableCell>
                         </TableRow>
                       )
@@ -683,8 +762,9 @@ export default function Dashboard() {
                 className="ct-chart"
                 data={graph_data.Covid_safety}
                 type="Line"
-                options={completedTasksChart.options}
-                listener={completedTasksChart.animation}
+                options={emailsSubscriptionChart.options}
+                listener={emailsSubscriptionChart.animation}
+                responsiveOptions={emailsSubscriptionChart.responsiveOptions}
               />
             </CardHeader>
 
@@ -709,7 +789,14 @@ export default function Dashboard() {
 
               <a
                 href={
-                  selectedCity == "" || selectedState == "" ? () => { alert('Please select the State and city') } : "/admin/threats/Covid_safety/" +
+                  selectedCity == "" || selectedState == "" ? "/admin/threats/Covid_safety/" +
+                    null +
+                    "/" +
+                    null +
+                    "/" +
+                    result +
+                    "/" +
+                    result2 : "/admin/threats/Covid_safety/" +
                     selectedState +
                     "/" +
                     selectedCity +
@@ -719,10 +806,12 @@ export default function Dashboard() {
                     result2
                 }
               >
-
-                <div className="makeStyles-stats-98" style={{ color: "#43a047" }}>
+                <div
+                  className="makeStyles-stats-98"
+                  style={{ color: "#43a047" }}
+                >
                   View More
-              </div>
+                </div>
               </a>
             </div>
             <CardBody>
@@ -730,51 +819,87 @@ export default function Dashboard() {
                 <Table>
                   <TableBody>
                     {graph_data.Covid_safety.dataList.map((row, index) => {
-                      if (index < 4) {
-                        return (
-                          <TableRow
-                            key={row.age}
-                            className={classes.tableBodyRow}
+                      if (row.Type === "Temperature alert") {
+                        return <TableRow key={row.age} className={classes.tableBodyRow}>
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "left",
+                            }}
                           >
-                            <TableCell
-                              className={classes.tableCell}
-                              align="center"
-                              style={{
-                                fontWeight: "bold",
-                                color: "#3C4858",
-                                fontSize: "0.8125rem",
-                                textAlign: "left",
-                              }}
-                            >
-                              {row.Type}
-                            </TableCell>
-                            <TableCell
-                              className={classes.tableCell}
-                              align="center"
-                              style={{
-                                fontWeight: "bold",
-                                color: "#3C4858",
-                                fontSize: "0.8125rem",
-                                textAlign: "left",
-                              }}
-                            >
-                              {row.Count}
-                            </TableCell>
+                            {row.Type}
+                          </TableCell>
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "left",
+                            }}
+                          >
+                            {row.Count}
+                          </TableCell>
 
-                            <TableCell
-                              className={classes.tableCell}
-                              align="center"
-                              style={{
-                                fontWeight: "bold",
-                                color: "#3C4858",
-                                fontSize: "0.8125rem",
-                                textAlign: "right",
-                              }}
-                            >
-                              <a href={"view/branch/"}>View</a>
-                            </TableCell>
-                          </TableRow>
-                        );
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "right",
+                            }}
+                          >
+                            <a href={"http://10.11.0.4:8118/tickets/filter/?f=1&ds=" + result3 + "&de=" + result4 + "&fs=High%20temperature&gp=5f9fc190afc8700011a17f9c"}>View</a>
+                          </TableCell>
+                        </TableRow>
+                      }
+                      else {
+                        return <TableRow key={row.age} className={classes.tableBodyRow}>
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "left",
+                            }}
+                          >
+                            {row.Type}
+                          </TableCell>
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "left",
+                            }}
+                          >
+                            {row.Count}
+                          </TableCell>
+
+                          <TableCell
+                            className={classes.tableCell}
+                            align="center"
+                            style={{
+                              fontWeight: "bold",
+                              color: "#3C4858",
+                              fontSize: "0.8125rem",
+                              textAlign: "right",
+                            }}
+                          >
+                            <a href={"/admin/detail/threats/All/Covid_safety/" + row.Type.replace("alert", "").replace(/\s+/, "") + "/" + selectedState + "/" + selectedCity + "/" + result + "/" + result2}>View</a>
+                          </TableCell>
+                        </TableRow>
                       }
                     })}
                   </TableBody>

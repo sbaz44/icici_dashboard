@@ -40,7 +40,7 @@ export default function ViewDetails(props) {
 
   const handleChange = (event) => {
     setType(event.target.value);
-    dispatch(viewDetail(props.match.params.branch, event.target.value, props.match.params.subtype, props.match.params.date, currentPage));
+    dispatch(viewDetail(props.match.params.branch, event.target.value, props.match.params.subtype, props.match.params.date, "", currentPage));
   };
   const viewBranchDetail = useSelector((state) => state.viewBranchDetail);
 
@@ -48,11 +48,11 @@ export default function ViewDetails(props) {
   const pagination = (name) => {
     if (name === "increment") {
       currentPage += 1;
-      dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, currentPage))
+      dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, "", currentPage))
     } else if (name === "decrement") {
       currentPage -= 1;
       // this.getData(currentPage);
-      dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, currentPage))
+      dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, "", currentPage))
     }
   };
   const threats = {
@@ -67,12 +67,14 @@ export default function ViewDetails(props) {
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
     currentPage = 1;
     setType(props.match.params.type)
-    if (props.match.params.subtype == "null") {
-      dispatch(getbranchDetails(props.match.params.date));
-    }
-    else if (props.match.params.subtype != "null") {
-      dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, currentPage));
-    }
+    // if (props.match.params.subtype == "null") {
+    //   alert('insidne')
+    //   dispatch(getbranchDetails(props.match.params.date));
+    // }
+    // else if (props.match.params.subtype != "null") {
+
+    dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, "", currentPage));
+    // }
 
   }, []);
 

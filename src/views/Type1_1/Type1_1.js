@@ -331,7 +331,7 @@ export default function Type1_1(props) {
               >
                 Trespass Alert
               </p>
-              <h3 className={classes.cardTitle}>{data.Trespassing}</h3>
+              <h3 className={classes.cardTitle}>{data.Trespass}</h3>
             </CardHeader>
             <CardFooter stats>
               <a
