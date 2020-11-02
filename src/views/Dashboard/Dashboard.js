@@ -33,7 +33,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import { useSelector, useDispatch } from "react-redux";
 import Select from "@material-ui/core/Select";
 import { bugs, website, server } from "variables/general.js";
-import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from "@material-ui/lab/Skeleton";
 import {
   getbranchDetails,
   postBranchDetails,
@@ -64,7 +64,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 var result = "";
-var result2 = ""; var result3 = "";
+var result2 = "";
+var result3 = "";
 var result4 = "";
 const useStyles = makeStyles(styles);
 const useStyles2 = makeStyles((theme) => ({
@@ -412,21 +413,23 @@ export default function Dashboard() {
               </h4>
               <a
                 href={
-                  selectedCity == "" || selectedState == "" ? "/admin/threats/External_threats/" +
-                    null +
-                    "/" +
-                    null +
-                    "/" +
-                    result +
-                    "/" +
-                    result2 : "/admin/threats/External_threats/" +
-                    selectedState +
-                    "/" +
-                    selectedCity +
-                    "/" +
-                    result +
-                    "/" +
-                    result2
+                  selectedCity == "" || selectedState == ""
+                    ? "/admin/threats/External_threats/" +
+                      null +
+                      "/" +
+                      null +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
+                    : "/admin/threats/External_threats/" +
+                      selectedState +
+                      "/" +
+                      selectedCity +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
                 }
               >
                 <div
@@ -478,7 +481,22 @@ export default function Dashboard() {
                             textAlign: "right",
                           }}
                         >
-                          <a href={"/admin/detail/threats/All/External_threats/" + row.Type.replace("alert", "").replace(/\s+/, "") + "/" + selectedState + "/" + selectedCity + "/" + result + "/" + result2}>View</a>
+                          <a
+                            href={
+                              "/admin/detail/threats/All/External_threats/" +
+                              row.Type.replace("alert", "").replace(/\s+/, "") +
+                              "/" +
+                              selectedState +
+                              "/" +
+                              selectedCity +
+                              "/" +
+                              result +
+                              "/" +
+                              result2
+                            }
+                          >
+                            View
+                          </a>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -522,21 +540,23 @@ export default function Dashboard() {
               </h4>
               <a
                 href={
-                  selectedCity == "" || selectedState == "" ? "/admin/threats/Business_insights/" +
-                    null +
-                    "/" +
-                    null +
-                    "/" +
-                    result +
-                    "/" +
-                    result2 : "/admin/threats/Business_insights/" +
-                    selectedState +
-                    "/" +
-                    selectedCity +
-                    "/" +
-                    result +
-                    "/" +
-                    result2
+                  selectedCity == "" || selectedState == ""
+                    ? "/admin/threats/Business_insights/" +
+                      null +
+                      "/" +
+                      null +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
+                    : "/admin/threats/Business_insights/" +
+                      selectedState +
+                      "/" +
+                      selectedCity +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
                 }
               >
                 <div
@@ -553,86 +573,125 @@ export default function Dashboard() {
                   <TableBody>
                     {graph_data.Business_insights.dataList.map((row, index) => {
                       if (row.Type === "Temperature alert") {
-                        return <TableRow key={row.age} className={classes.tableBodyRow}>
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "left",
-                            }}
+                        return (
+                          <TableRow
+                            key={row.age}
+                            className={classes.tableBodyRow}
                           >
-                            {row.Type}
-                          </TableCell>
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "left",
-                            }}
-                          >
-                            {row.Count}
-                          </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
+                            >
+                              {row.Type}
+                            </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
+                            >
+                              {row.Count}
+                            </TableCell>
 
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "right",
-                            }}
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "right",
+                              }}
+                            >
+                              <a
+                                href={
+                                  "http://10.11.0.4:8118/tickets/filter/?f=1&ds=" +
+                                  result3 +
+                                  "&de=" +
+                                  result4 +
+                                  "&fs=High%20temperature&gp=5f9fc190afc8700011a17f9c"
+                                }
+                              >
+                                View
+                              </a>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      } else {
+                        return (
+                          <TableRow
+                            key={row.age}
+                            className={classes.tableBodyRow}
                           >
-                            <a href={"http://10.11.0.4:8118/tickets/filter/?f=1&ds=" + result3 + "&de=" + result4 + "&fs=High%20temperature&gp=5f9fc190afc8700011a17f9c"}>View</a>
-                          </TableCell>
-                        </TableRow>
-                      }
-                      else {
-                        return <TableRow key={row.age} className={classes.tableBodyRow}>
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "left",
-                            }}
-                          >
-                            {row.Type}
-                          </TableCell>
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "left",
-                            }}
-                          >
-                            {row.Count}
-                          </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
+                            >
+                              {row.Type == "People_count alert"
+                                ? "People count alert"
+                                : row.Type}
+                            </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
+                            >
+                              {row.Count}
+                            </TableCell>
 
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "right",
-                            }}
-                          >
-                            <a href={"/admin/detail/threats/All/Business_insights/" + row.Type.replace("alert", "").replace(/\s+/, "") + "/" + selectedState + "/" + selectedCity + "/" + result + "/" + result2}>View</a>
-                          </TableCell>
-                        </TableRow>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "right",
+                              }}
+                            >
+                              <a
+                                href={
+                                  "/admin/detail/threats/All/Business_insights/" +
+                                  row.Type.replace("alert", "").replace(
+                                    /\s+/,
+                                    ""
+                                  ) +
+                                  "/" +
+                                  selectedState +
+                                  "/" +
+                                  selectedCity +
+                                  "/" +
+                                  result +
+                                  "/" +
+                                  result2
+                                }
+                              >
+                                View
+                              </a>
+                            </TableCell>
+                          </TableRow>
+                        );
                       }
                     })}
                   </TableBody>
@@ -674,21 +733,23 @@ export default function Dashboard() {
               </h4>
               <a
                 href={
-                  selectedCity == "" || selectedState == "" ? "/admin/threats/Internal_compliance/" +
-                    null +
-                    "/" +
-                    null +
-                    "/" +
-                    result +
-                    "/" +
-                    result2 : "/admin/threats/Internal_compliance/" +
-                    selectedState +
-                    "/" +
-                    selectedCity +
-                    "/" +
-                    result +
-                    "/" +
-                    result2
+                  selectedCity == "" || selectedState == ""
+                    ? "/admin/threats/Internal_compliance/" +
+                      null +
+                      "/" +
+                      null +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
+                    : "/admin/threats/Internal_compliance/" +
+                      selectedState +
+                      "/" +
+                      selectedCity +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
                 }
               >
                 <div
@@ -744,7 +805,25 @@ export default function Dashboard() {
                               textAlign: "right",
                             }}
                           >
-                            <a href={"/admin/detail/threats/All/Internal_compliance/" + row.Type.replace("alert", "").replace(/\s+/, "") + "/" + selectedState + "/" + selectedCity + "/" + result + "/" + result2}>View</a>
+                            <a
+                              href={
+                                "/admin/detail/threats/All/Internal_compliance/" +
+                                row.Type.replace("alert", "").replace(
+                                  /\s+/,
+                                  ""
+                                ) +
+                                "/" +
+                                selectedState +
+                                "/" +
+                                selectedCity +
+                                "/" +
+                                result +
+                                "/" +
+                                result2
+                              }
+                            >
+                              View
+                            </a>
                           </TableCell>
                         </TableRow>
                       )
@@ -789,21 +868,23 @@ export default function Dashboard() {
 
               <a
                 href={
-                  selectedCity == "" || selectedState == "" ? "/admin/threats/Covid_safety/" +
-                    null +
-                    "/" +
-                    null +
-                    "/" +
-                    result +
-                    "/" +
-                    result2 : "/admin/threats/Covid_safety/" +
-                    selectedState +
-                    "/" +
-                    selectedCity +
-                    "/" +
-                    result +
-                    "/" +
-                    result2
+                  selectedCity == "" || selectedState == ""
+                    ? "/admin/threats/Covid_safety/" +
+                      null +
+                      "/" +
+                      null +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
+                    : "/admin/threats/Covid_safety/" +
+                      selectedState +
+                      "/" +
+                      selectedCity +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
                 }
               >
                 <div
@@ -820,86 +901,123 @@ export default function Dashboard() {
                   <TableBody>
                     {graph_data.Covid_safety.dataList.map((row, index) => {
                       if (row.Type === "Temperature alert") {
-                        return <TableRow key={row.age} className={classes.tableBodyRow}>
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "left",
-                            }}
+                        return (
+                          <TableRow
+                            key={row.age}
+                            className={classes.tableBodyRow}
                           >
-                            {row.Type}
-                          </TableCell>
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "left",
-                            }}
-                          >
-                            {row.Count}
-                          </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
+                            >
+                              {row.Type}
+                            </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
+                            >
+                              {row.Count}
+                            </TableCell>
 
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "right",
-                            }}
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "right",
+                              }}
+                            >
+                              <a
+                                href={
+                                  "http://10.11.0.4:8118/tickets/filter/?f=1&ds=" +
+                                  result3 +
+                                  "&de=" +
+                                  result4 +
+                                  "&fs=High%20temperature&gp=5f9fc190afc8700011a17f9c"
+                                }
+                              >
+                                View
+                              </a>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      } else {
+                        return (
+                          <TableRow
+                            key={row.age}
+                            className={classes.tableBodyRow}
                           >
-                            <a href={"http://10.11.0.4:8118/tickets/filter/?f=1&ds=" + result3 + "&de=" + result4 + "&fs=High%20temperature&gp=5f9fc190afc8700011a17f9c"}>View</a>
-                          </TableCell>
-                        </TableRow>
-                      }
-                      else {
-                        return <TableRow key={row.age} className={classes.tableBodyRow}>
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "left",
-                            }}
-                          >
-                            {row.Type}
-                          </TableCell>
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "left",
-                            }}
-                          >
-                            {row.Count}
-                          </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
+                            >
+                              {row.Type}
+                            </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
+                            >
+                              {row.Count}
+                            </TableCell>
 
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "right",
-                            }}
-                          >
-                            <a href={"/admin/detail/threats/All/Covid_safety/" + row.Type.replace("alert", "").replace(/\s+/, "") + "/" + selectedState + "/" + selectedCity + "/" + result + "/" + result2}>View</a>
-                          </TableCell>
-                        </TableRow>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "right",
+                              }}
+                            >
+                              <a
+                                href={
+                                  "/admin/detail/threats/All/Covid_safety/" +
+                                  row.Type.replace("alert", "").replace(
+                                    /\s+/,
+                                    ""
+                                  ) +
+                                  "/" +
+                                  selectedState +
+                                  "/" +
+                                  selectedCity +
+                                  "/" +
+                                  result +
+                                  "/" +
+                                  result2
+                                }
+                              >
+                                View
+                              </a>
+                            </TableCell>
+                          </TableRow>
+                        );
                       }
                     })}
                   </TableBody>
@@ -914,6 +1032,6 @@ export default function Dashboard() {
         alt=""
         style={{ width: "100%", height: "15vw", objectFit: "cover" }}
       /> */}
-    </div >
+    </div>
   );
 }

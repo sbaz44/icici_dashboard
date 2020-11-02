@@ -147,7 +147,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Weapon/" +
+                  "/admin/details/threats/Weapon/External_threats/" +
                   state +
                   "/" +
                   city +
@@ -183,7 +183,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Tampering/" +
+                  "/admin/details/threats/Tampering/External_threats/" +
                   state +
                   "/" +
                   city +
@@ -224,7 +224,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Mask/" +
+                  "/admin/details/threats/Mask/External_threats/" +
                   state +
                   "/" +
                   city +
@@ -238,7 +238,6 @@ export default function Type1_1(props) {
                   View More
                 </div>
               </a>
-
             </CardFooter>
           </Card>
         </GridItem>
@@ -262,7 +261,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Fire/" +
+                  "/admin/details/threats/Fire/External_threats/" +
                   state +
                   "/" +
                   city +
@@ -299,7 +298,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Exceeded/" +
+                  "/admin/details/threats/Exceeded/External_threats/" +
                   state +
                   "/" +
                   city +
@@ -313,7 +312,6 @@ export default function Type1_1(props) {
                   View More
                 </div>
               </a>
-
             </CardFooter>
           </Card>
         </GridItem>
@@ -336,7 +334,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Trespass/" +
+                  "/admin/details/threats/Trespass/External_threats/" +
                   state +
                   "/" +
                   city +
@@ -376,7 +374,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Loitering/" +
+                  "/admin/details/threats/Loitering/External_threats/" +
                   state +
                   "/" +
                   city +
@@ -390,7 +388,6 @@ export default function Type1_1(props) {
                   View More
                 </div>
               </a>
-
             </CardFooter>
           </Card>
         </GridItem>
@@ -417,7 +414,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Helmet/" +
+                  "/admin/details/threats/Helmet/External_threats/" +
                   state +
                   "/" +
                   city +
@@ -431,7 +428,6 @@ export default function Type1_1(props) {
                   View More
                 </div>
               </a>
-
             </CardFooter>
           </Card>
         </GridItem>
@@ -458,7 +454,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/External_threats/Defective/" +
+                  "/admin/details/threats/Defective/External_threats/" +
                   state +
                   "/" +
                   city +
@@ -472,8 +468,6 @@ export default function Type1_1(props) {
                   View More
                 </div>
               </a>
-
-
             </CardFooter>
           </Card>
         </GridItem>
@@ -506,7 +500,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Business_insights/Loitering/" +
+                  "/admin/details/threats/Loitering/Business_insights/" +
                   state +
                   "/" +
                   city +
@@ -537,12 +531,12 @@ export default function Type1_1(props) {
               >
                 People Count Alert
               </p>
-              <h3 className={classes.cardTitle}>{data.Person}</h3>
+              <h3 className={classes.cardTitle}>{data.People_count}</h3>
             </CardHeader>
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Business_insights/Person/" +
+                  "/admin/details/threats/Person/Business_insights/" +
                   state +
                   "/" +
                   city +
@@ -556,7 +550,6 @@ export default function Type1_1(props) {
                   View More
                 </div>
               </a>
-
             </CardFooter>
           </Card>
         </GridItem>
@@ -583,7 +576,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Business_insights/Unattended/" +
+                  "/admin/details/threats/Unattended/Business_insights/" +
                   state +
                   "/" +
                   city +
@@ -597,7 +590,6 @@ export default function Type1_1(props) {
                   View More
                 </div>
               </a>
-
             </CardFooter>
           </Card>
         </GridItem>
@@ -661,7 +653,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Business_insights/Social/" +
+                  "/admin/details/threats/Social/Business_insights/" +
                   state +
                   "/" +
                   city +
@@ -701,7 +693,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Business_insights/Vault/" +
+                  "/admin/details/threats/Vault/Business_insights/" +
                   state +
                   "/" +
                   city +
@@ -715,7 +707,6 @@ export default function Type1_1(props) {
                   View More
                 </div>
               </a>
-
             </CardFooter>
           </Card>
         </GridItem>
@@ -779,7 +770,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Internal_compliance/Unattended/" +
+                  "/admin/details/threats/Unattended/Internal_compliance/" +
                   state +
                   "/" +
                   city +
@@ -793,7 +784,6 @@ export default function Type1_1(props) {
                   View More
                 </div>
               </a>
-
             </CardFooter>
           </Card>
         </GridItem>
@@ -820,7 +810,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Internal_compliance/Vault/" +
+                  "/admin/details/threats/Vault/Internal_compliance/" +
                   state +
                   "/" +
                   city +
@@ -834,7 +824,6 @@ export default function Type1_1(props) {
                   View More
                 </div>
               </a>
-
             </CardFooter>
           </Card>
         </GridItem>
@@ -864,7 +853,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Covid_safety/Person/" +
+                  "/admin/details/threats/Person/Covid_safety/" +
                   state +
                   "/" +
                   city +
@@ -904,7 +893,7 @@ export default function Type1_1(props) {
             <CardFooter stats>
               <a
                 href={
-                  "/admin/details/threats/Covid_safety/Social/" +
+                  "/admin/details/threats/Social/Covid_safety/" +
                   state +
                   "/" +
                   city +
@@ -918,7 +907,6 @@ export default function Type1_1(props) {
                   View More
                 </div>
               </a>
-
             </CardFooter>
           </Card>
         </GridItem>
@@ -951,7 +939,7 @@ export default function Type1_1(props) {
               > */}
               <a
                 href={
-                  "/admin/details/threats/Covid_safety/no/" +
+                  "/admin/details/threats/no/Covid_safety/" +
                   state +
                   "/" +
                   city +
@@ -965,7 +953,6 @@ export default function Type1_1(props) {
                   View More
                 </div>
               </a>
-
             </CardFooter>
           </Card>
         </GridItem>
