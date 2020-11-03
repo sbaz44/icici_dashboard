@@ -49,8 +49,9 @@ export default function Type1_3(props) {
       viewDetail(
         props.match.params.branch,
         event.target.value,
-        props.match.params.subtype,
-        props.match.params.date,
+        props.match.params.type,
+        result2,
+        result,
         currentPage
       )
     );
@@ -67,10 +68,10 @@ export default function Type1_3(props) {
     dispatch(
       viewDetail(
         props.match.params.branch,
-        props.match.params.type,
         props.match.params.subtype,
+        props.match.params.type,
         props.match.params.date,
-        props.match.params.date2,
+        result2,
         currentPage
       )
     );
@@ -81,9 +82,9 @@ export default function Type1_3(props) {
     dispatch(
       viewDetail(
         props.match.params.branch,
-        props.match.params.type,
         props.match.params.subtype,
-        props.match.params.date,
+        props.match.params.type,
+        result,
         props.match.params.date2,
         currentPage
       )
@@ -96,9 +97,10 @@ export default function Type1_3(props) {
       dispatch(
         viewDetail(
           props.match.params.branch,
-          props.match.params.type,
           props.match.params.subtype,
-          props.match.params.date,
+          props.match.params.type,
+          result,
+          result2,
           currentPage
         )
       );
@@ -108,9 +110,10 @@ export default function Type1_3(props) {
       dispatch(
         viewDetail(
           props.match.params.branch,
-          props.match.params.type,
           props.match.params.subtype,
-          props.match.params.date,
+          props.match.params.type,
+          result,
+          result2,
           currentPage
         )
       );
@@ -141,8 +144,8 @@ export default function Type1_3(props) {
     dispatch(
       viewDetail(
         props.match.params.branch,
-        props.match.params.type,
         props.match.params.subtype,
+        props.match.params.type,
         props.match.params.date,
         props.match.params.date2,
         currentPage

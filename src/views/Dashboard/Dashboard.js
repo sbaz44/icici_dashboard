@@ -114,7 +114,6 @@ export default function Dashboard() {
     setselectedState(event.target.value);
     dispatch(graphData(event.target.value, selectedCity, result, result2));
     dispatch(dashboardCount(event.target.value, selectedCity, result, result2));
-    // dispatch(viewDetail(props.match.params.branch, event.target.value, props.match.params.subtype, props.match.params.date, currentPage));
   };
 
   const handleBranchChange = (event) => {
@@ -123,8 +122,6 @@ export default function Dashboard() {
     dispatch(
       dashboardCount(selectedState, event.target.value, result, result2)
     );
-
-    // dispatch(viewDetail(props.match.params.branch, event.target.value, props.match.params.subtype, props.match.params.date, currentPage));
   };
 
   useEffect(() => {
@@ -237,10 +234,6 @@ export default function Dashboard() {
               Haryana.map((item, index) => {
                 return <MenuItem value={item}>{item}</MenuItem>;
               })}
-            {/* 
-              <MenuItem value={'Business_insights'}>Business Insights</MenuItem>
-              <MenuItem value={'Internal_compliance'}>Internal Compliance</MenuItem>
-              <MenuItem value={'Covid_safety'}>Covid Safety</MenuItem> */}
           </Select>
         </FormControl>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -276,6 +269,12 @@ export default function Dashboard() {
           />
         </MuiPickersUtilsProvider>
       </div>
+      {/* <GridContainer>
+        <GridItem xs={12} sm={6} md={3}>
+          <Skeleton animation="wave" variant="text" height={200} />
+        </GridItem>
+      </GridContainer> */}
+
       <GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>

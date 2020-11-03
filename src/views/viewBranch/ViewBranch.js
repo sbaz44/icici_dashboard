@@ -82,6 +82,7 @@ export default function ViewBranch(props) {
   };
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [localData, setLocalData] = React.useState({});
+  const [image, setImage] = React.useState(null);
   const handleDateChange = (date) => {
     result = format(date, "dd-MM-yyyy");
     setSelectedDate(date);
@@ -260,7 +261,14 @@ export default function ViewBranch(props) {
           </div>
           <GridContainer>
             <GridItem xs={12} sm={6} md={3}>
-              <Card onClick={() => alert("hi")}>
+              <Card
+                onClick={() => {
+                  if (localData.open_image != null) {
+                    setImage(localData.open_image);
+                    setOpen(true);
+                  }
+                }}
+              >
                 <p
                   className={classes.cardCategory}
                   style={{
@@ -275,7 +283,14 @@ export default function ViewBranch(props) {
               </Card>
             </GridItem>
             <GridItem xs={12} sm={6} md={3}>
-              <Card>
+              <Card
+                onClick={() => {
+                  if (localData.close_image != null) {
+                    setImage(localData.close_image);
+                    setOpen(true);
+                  }
+                }}
+              >
                 <p
                   className={classes.cardCategory}
                   style={{
@@ -465,7 +480,7 @@ export default function ViewBranch(props) {
                       "&de=" +
                       result2 +
                       "&fs=High%20temperature%20" +
-                      props.match.params.branch +
+                      // props.match.params.branch +
                       "&gp=5f9fc190afc8700011a17f9c"
                     }
                     target="_blank"
