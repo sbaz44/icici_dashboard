@@ -482,9 +482,9 @@ export default function Dashboard() {
                         >
                           <a
                             href={
-                              "/admin/detail/threats/All/External_threats/" +
+                              "/admin/detail/threats/All/" +
                               row.Type.replace("alert", "").replace(/\s+/, "") +
-                              "/" +
+                              "/External_threats/" +
                               selectedState +
                               "/" +
                               selectedCity +
@@ -618,7 +618,7 @@ export default function Dashboard() {
                                   result3 +
                                   "&de=" +
                                   result4 +
-                                  "&fs=High%20temperature&gp=5f9fc190afc8700011a17f9c"
+                                  "&fs=Temperature&gp=5f9fc190afc8700011a17f9c"
                                 }
                               >
                                 View
@@ -671,12 +671,12 @@ export default function Dashboard() {
                             >
                               <a
                                 href={
-                                  "/admin/detail/threats/All/Business_insights/" +
+                                  "/admin/detail/threats/All/" +
                                   row.Type.replace("alert", "").replace(
                                     /\s+/,
                                     ""
                                   ) +
-                                  "/" +
+                                  "/Business_insights/" +
                                   selectedState +
                                   "/" +
                                   selectedCity +
@@ -806,12 +806,12 @@ export default function Dashboard() {
                           >
                             <a
                               href={
-                                "/admin/detail/threats/All/Internal_compliance/" +
+                                "/admin/detail/threats/All/" +
                                 row.Type.replace("alert", "").replace(
                                   /\s+/,
                                   ""
                                 ) +
-                                "/" +
+                                "/Internal_compliance/" +
                                 selectedState +
                                 "/" +
                                 selectedCity +
@@ -946,7 +946,7 @@ export default function Dashboard() {
                                   result3 +
                                   "&de=" +
                                   result4 +
-                                  "&fs=High%20temperature&gp=5f9fc190afc8700011a17f9c"
+                                  "&fs=Temperature&gp=5f9fc190afc8700011a17f9c"
                                 }
                               >
                                 View
@@ -997,12 +997,12 @@ export default function Dashboard() {
                             >
                               <a
                                 href={
-                                  "/admin/detail/threats/All/Covid_safety/" +
+                                  "/admin/detail/threats/All/" +
                                   row.Type.replace("alert", "").replace(
                                     /\s+/,
                                     ""
                                   ) +
-                                  "/" +
+                                  "/Covid_safety/" +
                                   selectedState +
                                   "/" +
                                   selectedCity +

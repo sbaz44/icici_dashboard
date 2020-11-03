@@ -194,7 +194,7 @@ export default function ViewBranch(props) {
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <img src={localData.image} style={{ padding: "1vw" }} />
+        <img src={image} style={{ padding: "1vw" }} />
       </Dialog>
 
       {isLoading ? (
@@ -305,7 +305,14 @@ export default function ViewBranch(props) {
               </Card>
             </GridItem>
             <GridItem xs={12} sm={6} md={3}>
-              <Card>
+              <Card
+                onClick={() => {
+                  if (localData.open_vault_image != null) {
+                    setImage(localData.open_vault_image);
+                    setOpen(true);
+                  }
+                }}
+              >
                 <p
                   className={classes.cardCategory}
                   style={{
@@ -320,7 +327,14 @@ export default function ViewBranch(props) {
               </Card>
             </GridItem>
             <GridItem xs={12} sm={6} md={3}>
-              <Card>
+              <Card
+                onClick={() => {
+                  if (localData.close_vault_image != null) {
+                    setImage(localData.close_vault_image);
+                    setOpen(true);
+                  }
+                }}
+              >
                 <p
                   className={classes.cardCategory}
                   style={{
@@ -479,7 +493,7 @@ export default function ViewBranch(props) {
                       result2 +
                       "&de=" +
                       result2 +
-                      "&fs=High%20temperature%20" +
+                      "&fs=Temperature" +
                       // props.match.params.branch +
                       "&gp=5f9fc190afc8700011a17f9c"
                     }
