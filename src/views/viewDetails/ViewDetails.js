@@ -10,17 +10,13 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import smart from "../../assets/img/smartAI.png";
 import CardBody from "components/Card/CardBody.js";
-import {
-  getbranchDetails,
-
-  viewDetail
-} from "../../middleware/actions";
+import { viewDetail } from "../../middleware/actions";
 import Pagination from "components/pagination/Pagination";
-import $ from 'jquery'
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import $ from "jquery";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 let currentPage = 1;
 const useStyles = makeStyles((theme) => ({
@@ -36,11 +32,20 @@ const useStyles = makeStyles((theme) => ({
 export default function ViewDetails(props) {
   const classes = useStyles();
 
-  const [typee, setType] = React.useState('');
+  const [typee, setType] = React.useState("");
 
   const handleChange = (event) => {
     setType(event.target.value);
-    dispatch(viewDetail(props.match.params.branch, event.target.value, props.match.params.subtype, props.match.params.date, "", currentPage));
+    dispatch(
+      viewDetail(
+        props.match.params.branch,
+        event.target.value,
+        props.match.params.subtype,
+        props.match.params.date,
+        "",
+        currentPage
+      )
+    );
   };
   const viewBranchDetail = useSelector((state) => state.viewBranchDetail);
 
@@ -48,11 +53,29 @@ export default function ViewDetails(props) {
   const pagination = (name) => {
     if (name === "increment") {
       currentPage += 1;
-      dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, "", currentPage))
+      dispatch(
+        viewDetail(
+          props.match.params.branch,
+          props.match.params.type,
+          props.match.params.subtype,
+          props.match.params.date,
+          "",
+          currentPage
+        )
+      );
     } else if (name === "decrement") {
       currentPage -= 1;
       // this.getData(currentPage);
-      dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, "", currentPage))
+      dispatch(
+        viewDetail(
+          props.match.params.branch,
+          props.match.params.type,
+          props.match.params.subtype,
+          props.match.params.date,
+          "",
+          currentPage
+        )
+      );
     }
   };
   const threats = {
@@ -60,26 +83,34 @@ export default function ViewDetails(props) {
     Business_insights: "Business Insights Alerts",
     Internal_compliance: "Internal Compliance Alerts",
     Covid_safety: "Covid Safety Alerts",
-  }
+  };
   useEffect(() => {
     $("#root").find("header").hide();
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
     currentPage = 1;
-    setType(props.match.params.type)
+    setType(props.match.params.type);
     // if (props.match.params.subtype == "null") {
     //   alert('insidne')
     //   dispatch(getbranchDetails(props.match.params.date));
     // }
     // else if (props.match.params.subtype != "null") {
 
-    dispatch(viewDetail(props.match.params.branch, props.match.params.type, props.match.params.subtype, props.match.params.date, "", currentPage));
+    dispatch(
+      viewDetail(
+        props.match.params.branch,
+        props.match.params.type,
+        props.match.params.subtype,
+        props.match.params.date,
+        "",
+        currentPage
+      )
+    );
     // }
-
   }, []);
 
   return (
-    <div >
+    <div>
       <div
         style={{
           display: "flex",
@@ -103,7 +134,7 @@ export default function ViewDetails(props) {
             }}
           >
             {props.match.params.branch} Branch
-            </p>
+          </p>
         </div>
         <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label">Select Type</InputLabel>
@@ -113,10 +144,12 @@ export default function ViewDetails(props) {
             value={typee}
             onChange={handleChange}
           >
-            <MenuItem value={'External_threats'}>External Threats</MenuItem>
-            <MenuItem value={'Business_insights'}>Business Insights</MenuItem>
-            <MenuItem value={'Internal_compliance'}>Internal Compliance</MenuItem>
-            <MenuItem value={'Covid_safety'}>Covid Safety</MenuItem>
+            <MenuItem value={"External_threats"}>External Threats</MenuItem>
+            <MenuItem value={"Business_insights"}>Business Insights</MenuItem>
+            <MenuItem value={"Internal_compliance"}>
+              Internal Compliance
+            </MenuItem>
+            <MenuItem value={"Covid_safety"}>Covid Safety</MenuItem>
           </Select>
         </FormControl>
       </div>
@@ -124,7 +157,9 @@ export default function ViewDetails(props) {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>{props.match.params.type != "null" ? threats[typee] : "Alerts"} </h4>
+              <h4 className={classes.cardTitleWhite}>
+                {props.match.params.type != "null" ? threats[typee] : "Alerts"}
+              </h4>
               {/* <p className={classes.cardCategoryWhite}>List of all branches</p> */}
             </CardHeader>
             <CardBody>
@@ -144,14 +179,14 @@ export default function ViewDetails(props) {
           </Card>
         </GridItem>
       </GridContainer>
-      {viewBranchDetail.count > 9 && <Pagination currentPage={currentPage}
-        lastPage={Math.ceil(
-          viewBranchDetail.count / 10
-        )}
-
-        nextPage={() => pagination("increment")}
-        prevPage={() => pagination("decrement")} />}
-
+      {viewBranchDetail.count > 9 && (
+        <Pagination
+          currentPage={currentPage}
+          lastPage={Math.ceil(viewBranchDetail.count / 10)}
+          nextPage={() => pagination("increment")}
+          prevPage={() => pagination("decrement")}
+        />
+      )}
     </div>
   );
 }

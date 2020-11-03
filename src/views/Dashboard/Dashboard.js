@@ -34,14 +34,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Select from "@material-ui/core/Select";
 import { bugs, website, server } from "variables/general.js";
 import Skeleton from "@material-ui/lab/Skeleton";
-import {
-  getbranchDetails,
-  postBranchDetails,
-  getbranchReports,
-  postBranchReports,
-  dashboardCount,
-  graphData,
-} from "../../middleware/actions";
+import { dashboardCount, graphData } from "../../middleware/actions";
 import $ from "jquery";
 import {
   dailySalesChart,
@@ -92,24 +85,34 @@ export default function Dashboard() {
   const [selectedState, setselectedState] = useState("null");
   const [selectedCity, setselectedCity] = useState("null");
 
+  const handleFromChange = (date) => {
+    result = format(date, "dd-MM-yyyy");
+    result3 = format(date, "MM/dd/yyyy");
+    setFromDate(date);
+    var datee = new Date(date);
+    datee.setDate(datee.getDate() + 7);
+    result2 = format(datee, "dd-MM-yyyy");
+    result4 = format(datee, "MM/dd/yyyy");
+    setToDate(datee);
+    dispatch(graphData(selectedState, selectedCity, result, result2));
+    dispatch(dashboardCount(selectedState, selectedCity, result, result2));
+  };
+
   const handleToChange = (date) => {
     result2 = format(date, "dd-MM-yyyy");
     result4 = format(date, "MM/dd/yyyy");
     setToDate(date);
+    var datee = new Date(date);
+    datee.setDate(datee.getDate() - 7);
+    result = format(datee, "dd-MM-yyyy");
+    result3 = format(datee, "MM/dd/yyyy");
+    setFromDate(datee);
     dispatch(graphData(selectedState, selectedCity, result, result2));
     dispatch(dashboardCount(selectedState, selectedCity, result, result2));
-    // dispatch(viewBranchDetail(props.match.params.branch, result));
+    // dispatch(graphData(selectedState, selectedCity, result, result2));
+    // dispatch(dashboardCount(selectedState, selectedCity, result, result2));
   };
-  const handleFromChange = (date) => {
-    result = format(date, "dd-MM-yyyy");
-    result3 = format(date, "MM/dd/yyyy");
 
-    setFromDate(date);
-
-    dispatch(graphData(selectedState, selectedCity, result, result2));
-    dispatch(dashboardCount(selectedState, selectedCity, result, result2));
-    // dispatch(viewBranchDetail(props.match.params.branch, result));
-  };
   const handleCityChange = (event) => {
     setselectedState(event.target.value);
     dispatch(graphData(event.target.value, selectedCity, result, result2));
@@ -127,7 +130,7 @@ export default function Dashboard() {
   useEffect(() => {
     var todaysDate = new Date();
     var todaysDate2 = new Date();
-    todaysDate2.setDate(todaysDate2.getDate() - 6);
+    todaysDate2.setDate(todaysDate2.getDate() - 7);
     result2 = format(todaysDate, "dd-MM-yyyy");
     result = format(todaysDate2, "dd-MM-yyyy");
     result4 = format(todaysDate, "MM/dd/yyyy");
@@ -174,7 +177,7 @@ export default function Dashboard() {
   const Delhi = ["Dwarka", "Najafgarh", "TagoreGarden"];
   return (
     <div id="dashboard-page">
-      {console.log(selectedState)}
+      {console.log(selectedToDate)}
       <div
         style={{
           display: "flex",
@@ -182,12 +185,13 @@ export default function Dashboard() {
           alignItems: "center",
           width: "100%",
           marginBottom: "2vw",
+          flexWrap: "wrap",
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
           <img
             src={smart}
-            style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
+            style={{ width: "50px", height: "50px", objectFit: "contain" }}
           />
           <p
             style={{
@@ -239,7 +243,7 @@ export default function Dashboard() {
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
             disableToolbar
-            disableFuture
+            // disableFuture
             variant="inline"
             format="MM/dd/yyyy"
             margin="normal"
@@ -255,7 +259,7 @@ export default function Dashboard() {
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
             disableToolbar
-            disableFuture
+            // disableFuture
             variant="inline"
             format="MM/dd/yyyy"
             margin="normal"

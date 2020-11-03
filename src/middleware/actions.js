@@ -18,10 +18,10 @@ export const POST_BRANCH_REPORTS = "POST_BRANCH_REPORTS";
 export const URL = "http://13.127.202.106:8000/dashboard";
 
 //get calls
-export function getbranchDetails(date) {
+export function getbranchDetails(date, state, city) {
   return (dispatch) => {
     axios
-      .get(URL + "/branch/?Date=" + date)
+      .get(URL + "/branch?State=" + state + "&City=" + city + "&Date=" + date)
       .then((res) =>
         dispatch({
           type: GET_BRANCH_DETAILS,

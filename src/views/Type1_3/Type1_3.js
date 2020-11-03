@@ -10,7 +10,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import smart from "../../assets/img/smartAI.png";
 import CardBody from "components/Card/CardBody.js";
-import { getbranchDetails, viewDetail } from "../../middleware/actions";
+import { viewDetail } from "../../middleware/actions";
 import Pagination from "components/pagination/Pagination";
 import $ from "jquery";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -43,6 +43,11 @@ export default function Type1_3(props) {
 
   const [typee, setType] = React.useState("");
 
+  const viewBranchDetail = useSelector((state) => state.viewBranchDetail);
+
+  const dispatch = useDispatch();
+  const [selectedToDate, setToDate] = React.useState(new Date());
+  const [selectedFromDate, setFromDate] = React.useState(new Date());
   const handleChange = (event) => {
     setType(event.target.value);
     dispatch(
@@ -56,29 +61,13 @@ export default function Type1_3(props) {
       )
     );
   };
-  const viewBranchDetail = useSelector((state) => state.viewBranchDetail);
-
-  const dispatch = useDispatch();
-  const [selectedToDate, setToDate] = React.useState(new Date());
-  const [selectedFromDate, setFromDate] = React.useState(new Date());
-
-  const handleToChange = (date) => {
-    result2 = format(date, "dd-MM-yyyy");
-    setToDate(date);
-    dispatch(
-      viewDetail(
-        props.match.params.branch,
-        props.match.params.subtype,
-        props.match.params.type,
-        props.match.params.date,
-        result2,
-        currentPage
-      )
-    );
-  };
   const handleFromChange = (date) => {
     result = format(date, "dd-MM-yyyy");
     setFromDate(date);
+    var datee = new Date(date);
+    datee.setDate(datee.getDate() + 7);
+    result2 = format(datee, "dd-MM-yyyy");
+    setToDate(datee);
     dispatch(
       viewDetail(
         props.match.params.branch,
@@ -86,6 +75,25 @@ export default function Type1_3(props) {
         props.match.params.type,
         result,
         props.match.params.date2,
+        currentPage
+      )
+    );
+  };
+
+  const handleToChange = (date) => {
+    result2 = format(date, "dd-MM-yyyy");
+    setToDate(date);
+    var datee = new Date(date);
+    datee.setDate(datee.getDate() - 7);
+    result = format(datee, "dd-MM-yyyy");
+    setFromDate(datee);
+    dispatch(
+      viewDetail(
+        props.match.params.branch,
+        props.match.params.subtype,
+        props.match.params.type,
+        props.match.params.date,
+        result2,
         currentPage
       )
     );
@@ -130,7 +138,7 @@ export default function Type1_3(props) {
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
     currentPage = 1;
-    setType(props.match.params.type);
+    setType(props.match.params.subtype);
 
     var datee = props.match.params.date;
     var datee2 = props.match.params.date2;
@@ -200,7 +208,7 @@ export default function Type1_3(props) {
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
               disableToolbar
-              disableFuture
+              // disableFuture
               variant="inline"
               format="MM/dd/yyyy"
               margin="normal"
@@ -217,7 +225,7 @@ export default function Type1_3(props) {
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
               disableToolbar
-              disableFuture
+              // disableFuture
               variant="inline"
               format="MM/dd/yyyy"
               margin="normal"
@@ -237,7 +245,9 @@ export default function Type1_3(props) {
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>
-                {props.match.params.type != "null" ? threats[typee] : "Alerts"}{" "}
+                {props.match.params.subtype != "null"
+                  ? threats[props.match.params.subtype]
+                  : "Alerts"}
               </h4>
               {/* <p className={classes.cardCategoryWhite}>List of all branches</p> */}
             </CardHeader>

@@ -57,19 +57,13 @@ import avatar from "assets/img/dummy.png";
 import { FormControlLabel } from "@material-ui/core";
 var result = "";
 var result2 = "";
+var result3 = "";
 const useStyles = makeStyles(styles);
 
 // const useStyless = makeStyles(styless);
 export default function ViewBranch(props) {
   const classes = useStyles();
-  // const classess = useStyless();
-  const branches = useSelector((state) => state.branches);
-  // let data = [];
-  // data = useSelector((state) => state.viewBranchDetail);
-  const contactData = useSelector((state) => state.viewBranchDetail.Contact);
-  const graph_data = useSelector((state) => state.graph_data);
-  const postBranchResponse = useSelector((state) => state.postBranchResponse);
-  const branchReport = useSelector((state) => state.branchReport);
+
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [isLoading, setisLoading] = React.useState(false);
@@ -115,6 +109,13 @@ export default function ViewBranch(props) {
 
     var chunks = result.split("-");
     result2 = chunks[1] + "/" + chunks[0] + "/" + chunks[2];
+
+    var addDate = new Date(result2);
+    addDate.setDate(addDate.getDate() + 1);
+    result3 = format(addDate, "dd-MM-yyyy");
+    var chunks2 = result3.split("-");
+    result3 = chunks2[1] + "/" + chunks2[0] + "/" + chunks2[2];
+
     var datee = props.match.params.date;
     var newdate = datee.split("-").reverse().join("-");
     setSelectedDate(newdate);
@@ -492,7 +493,7 @@ export default function ViewBranch(props) {
                       "http://10.11.0.4:8118/tickets/filter/?f=1&ds=" +
                       result2 +
                       "&de=" +
-                      result2 +
+                      result3 +
                       "&fs=Temperature" +
                       // props.match.params.branch +
                       "&gp=5f9fc190afc8700011a17f9c"

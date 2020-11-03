@@ -78,21 +78,16 @@ export default function TableList() {
   const handleDateChange = (date) => {
     result = format(date, "dd-MM-yyyy");
     setSelectedDate(date);
-    dispatch(getbranchDetails(result));
-    // dispatch(getThreatDetail(props.match.params.subtype, result));
+    dispatch(getbranchDetails(result, selectedState, selectedCity));
   };
   const handleCityChange = (event) => {
     setselectedState(event.target.value);
-    // dispatch(graphData(event.target.value, selectedCity, result, result2));
-    // dispatch(dashboardCount(event.target.value, selectedCity, result, result2));
+    dispatch(getbranchDetails(result, event.target.value, selectedCity));
   };
 
   const handleBranchChange = (event) => {
     setselectedCity(event.target.value);
-    // dispatch(graphData(selectedState, event.target.value, result, result2));
-    // dispatch(
-    //   dashboardCount(selectedState, event.target.value, result, result2)
-    // );
+    dispatch(getbranchDetails(result, selectedState, event.target.value));
   };
   const Maharashtra = ["Mumbai", "Nagpur", "Pune"];
   const Haryana = ["Padla"];
@@ -100,7 +95,7 @@ export default function TableList() {
   useEffect(() => {
     var date = new Date();
     result = format(date, "dd-MM-yyyy");
-    dispatch(getbranchDetails(""));
+    dispatch(getbranchDetails("", "", ""));
     $("#root").find("header").hide();
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
