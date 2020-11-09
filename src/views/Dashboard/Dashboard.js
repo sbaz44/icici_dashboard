@@ -473,10 +473,10 @@ export default function Dashboard() {
                             else if (row.Type == "Defective alert") {
                               return "Defective camera alert"
                             }
-                            else if (row.Type == "Shutter alert") {
+                            else if (row.Type == "Mask alert") {
                               return "No mask alert"
                             }
-                            else if (row.Type == "Mask alert") {
+                            else if (row.Type == "Shutter alert") {
                               return "Shutter related alert"
                             }
                             else {
