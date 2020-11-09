@@ -11,6 +11,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import $ from "jquery";
 import { getbranchDetails } from "../../middleware/actions";
+import Select from "@material-ui/core/Select";
 import smart from "../../assets/img/smartAI.png";
 import {
   MuiPickersUtilsProvider,
@@ -20,6 +21,9 @@ import {
 import DateFnsUtils from "@date-io/date-fns";
 import { format } from "date-fns";
 import Pagination from "components/pagination/Pagination";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
 const styles = {
   cardCategoryWhite: {
     "&,& a,& a:hover,& a:focus": {
@@ -52,30 +56,49 @@ const styles = {
 var result = "";
 
 const useStyles = makeStyles(styles);
-
+const useStyles2 = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 export default function TableList() {
   const classes = useStyles();
+  const classes2 = useStyles2();
+
   const branches = useSelector((state) => state.branches);
 
   const dispatch = useDispatch();
   const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [selectedState, setselectedState] = useState("null");
+  const [selectedCity, setselectedCity] = useState("null");
   const handleDateChange = (date) => {
     result = format(date, "dd-MM-yyyy");
     setSelectedDate(date);
-    dispatch(getbranchDetails(result));
-    // dispatch(getThreatDetail(props.match.params.subtype, result));
+    dispatch(getbranchDetails(result, selectedState, selectedCity));
   };
+  const handleCityChange = (event) => {
+    setselectedState(event.target.value);
+    dispatch(getbranchDetails(result, event.target.value, selectedCity));
+  };
+
+  const handleBranchChange = (event) => {
+    setselectedCity(event.target.value);
+    dispatch(getbranchDetails(result, selectedState, event.target.value));
+  };
+  const Maharashtra = ["Mumbai", "Nagpur", "Pune"];
+  const Haryana = ["Padla"];
+  const Delhi = ["Dwarka", "Najafgarh", "TagoreGarden"];
   useEffect(() => {
     var date = new Date();
     result = format(date, "dd-MM-yyyy");
-    dispatch(getbranchDetails(""));
+    dispatch(getbranchDetails("", "", ""));
     $("#root").find("header").hide();
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
-    // console.log(branches);
-    // return () => {
-    //   console.log("cleared");
-    // };
   }, []);
 
   return (
@@ -84,6 +107,7 @@ export default function TableList() {
         style={{
           display: "flex",
           justifyContent: "space-between",
+          flexWrap: "wrap",
           alignItems: "center",
           width: "100%",
           marginBottom: "2vw",
@@ -106,6 +130,46 @@ export default function TableList() {
               Branches
             </p>
           </div>
+
+          <div>
+            <FormControl className={classes2.formControl}>
+              <InputLabel id="demo-simple-select-label">State</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={selectedState}
+                onChange={handleCityChange}
+              >
+                <MenuItem value={"Delhi"}>Delhi</MenuItem>
+                <MenuItem value={"Maharashtra"}>Maharashtra</MenuItem>
+                <MenuItem value={"Haryana"}>Haryana</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl className={classes2.formControl}>
+              <InputLabel id="demo-simple-select-label">City</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={selectedCity}
+                onChange={handleBranchChange}
+              >
+                {selectedState === "Maharashtra" &&
+                  Maharashtra.map((item, index) => {
+                    return <MenuItem value={item}>{item}</MenuItem>;
+                  })}
+
+                {selectedState === "Delhi" &&
+                  Delhi.map((item, index) => {
+                    return <MenuItem value={item}>{item}</MenuItem>;
+                  })}
+                {selectedState === "Haryana" &&
+                  Haryana.map((item, index) => {
+                    return <MenuItem value={item}>{item}</MenuItem>;
+                  })}
+              </Select>
+            </FormControl>
+          </div>
+
           <KeyboardDatePicker
             disableToolbar
             disableFuture
@@ -135,7 +199,7 @@ export default function TableList() {
               <Table
                 tableHeaderColor="primary"
                 tableHead={[
-                  "Status",
+                  "Compliance Status",
                   "Branch",
                   "Camera Count",
                   "People Count",

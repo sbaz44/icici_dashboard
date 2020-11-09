@@ -59,9 +59,13 @@ export default function Type1_2(props) {
   const [selectedToDate, setToDate] = React.useState(new Date());
   const [selectedFromDate, setFromDate] = React.useState(new Date());
 
-  const handleToChange = (date) => {
-    result2 = format(date, "dd-MM-yyyy");
-    setToDate(date);
+  const handleFromChange = (date) => {
+    result = format(date, "dd-MM-yyyy");
+    setFromDate(date);
+    var datee = new Date(date);
+    datee.setDate(datee.getDate() + 7);
+    result2 = format(datee, "dd-MM-yyyy");
+    setToDate(datee);
     dispatch(
       getThreatDetail(
         props.match.params.type,
@@ -73,9 +77,14 @@ export default function Type1_2(props) {
       )
     );
   };
-  const handleFromChange = (date) => {
-    result = format(date, "dd-MM-yyyy");
-    setFromDate(date);
+
+  const handleToChange = (date) => {
+    result2 = format(date, "dd-MM-yyyy");
+    setToDate(date);
+    var datee = new Date(date);
+    datee.setDate(datee.getDate() - 7);
+    result = format(datee, "dd-MM-yyyy");
+    setFromDate(datee);
     dispatch(
       getThreatDetail(
         props.match.params.type,
@@ -153,7 +162,7 @@ export default function Type1_2(props) {
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
               disableToolbar
-              disableFuture
+              // disableFuture
               variant="inline"
               format="MM/dd/yyyy"
               margin="normal"
@@ -170,7 +179,7 @@ export default function Type1_2(props) {
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
               disableToolbar
-              disableFuture
+              // disableFuture
               variant="inline"
               format="MM/dd/yyyy"
               margin="normal"

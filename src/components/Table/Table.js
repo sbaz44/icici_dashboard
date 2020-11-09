@@ -60,10 +60,30 @@ export default function CustomTable(props) {
                   fontSize: "0.9em",
                 }}
               >
-                {row.Status === 0 && <span class="iconify" data-icon="teenyicons:tick-circle-outline" data-inline="false" style={{ color: 'red' }}></span>}
-                {row.Status === 1 && <span class="iconify" data-icon="teenyicons:tick-circle-outline" data-inline="false" style={{ color: 'green' }}></span>}
-                {row.Status === 2 && <span class="iconify" data-icon="teenyicons:tick-circle-outline" data-inline="false" style={{ color: 'gray' }}></span>}
-
+                {row.Status === 0 && (
+                  <span
+                    class="iconify"
+                    data-icon="teenyicons:tick-circle-outline"
+                    data-inline="false"
+                    style={{ color: "red" }}
+                  ></span>
+                )}
+                {row.Status === 1 && (
+                  <span
+                    class="iconify"
+                    data-icon="teenyicons:tick-circle-outline"
+                    data-inline="false"
+                    style={{ color: "green" }}
+                  ></span>
+                )}
+                {row.Status === 2 && (
+                  <span
+                    class="iconify"
+                    data-icon="teenyicons:tick-circle-outline"
+                    data-inline="false"
+                    style={{ color: "gray" }}
+                  ></span>
+                )}
               </TableCell>
               <TableCell
                 className={classes.tableCell}
@@ -188,6 +208,8 @@ export default function CustomTable(props) {
                       close: row.Close_time,
                       open_image: row.Open_time_image,
                       close_image: row.Close_time_image,
+                      open_vault_image: row.Vault_door_open_image,
+                      close_vault_image: row.Vault_door_close_image,
                       type: row.Type,
                     };
                     localStorage.setItem("smData", JSON.stringify(data));
