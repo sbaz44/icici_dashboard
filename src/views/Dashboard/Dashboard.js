@@ -453,7 +453,32 @@ export default function Dashboard() {
                             textAlign: "left",
                           }}
                         >
-                          {row.Type}
+                          {/* {row.Type} */}
+                          {(() => {
+                            if (row.Type == "Tampering alert") {
+                              return "Camera tampering alert"
+                            }
+                            else if (row.Type == "Mask alert") {
+                              return "No mask alert"
+                            }
+                            else if (row.Type == "Exceeded alert") {
+                              return "Person exceeded alert"
+                            }
+                            else if (row.Type == "Defective alert") {
+                              return "Defective camera alert"
+                            }
+                            else if (row.Type == "Shutter alert") {
+                              return "No mask alert"
+                            }
+                            else if (row.Type == "Mask alert") {
+                              return "Shutter related alert"
+                            }
+                            else {
+                              return row.Type
+                            }
+                          })()}
+
+
                         </TableCell>
                         <TableCell
                           className={classes.tableCell}
@@ -605,7 +630,37 @@ export default function Dashboard() {
                               textAlign: "left",
                             }}
                           >
-                            {row.Type}
+
+                            {(() => {
+                              if (row.Type == "People alert") {
+                                return "People count alert"
+                              }
+                              else if (row.Type == "Unattended alert") {
+                                return "Unattended objects alert"
+                              }
+                              else if (row.Type == "Thermal alert") {
+                                return "High temperature alert"
+                              }
+                              else if (row.Type == "Queue alert") {
+                                return "Queue related alert"
+                              }
+                              else if (row.Type == "Social alert") {
+                                return "Social distancing alert"
+                              }
+                              else if (row.Type == "Vault alert") {
+                                return "Vault related alert"
+                              }
+                              else {
+                                return row.Type
+                              }
+                            })()}
+
+                            {/* {row.Type == "People alert" ? "People count alert" : row.Type}
+                            {row.Type == "Unattended alert" ? "Unattended objects alert" : row.Type}
+                            {row.Type == "Thermal alert" ? "High temperature alert" : row.Type}
+                            {row.Type == "Queue alert" ? "Queue related alert" : row.Type}
+                            {row.Type == "Social alert" ? "Social distancing alert" : row.Type}
+                            {row.Type == "Vault alert" ? "Vault related alert" : row.Type} */}
                           </TableCell>
                           <TableCell
                             className={classes.tableCell}
@@ -719,7 +774,30 @@ export default function Dashboard() {
                               textAlign: "left",
                             }}
                           >
-                            {row.Type}
+                            {/* {row.Type} */}
+                            {/* {row.Type == "Vault alert" ? "Vault related alert" : row.Type}
+                            {row.Type == "UPS alert" ? "UPS related alert" : row.Type}
+                            {row.Type == "Unattended alert" ? "Unattended objects alert" : row.Type}
+                            {row.Type == "People alert" ? "People count alert" : row.Type} */}
+
+                            {(() => {
+                              if (row.Type == "People alert") {
+                                return "People count alert"
+                              }
+                              else if (row.Type == "Unattended alert") {
+                                return "Unattended objects alert"
+                              }
+                              else if (row.Type == "UPS alert") {
+                                return "UPS related alert"
+                              }
+                              else if (row.Type == "Vault alert") {
+                                return "Vault related alert"
+                              }
+                              else {
+                                return row.Type
+                              }
+                            })()}
+
                           </TableCell>
                           <TableCell
                             className={classes.tableCell}
@@ -831,7 +909,7 @@ export default function Dashboard() {
                               textAlign: "left",
                             }}
                           >
-                            {row.Type}
+                            High temperature alert
                           </TableCell>
                           <TableCell
                             className={classes.tableCell}
@@ -872,7 +950,25 @@ export default function Dashboard() {
                               textAlign: "left",
                             }}
                           >
-                            {row.Type}
+                            {/* {row.Type} */}
+                            {/* {row.Type == "Social alert" ? "Social distancing alert" : row.Type}
+                            {row.Type == "Person alert" ? "Person exceeded alert" : row.Type}
+                            {row.Type == "Mask alert" ? "No mask alert" : row.Type} */}
+                            {(() => {
+                              if (row.Type == "Social aler") {
+                                return "Social distancing alert"
+                              }
+                              else if (row.Type == "Person alert") {
+                                return "Person exceeded alert"
+                              }
+                              else if (row.Type == "Mask alert") {
+                                return "No mask alert"
+                              }
+
+                              else {
+                                return row.Type
+                              }
+                            })()}
                           </TableCell>
                           <TableCell
                             className={classes.tableCell}
