@@ -626,7 +626,7 @@ export default function Type1_1(props) {
                 }
               > */}
               <a
-                href="http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032"
+                href="http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f9fc190afc8700011a17f9c"
                 target="_blank"
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
@@ -989,7 +989,7 @@ export default function Type1_1(props) {
                 }
               > */}
               <a
-                href="http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f927d96afe0780011024d2a&r=29032"
+                href="http://10.11.0.4:8118/tickets/filter/?f=1&fs=Temperature&gp=5f9fc190afc8700011a17f9c"
                 target="_blank"
               >
                 <div className={classes.stats} style={{ color: "#43a047" }}>
