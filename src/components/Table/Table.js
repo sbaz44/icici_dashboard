@@ -11,7 +11,9 @@ import TableCell from "@material-ui/core/TableCell";
 import styles from "assets/jss/material-dashboard-react/components/tableStyle.js";
 import { NavLink } from "react-router-dom";
 import Dialog from "@material-ui/core/Dialog";
-
+import red from "../../assets/img/red.png";
+import green from "../../assets/img/green.png";
+import gray from "../../assets/img/gray.png";
 const useStyles = makeStyles(styles);
 
 export default function CustomTable(props) {
@@ -61,28 +63,13 @@ export default function CustomTable(props) {
                 }}
               >
                 {row.Status === 0 && (
-                  <span
-                    class="iconify"
-                    data-icon="teenyicons:tick-circle-outline"
-                    data-inline="false"
-                    style={{ color: "red" }}
-                  ></span>
+                  <img src={red} style={{ width: "15px" }} />
                 )}
                 {row.Status === 1 && (
-                  <span
-                    class="iconify"
-                    data-icon="teenyicons:tick-circle-outline"
-                    data-inline="false"
-                    style={{ color: "green" }}
-                  ></span>
+                  <img src={green} style={{ width: "15px" }} />
                 )}
                 {row.Status === 2 && (
-                  <span
-                    class="iconify"
-                    data-icon="teenyicons:tick-circle-outline"
-                    data-inline="false"
-                    style={{ color: "gray" }}
-                  ></span>
+                  <img src={gray} style={{ width: "15px" }} />
                 )}
               </TableCell>
               <TableCell
