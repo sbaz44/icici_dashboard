@@ -269,6 +269,7 @@ export default function ViewBranch(props) {
                     setOpen(true);
                   }
                 }}
+                style={{ cursor: "pointer" }}
               >
                 <p
                   className={classes.cardCategory}
@@ -291,6 +292,7 @@ export default function ViewBranch(props) {
                     setOpen(true);
                   }
                 }}
+                style={{ cursor: "pointer" }}
               >
                 <p
                   className={classes.cardCategory}
@@ -313,6 +315,7 @@ export default function ViewBranch(props) {
                     setOpen(true);
                   }
                 }}
+                style={{ cursor: "pointer" }}
               >
                 <p
                   className={classes.cardCategory}
@@ -335,6 +338,7 @@ export default function ViewBranch(props) {
                     setOpen(true);
                   }
                 }}
+                style={{ cursor: "pointer" }}
               >
                 <p
                   className={classes.cardCategory}
