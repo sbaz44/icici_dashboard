@@ -17,7 +17,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
+import TextField from "@material-ui/core/TextField";
 let currentPage = 1;
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -33,6 +33,7 @@ export default function ViewDetails(props) {
   const classes = useStyles();
 
   const [typee, setType] = React.useState("");
+  const [search, setSearch] = React.useState("null");
 
   const handleChange = (event) => {
     setType(event.target.value);
@@ -57,7 +58,7 @@ export default function ViewDetails(props) {
         viewDetail(
           props.match.params.branch,
           props.match.params.type,
-          props.match.params.subtype,
+          search,
           props.match.params.date,
           "",
           currentPage
@@ -70,7 +71,7 @@ export default function ViewDetails(props) {
         viewDetail(
           props.match.params.branch,
           props.match.params.type,
-          props.match.params.subtype,
+          search,
           props.match.params.date,
           "",
           currentPage
@@ -84,23 +85,57 @@ export default function ViewDetails(props) {
     Internal_compliance: "Internal Compliance Alerts",
     Covid_safety: "Covid Safety Alerts",
   };
+  const handleChangee = (event) => {
+    setSearch(event.target.value);
+    if (search.length == 0) {
+      setSearch("null");
+    }
+  };
+
+  const postSearch = () => {
+    currentPage = 1;
+    if (search.length === 0) {
+      setSearch("null");
+      dispatch(
+        viewDetail(
+          props.match.params.branch,
+          props.match.params.type,
+          props.match.params.subtype,
+          props.match.params.date,
+          "",
+          1
+        )
+      );
+    } else {
+      dispatch(
+        viewDetail(
+          props.match.params.branch,
+          props.match.params.type,
+          search,
+          props.match.params.date,
+          "",
+          1
+        )
+      );
+    }
+  };
   useEffect(() => {
     $("#root").find("header").hide();
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
     currentPage = 1;
     setType(props.match.params.type);
-    // if (props.match.params.subtype == "null") {
+    // if (search == "null") {
     //   alert('insidne')
     //   dispatch(getbranchDetails(props.match.params.date));
     // }
-    // else if (props.match.params.subtype != "null") {
+    // else if (search != "null") {
 
     dispatch(
       viewDetail(
         props.match.params.branch,
         props.match.params.type,
-        props.match.params.subtype,
+        search,
         props.match.params.date,
         "",
         currentPage
@@ -136,7 +171,24 @@ export default function ViewDetails(props) {
             {props.match.params.branch} Branch
           </p>
         </div>
-        <FormControl className={classes.formControl}>
+        {props.match.params.type == "null" && (
+          <TextField
+            label="Search"
+            onChange={handleChangee}
+            onKeyPress={(event) => {
+              if (event.key === "Enter") {
+                postSearch();
+                // this.fetchAPI(
+                //   this.props.role,
+                //   this.state.username,
+                //   this.state.password
+                // );
+              }
+            }}
+          />
+        )}
+
+        {/* <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label">Select Type</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -151,7 +203,7 @@ export default function ViewDetails(props) {
             </MenuItem>
             <MenuItem value={"Covid_safety"}>Covid Safety</MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
       </div>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
