@@ -310,8 +310,8 @@ export default function ViewBranch(props) {
             <GridItem xs={12} sm={6} md={3}>
               <Card
                 onClick={() => {
-                  if (localData.open_vault_image != null) {
-                    setImage(localData.open_vault_image);
+                  if (data.Vault_door_open_image != null) {
+                    setImage(data.Vault_door_open_image);
                     setOpen(true);
                   }
                 }}
@@ -333,8 +333,8 @@ export default function ViewBranch(props) {
             <GridItem xs={12} sm={6} md={3}>
               <Card
                 onClick={() => {
-                  if (localData.close_vault_image != null) {
-                    setImage(localData.close_vault_image);
+                  if (data.Vault_door_close_image != null) {
+                    setImage(data.Vault_door_close_image);
                     setOpen(true);
                   }
                 }}

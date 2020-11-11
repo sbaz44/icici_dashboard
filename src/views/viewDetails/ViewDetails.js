@@ -220,6 +220,7 @@ export default function ViewDetails(props) {
                 tableHead={[
                   "Type",
                   "Message",
+                  "Category",
                   "Date",
                   "Time",
                   "Camera ID",

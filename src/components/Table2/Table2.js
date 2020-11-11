@@ -51,7 +51,7 @@ export default function CustomTable(props) {
                     className={classes.tableCell + " " + classes.tableHeadCell}
                     key={key}
                     align="center"
-                    style={{ fontWeight: "bold", fontSize: "0.93vw" }}
+                    style={{ fontWeight: "bold", fontSize: "1.03em" }}
                   >
                     {prop}
                   </TableCell>
@@ -72,7 +72,7 @@ export default function CustomTable(props) {
                       style={{
                         fontWeight: "bold",
                         color: "#3C4858",
-                        fontSize: "0.8vw",
+                        fontSize: "0.9em",
                       }}
                     >
                       {row.Type}
@@ -83,10 +83,21 @@ export default function CustomTable(props) {
                       style={{
                         fontWeight: "bold",
                         color: "#3C4858",
-                        fontSize: "0.8vw",
+                        fontSize: "0.9em",
                       }}
                     >
                       {row.Message}
+                    </TableCell>
+                    <TableCell
+                      className={classes.tableCell}
+                      align="center"
+                      style={{
+                        fontWeight: "bold",
+                        color: "#3C4858",
+                        fontSize: "0.9em",
+                      }}
+                    >
+                      {row.Group}
                     </TableCell>
 
                     <TableCell
@@ -95,7 +106,7 @@ export default function CustomTable(props) {
                       style={{
                         fontWeight: "bold",
                         color: "#3C4858",
-                        fontSize: "0.8vw",
+                        fontSize: "0.9em",
                       }}
                     >
                       {row.Created.substring(0, 10)}
@@ -106,7 +117,7 @@ export default function CustomTable(props) {
                       style={{
                         fontWeight: "bold",
                         color: "#3C4858",
-                        fontSize: "0.8vw",
+                        fontSize: "0.9em",
                       }}
                     >
                       {row.Created.substring(11, 19)}
@@ -117,7 +128,7 @@ export default function CustomTable(props) {
                       style={{
                         fontWeight: "bold",
                         color: "#3C4858",
-                        fontSize: "0.8vw",
+                        fontSize: "0.9em",
                       }}
                     >
                       {row.Camera_id}
@@ -128,7 +139,7 @@ export default function CustomTable(props) {
                       style={{
                         fontWeight: "bold",
                         color: "#3C4858",
-                        fontSize: "0.8vw",
+                        fontSize: "0.9em",
                       }}
                       onClick={() => handleClickOpen(row.Image)}
                     >

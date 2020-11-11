@@ -167,6 +167,7 @@ export default function Type1_3(props) {
         style={{
           display: "flex",
           justifyContent: "space-between",
+          flexWrap: "wrap",
           alignItems: "center",
           width: "100%",
           marginBottom: "2vw",
@@ -175,11 +176,11 @@ export default function Type1_3(props) {
         <div style={{ display: "flex", alignItems: "center" }}>
           <img
             src={smart}
-            style={{ width: "2.8vw", height: "2.8vw", objectFit: "contain" }}
+            style={{ width: "50px", height: "50px", objectFit: "contain" }}
           />
           <p
             style={{
-              fontSize: "1.5vw",
+              fontSize: "1.3em",
               marginLeft: "0.5vw",
               fontWeight: "bold",
               paddingTop: "0.5vw",
@@ -257,6 +258,7 @@ export default function Type1_3(props) {
                 tableHead={[
                   "Type",
                   "Message",
+                  "Category",
                   "Date",
                   "Time",
                   "Camera ID",
