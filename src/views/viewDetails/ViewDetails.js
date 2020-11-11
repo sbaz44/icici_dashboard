@@ -125,7 +125,10 @@ export default function ViewDetails(props) {
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
     currentPage = 1;
     setType(props.match.params.type);
-    if (props.match.params.type == "null") {
+    if (
+      props.match.params.type == "null" &&
+      props.match.params.subtype == "null"
+    ) {
       dispatch(
         viewDetail(
           props.match.params.branch,
