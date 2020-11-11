@@ -125,22 +125,42 @@ export default function ViewDetails(props) {
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
     currentPage = 1;
     setType(props.match.params.type);
-    // if (search == "null") {
-    //   alert('insidne')
-    //   dispatch(getbranchDetails(props.match.params.date));
-    // }
+    if (props.match.params.type == "null") {
+      dispatch(
+        viewDetail(
+          props.match.params.branch,
+          props.match.params.type,
+          search,
+          props.match.params.date,
+          "",
+          currentPage
+        )
+      );
+    } else {
+      setSearch(props.match.params.subtype);
+      dispatch(
+        viewDetail(
+          props.match.params.branch,
+          props.match.params.type,
+          props.match.params.subtype,
+          props.match.params.date,
+          "",
+          1
+        )
+      );
+    }
     // else if (search != "null") {
 
-    dispatch(
-      viewDetail(
-        props.match.params.branch,
-        props.match.params.type,
-        search,
-        props.match.params.date,
-        "",
-        currentPage
-      )
-    );
+    // dispatch(
+    //   viewDetail(
+    //     props.match.params.branch,
+    //     props.match.params.type,
+    //     search,
+    //     props.match.params.date,
+    //     "",
+    //     currentPage
+    //   )
+    // );
     // }
   }, []);
 
