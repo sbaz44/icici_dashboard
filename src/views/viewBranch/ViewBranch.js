@@ -275,12 +275,26 @@ export default function ViewBranch(props) {
                   className={classes.cardCategory}
                   style={{
                     fontWeight: "bold",
-                    color: "#3C4858",
+                    color: "#9C27B0",
                     paddingTop: "2px",
                     textAlign: "center",
+                    textDecoration: "underline",
                   }}
                 >
                   Branch Open Time: {localData.open}
+                </p>
+                <div style={{ height: "5px" }} />
+                <p
+                  className={classes.cardCategory}
+                  style={{
+                    fontWeight: "bold",
+                    color: "#9C27B0",
+                    paddingTop: "2px",
+                    textAlign: "center",
+                    textDecoration: "underline",
+                  }}
+                >
+                  Person Count: {data.Open_time_people_count}
                 </p>
               </Card>
             </GridItem>
@@ -298,12 +312,26 @@ export default function ViewBranch(props) {
                   className={classes.cardCategory}
                   style={{
                     fontWeight: "bold",
-                    color: "#3C4858",
+                    color: "#9C27B0",
                     paddingTop: "2px",
                     textAlign: "center",
+                    textDecoration: "underline",
                   }}
                 >
                   Branch Close Time: {localData.close}
+                </p>
+                <div style={{ height: "5px" }} />
+                <p
+                  className={classes.cardCategory}
+                  style={{
+                    fontWeight: "bold",
+                    color: "#9C27B0",
+                    paddingTop: "2px",
+                    textAlign: "center",
+                    textDecoration: "underline",
+                  }}
+                >
+                  Person Count: {data.Close_time_people_count}
                 </p>
               </Card>
             </GridItem>
@@ -321,12 +349,26 @@ export default function ViewBranch(props) {
                   className={classes.cardCategory}
                   style={{
                     fontWeight: "bold",
-                    color: "#3C4858",
+                    color: "#9C27B0",
                     paddingTop: "2px",
                     textAlign: "center",
+                    textDecoration: "underline",
                   }}
                 >
                   Vault Door Open Time: {data.Vault_door_open_time}
+                </p>
+                <div style={{ height: "5px" }} />
+                <p
+                  className={classes.cardCategory}
+                  style={{
+                    fontWeight: "bold",
+                    color: "#9C27B0",
+                    paddingTop: "2px",
+                    textAlign: "center",
+                    textDecoration: "underline",
+                  }}
+                >
+                  Person Count: {data.Vault_door_open_people_count}
                 </p>
               </Card>
             </GridItem>
@@ -344,12 +386,26 @@ export default function ViewBranch(props) {
                   className={classes.cardCategory}
                   style={{
                     fontWeight: "bold",
-                    color: "#3C4858",
+                    color: "#9C27B0",
                     paddingTop: "2px",
                     textAlign: "center",
+                    textDecoration: "underline",
                   }}
                 >
                   Vault Door Close Time: {data.Vault_door_close_time}
+                </p>
+                <div style={{ height: "5px" }} />
+                <p
+                  className={classes.cardCategory}
+                  style={{
+                    fontWeight: "bold",
+                    color: "#9C27B0",
+                    paddingTop: "2px",
+                    textAlign: "center",
+                    textDecoration: "underline",
+                  }}
+                >
+                  Person Count: {data.Vault_door_close_people_count}
                 </p>
               </Card>
             </GridItem>

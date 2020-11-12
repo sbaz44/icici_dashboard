@@ -32,19 +32,21 @@ const useStyles = makeStyles((theme) => ({
 export default function ViewDetails(props) {
   const classes = useStyles();
 
-  const [typee, setType] = React.useState("");
+  const [category, setCategory] = React.useState("null");
   const [search, setSearch] = React.useState("null");
 
   const handleChange = (event) => {
-    setType(event.target.value);
+    currentPage = 1;
+    setCategory(event.target.value);
     dispatch(
       viewDetail(
         props.match.params.branch,
-        event.target.value,
+        props.match.params.type,
         props.match.params.subtype,
         props.match.params.date,
         "",
-        currentPage
+        1,
+        event.target.value
       )
     );
   };
@@ -61,7 +63,8 @@ export default function ViewDetails(props) {
           search,
           props.match.params.date,
           "",
-          currentPage
+          currentPage,
+          category
         )
       );
     } else if (name === "decrement") {
@@ -74,7 +77,8 @@ export default function ViewDetails(props) {
           search,
           props.match.params.date,
           "",
-          currentPage
+          currentPage,
+          category
         )
       );
     }
@@ -103,7 +107,8 @@ export default function ViewDetails(props) {
           props.match.params.subtype,
           props.match.params.date,
           "",
-          1
+          1,
+          category
         )
       );
     } else {
@@ -114,7 +119,8 @@ export default function ViewDetails(props) {
           search,
           props.match.params.date,
           "",
-          1
+          1,
+          category
         )
       );
     }
@@ -124,7 +130,6 @@ export default function ViewDetails(props) {
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
     currentPage = 1;
-    setType(props.match.params.type);
     if (
       props.match.params.type == "null" &&
       props.match.params.subtype == "null"
@@ -136,7 +141,8 @@ export default function ViewDetails(props) {
           search,
           props.match.params.date,
           "",
-          currentPage
+          currentPage,
+          category
         )
       );
     } else {
@@ -148,7 +154,8 @@ export default function ViewDetails(props) {
           props.match.params.subtype,
           props.match.params.date,
           "",
-          1
+          1,
+          category
         )
       );
     }
@@ -201,39 +208,37 @@ export default function ViewDetails(props) {
             onKeyPress={(event) => {
               if (event.key === "Enter") {
                 postSearch();
-                // this.fetchAPI(
-                //   this.props.role,
-                //   this.state.username,
-                //   this.state.password
-                // );
               }
             }}
           />
         )}
 
-        {/* <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Select Type</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={typee}
-            onChange={handleChange}
-          >
-            <MenuItem value={"External_threats"}>External Threats</MenuItem>
-            <MenuItem value={"Business_insights"}>Business Insights</MenuItem>
-            <MenuItem value={"Internal_compliance"}>
-              Internal Compliance
-            </MenuItem>
-            <MenuItem value={"Covid_safety"}>Covid Safety</MenuItem>
-          </Select>
-        </FormControl> */}
+        {props.match.params.type == "null" && (
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">
+              Select Category
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={category}
+              onChange={handleChange}
+            >
+              <MenuItem value={"null"}>None</MenuItem>
+              <MenuItem value={"Trending"}>Trending</MenuItem>
+              <MenuItem value={"Alert"}>Alert</MenuItem>
+            </Select>
+          </FormControl>
+        )}
       </div>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>
-                {props.match.params.type != "null" ? threats[typee] : "Alerts"}
+                {props.match.params.type != "null"
+                  ? threats[category]
+                  : "Alerts"}
               </h4>
               {/* <p className={classes.cardCategoryWhite}>List of all branches</p> */}
             </CardHeader>

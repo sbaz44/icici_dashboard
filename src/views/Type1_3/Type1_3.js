@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Type1_3(props) {
   const classes = useStyles();
 
-  const [typee, setType] = React.useState("");
+  const [category, setCategory] = React.useState("null");
 
   const viewBranchDetail = useSelector((state) => state.viewBranchDetail);
 
@@ -49,15 +49,17 @@ export default function Type1_3(props) {
   const [selectedToDate, setToDate] = React.useState(new Date());
   const [selectedFromDate, setFromDate] = React.useState(new Date());
   const handleChange = (event) => {
-    setType(event.target.value);
+    currentPage = 1;
+    setCategory(event.target.value);
     dispatch(
       viewDetail(
         props.match.params.branch,
-        event.target.value,
+        props.match.params.subtype,
         props.match.params.type,
-        result2,
         result,
-        currentPage
+        result2,
+        1,
+        event.target.value
       )
     );
   };
@@ -75,7 +77,8 @@ export default function Type1_3(props) {
         props.match.params.type,
         result,
         props.match.params.date2,
-        currentPage
+        currentPage,
+        ""
       )
     );
   };
@@ -94,7 +97,8 @@ export default function Type1_3(props) {
         props.match.params.type,
         props.match.params.date,
         result2,
-        currentPage
+        currentPage,
+        ""
       )
     );
   };
@@ -109,7 +113,8 @@ export default function Type1_3(props) {
           props.match.params.type,
           result,
           result2,
-          currentPage
+          currentPage,
+          ""
         )
       );
     } else if (name === "decrement") {
@@ -122,7 +127,8 @@ export default function Type1_3(props) {
           props.match.params.type,
           result,
           result2,
-          currentPage
+          currentPage,
+          ""
         )
       );
     }
@@ -138,7 +144,7 @@ export default function Type1_3(props) {
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
     currentPage = 1;
-    setType(props.match.params.subtype);
+    // setType(props.match.params.subtype);
 
     var datee = props.match.params.date;
     var datee2 = props.match.params.date2;
@@ -156,7 +162,8 @@ export default function Type1_3(props) {
         props.match.params.type,
         props.match.params.date,
         props.match.params.date2,
-        currentPage
+        currentPage,
+        ""
       )
     );
   }, []);
@@ -190,19 +197,16 @@ export default function Type1_3(props) {
           </p>
         </div>
         <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Select Type</InputLabel>
+          <InputLabel id="demo-simple-select-label">Select Category</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={typee}
+            value={category}
             onChange={handleChange}
           >
-            <MenuItem value={"External_threats"}>External Threats</MenuItem>
-            <MenuItem value={"Business_insights"}>Business Insights</MenuItem>
-            <MenuItem value={"Internal_compliance"}>
-              Internal Compliance
-            </MenuItem>
-            <MenuItem value={"Covid_safety"}>Covid Safety</MenuItem>
+            <MenuItem value={"null"}>None</MenuItem>
+            <MenuItem value={"Trending"}>Trending</MenuItem>
+            <MenuItem value={"Alert"}>Alert</MenuItem>
           </Select>
         </FormControl>
         <div>

@@ -172,9 +172,10 @@ export default function Dashboard() {
 
     console.log(sortable);
   }, []);
-  const Maharashtra = ["Mumbai", "Nagpur", "Pune"];
+  const Maharashtra = ["Mumbai", "Nagpur", "Pune", "dummy"];
   const Haryana = ["Padla"];
   const Delhi = ["Dwarka", "Najafgarh", "TagoreGarden"];
+  const MadhyaPradesha = ["Manawar"];
   return (
     <div id="dashboard-page">
       {console.log(selectedToDate)}
@@ -215,6 +216,7 @@ export default function Dashboard() {
             <MenuItem value={"Delhi"}>Delhi</MenuItem>
             <MenuItem value={"Maharashtra"}>Maharashtra</MenuItem>
             <MenuItem value={"Haryana"}>Haryana</MenuItem>
+            <MenuItem value={"Madhya Pradesha"}>Madhya Pradesha</MenuItem>
           </Select>
         </FormControl>
         <FormControl className={classes2.formControl}>
@@ -236,6 +238,10 @@ export default function Dashboard() {
               })}
             {selectedState === "Haryana" &&
               Haryana.map((item, index) => {
+                return <MenuItem value={item}>{item}</MenuItem>;
+              })}
+            {selectedState === "Madhya Pradesha" &&
+              MadhyaPradesha.map((item, index) => {
                 return <MenuItem value={item}>{item}</MenuItem>;
               })}
           </Select>
@@ -418,21 +424,21 @@ export default function Dashboard() {
                 href={
                   selectedCity == "" || selectedState == ""
                     ? "/admin/threats/External_threats/" +
-                    null +
-                    "/" +
-                    null +
-                    "/" +
-                    result +
-                    "/" +
-                    result2
+                      null +
+                      "/" +
+                      null +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
                     : "/admin/threats/External_threats/" +
-                    selectedState +
-                    "/" +
-                    selectedCity +
-                    "/" +
-                    result +
-                    "/" +
-                    result2
+                      selectedState +
+                      "/" +
+                      selectedCity +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
                 }
               >
                 <div
@@ -462,29 +468,21 @@ export default function Dashboard() {
                           {/* {row.Type} */}
                           {(() => {
                             if (row.Type == "Tampering alert") {
-                              return "Camera tampering alert"
-                            }
-                            else if (row.Type == "Mask alert") {
-                              return "No mask alert"
-                            }
-                            else if (row.Type == "Exceeded alert") {
-                              return "Person exceeded alert"
-                            }
-                            else if (row.Type == "Defective alert") {
-                              return "Defective camera alert"
-                            }
-                            else if (row.Type == "Mask alert") {
-                              return "No mask alert"
-                            }
-                            else if (row.Type == "Shutter alert") {
-                              return "Shutter related alert"
-                            }
-                            else {
-                              return row.Type
+                              return "Camera tampering alert";
+                            } else if (row.Type == "Mask alert") {
+                              return "No mask alert";
+                            } else if (row.Type == "Exceeded alert") {
+                              return "Person exceeded alert";
+                            } else if (row.Type == "Defective alert") {
+                              return "Defective camera alert";
+                            } else if (row.Type == "Mask alert") {
+                              return "No mask alert";
+                            } else if (row.Type == "Shutter alert") {
+                              return "Shutter related alert";
+                            } else {
+                              return row.Type;
                             }
                           })()}
-
-
                         </TableCell>
                         <TableCell
                           className={classes.tableCell}
@@ -570,21 +568,21 @@ export default function Dashboard() {
                 href={
                   selectedCity == "" || selectedState == ""
                     ? "/admin/threats/Business_insights/" +
-                    null +
-                    "/" +
-                    null +
-                    "/" +
-                    result +
-                    "/" +
-                    result2
+                      null +
+                      "/" +
+                      null +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
                     : "/admin/threats/Business_insights/" +
-                    selectedState +
-                    "/" +
-                    selectedCity +
-                    "/" +
-                    result +
-                    "/" +
-                    result2
+                      selectedState +
+                      "/" +
+                      selectedCity +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
                 }
               >
                 <div
@@ -655,95 +653,92 @@ export default function Dashboard() {
                             </TableCell>
                           </TableRow>
                         );
-                      }
-                      else {
-                        return <TableRow key={row.age} className={classes.tableBodyRow}>
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "left",
-                            }}
+                      } else {
+                        return (
+                          <TableRow
+                            key={row.age}
+                            className={classes.tableBodyRow}
                           >
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
+                            >
+                              {(() => {
+                                if (row.Type == "People alert") {
+                                  return "People count alert";
+                                } else if (row.Type == "Unattended alert") {
+                                  return "Unattended objects alert";
+                                } else if (row.Type == "Thermal alert") {
+                                  return "High temperature alert";
+                                } else if (row.Type == "Queue alert") {
+                                  return "Queue related alert";
+                                } else if (row.Type == "Social alert") {
+                                  return "Social distancing alert";
+                                } else if (row.Type == "Vault alert") {
+                                  return "Vault related alert";
+                                } else {
+                                  return row.Type;
+                                }
+                              })()}
 
-                            {(() => {
-                              if (row.Type == "People alert") {
-                                return "People count alert"
-                              }
-                              else if (row.Type == "Unattended alert") {
-                                return "Unattended objects alert"
-                              }
-                              else if (row.Type == "Thermal alert") {
-                                return "High temperature alert"
-                              }
-                              else if (row.Type == "Queue alert") {
-                                return "Queue related alert"
-                              }
-                              else if (row.Type == "Social alert") {
-                                return "Social distancing alert"
-                              }
-                              else if (row.Type == "Vault alert") {
-                                return "Vault related alert"
-                              }
-                              else {
-                                return row.Type
-                              }
-                            })()}
-
-                            {/* {row.Type == "People alert" ? "People count alert" : row.Type}
+                              {/* {row.Type == "People alert" ? "People count alert" : row.Type}
                             {row.Type == "Unattended alert" ? "Unattended objects alert" : row.Type}
                             {row.Type == "Thermal alert" ? "High temperature alert" : row.Type}
                             {row.Type == "Queue alert" ? "Queue related alert" : row.Type}
                             {row.Type == "Social alert" ? "Social distancing alert" : row.Type}
                             {row.Type == "Vault alert" ? "Vault related alert" : row.Type} */}
-                          </TableCell>
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "left",
-                            }}
-                          >
-                            {row.Count}
-                          </TableCell>
-
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "right",
-                            }}
-                          >
-                            <a
-                              href={
-                                "/admin/detail/threats/All/" +
-                                row.Type.replace("alert", "").replace(
-                                  /\s+/,
-                                  ""
-                                ) +
-                                "/Business_insights/" +
-                                selectedState +
-                                "/" +
-                                selectedCity +
-                                "/" +
-                                result +
-                                "/" +
-                                result2
-                              }
+                            </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
                             >
-                              View
+                              {row.Count}
+                            </TableCell>
+
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "right",
+                              }}
+                            >
+                              <a
+                                href={
+                                  "/admin/detail/threats/All/" +
+                                  row.Type.replace("alert", "").replace(
+                                    /\s+/,
+                                    ""
+                                  ) +
+                                  "/Business_insights/" +
+                                  selectedState +
+                                  "/" +
+                                  selectedCity +
+                                  "/" +
+                                  result +
+                                  "/" +
+                                  result2
+                                }
+                              >
+                                View
                               </a>
-                          </TableCell>
-                        </TableRow>
+                            </TableCell>
+                          </TableRow>
+                        );
                       }
                     })}
                   </TableBody>
@@ -787,21 +782,21 @@ export default function Dashboard() {
                 href={
                   selectedCity == "" || selectedState == ""
                     ? "/admin/threats/Internal_compliance/" +
-                    null +
-                    "/" +
-                    null +
-                    "/" +
-                    result +
-                    "/" +
-                    result2
+                      null +
+                      "/" +
+                      null +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
                     : "/admin/threats/Internal_compliance/" +
-                    selectedState +
-                    "/" +
-                    selectedCity +
-                    "/" +
-                    result +
-                    "/" +
-                    result2
+                      selectedState +
+                      "/" +
+                      selectedCity +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
                 }
               >
                 <div
@@ -840,22 +835,17 @@ export default function Dashboard() {
 
                             {(() => {
                               if (row.Type == "People alert") {
-                                return "People count alert"
-                              }
-                              else if (row.Type == "Unattended alert") {
-                                return "Unattended objects alert"
-                              }
-                              else if (row.Type == "UPS alert") {
-                                return "UPS related alert"
-                              }
-                              else if (row.Type == "Vault alert") {
-                                return "Vault related alert"
-                              }
-                              else {
-                                return row.Type
+                                return "People count alert";
+                              } else if (row.Type == "Unattended alert") {
+                                return "Unattended objects alert";
+                              } else if (row.Type == "UPS alert") {
+                                return "UPS related alert";
+                              } else if (row.Type == "Vault alert") {
+                                return "Vault related alert";
+                              } else {
+                                return row.Type;
                               }
                             })()}
-
                           </TableCell>
                           <TableCell
                             className={classes.tableCell}
@@ -945,21 +935,21 @@ export default function Dashboard() {
                 href={
                   selectedCity == "" || selectedState == ""
                     ? "/admin/threats/Covid_safety/" +
-                    null +
-                    "/" +
-                    null +
-                    "/" +
-                    result +
-                    "/" +
-                    result2
+                      null +
+                      "/" +
+                      null +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
                     : "/admin/threats/Covid_safety/" +
-                    selectedState +
-                    "/" +
-                    selectedCity +
-                    "/" +
-                    result +
-                    "/" +
-                    result2
+                      selectedState +
+                      "/" +
+                      selectedCity +
+                      "/" +
+                      result +
+                      "/" +
+                      result2
                 }
               >
                 <div
@@ -992,7 +982,7 @@ export default function Dashboard() {
                               }}
                             >
                               High temperature alert
-                          </TableCell>
+                            </TableCell>
                             <TableCell
                               className={classes.tableCell}
                               align="center"
@@ -1030,83 +1020,83 @@ export default function Dashboard() {
                             </TableCell>
                           </TableRow>
                         );
-                      }
-                      else {
-                        return <TableRow key={row.age} className={classes.tableBodyRow}>
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "left",
-                            }}
+                      } else {
+                        return (
+                          <TableRow
+                            key={row.age}
+                            className={classes.tableBodyRow}
                           >
-                            {/* {row.Type} */}
-                            {/* {row.Type == "Social alert" ? "Social distancing alert" : row.Type}
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
+                            >
+                              {/* {row.Type} */}
+                              {/* {row.Type == "Social alert" ? "Social distancing alert" : row.Type}
                             {row.Type == "Person alert" ? "Person exceeded alert" : row.Type}
                             {row.Type == "Mask alert" ? "No mask alert" : row.Type} */}
-                            {(() => {
-                              if (row.Type == "Social aler") {
-                                return "Social distancing alert"
-                              }
-                              else if (row.Type == "Person alert") {
-                                return "Person exceeded alert"
-                              }
-                              else if (row.Type == "Mask alert") {
-                                return "No mask alert"
-                              }
-
-                              else {
-                                return row.Type
-                              }
-                            })()}
-                          </TableCell>
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "left",
-                            }}
-                          >
-                            {row.Count}
-                          </TableCell>
-
-                          <TableCell
-                            className={classes.tableCell}
-                            align="center"
-                            style={{
-                              fontWeight: "bold",
-                              color: "#3C4858",
-                              fontSize: "0.8125rem",
-                              textAlign: "right",
-                            }}
-                          >
-                            <a
-                              href={
-                                "/admin/detail/threats/All/" +
-                                row.Type.replace("alert", "").replace(
-                                  /\s+/,
-                                  ""
-                                ) +
-                                "/Covid_safety/" +
-                                selectedState +
-                                "/" +
-                                selectedCity +
-                                "/" +
-                                result +
-                                "/" +
-                                result2
-                              }
+                              {(() => {
+                                if (row.Type == "Social aler") {
+                                  return "Social distancing alert";
+                                } else if (row.Type == "Person alert") {
+                                  return "Person exceeded alert";
+                                } else if (row.Type == "Mask alert") {
+                                  return "No mask alert";
+                                } else {
+                                  return row.Type;
+                                }
+                              })()}
+                            </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "left",
+                              }}
                             >
-                              View
+                              {row.Count}
+                            </TableCell>
+
+                            <TableCell
+                              className={classes.tableCell}
+                              align="center"
+                              style={{
+                                fontWeight: "bold",
+                                color: "#3C4858",
+                                fontSize: "0.8125rem",
+                                textAlign: "right",
+                              }}
+                            >
+                              <a
+                                href={
+                                  "/admin/detail/threats/All/" +
+                                  row.Type.replace("alert", "").replace(
+                                    /\s+/,
+                                    ""
+                                  ) +
+                                  "/Covid_safety/" +
+                                  selectedState +
+                                  "/" +
+                                  selectedCity +
+                                  "/" +
+                                  result +
+                                  "/" +
+                                  result2
+                                }
+                              >
+                                View
                               </a>
-                          </TableCell>
-                        </TableRow>
+                            </TableCell>
+                          </TableRow>
+                        );
                       }
                     })}
                   </TableBody>

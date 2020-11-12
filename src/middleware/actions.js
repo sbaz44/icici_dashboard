@@ -139,7 +139,7 @@ export function viewBranchDetail(payload, payload2) {
   };
 }
 
-export function viewDetail(branch, type, subtype, from, to, page_no) {
+export function viewDetail(branch, type, subtype, from, to, page_no, category) {
   return (dispatch) => {
     axios
       .get(
@@ -150,6 +150,8 @@ export function viewDetail(branch, type, subtype, from, to, page_no) {
           type +
           "&Subtype=" +
           subtype +
+          "&Cat=" +
+          category +
           "&From=" +
           from +
           "&To=" +

@@ -89,9 +89,11 @@ export default function TableList() {
     setselectedCity(event.target.value);
     dispatch(getbranchDetails(result, selectedState, event.target.value));
   };
-  const Maharashtra = ["Mumbai", "Nagpur", "Pune"];
+  const Maharashtra = ["Mumbai", "Nagpur", "Pune", "dummy"];
   const Haryana = ["Padla"];
   const Delhi = ["Dwarka", "Najafgarh", "TagoreGarden"];
+  const MadhyaPradesha = ["Manawar"];
+
   useEffect(() => {
     var date = new Date();
     result = format(date, "dd-MM-yyyy");
@@ -143,6 +145,7 @@ export default function TableList() {
                 <MenuItem value={"Delhi"}>Delhi</MenuItem>
                 <MenuItem value={"Maharashtra"}>Maharashtra</MenuItem>
                 <MenuItem value={"Haryana"}>Haryana</MenuItem>
+                <MenuItem value={"Madhya Pradesha"}>Madhya Pradesha</MenuItem>
               </Select>
             </FormControl>
             <FormControl className={classes2.formControl}>
@@ -164,6 +167,10 @@ export default function TableList() {
                   })}
                 {selectedState === "Haryana" &&
                   Haryana.map((item, index) => {
+                    return <MenuItem value={item}>{item}</MenuItem>;
+                  })}
+                {selectedState === "Madhya Pradesha" &&
+                  MadhyaPradesha.map((item, index) => {
                     return <MenuItem value={item}>{item}</MenuItem>;
                   })}
               </Select>
