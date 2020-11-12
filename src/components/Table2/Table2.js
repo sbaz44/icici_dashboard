@@ -98,6 +98,12 @@ export default function CustomTable(props) {
                             "Social Distancing not maintained in Vault"
                           ) {
                             return "Crowd detected in Vault";
+                          } else if (
+                            row.Message === "Social Distancing not maintained"
+                          ) {
+                            return "Crowd detected in Branch";
+                          } else {
+                            return row.Message;
                           }
                         } else {
                           return row.Message;
