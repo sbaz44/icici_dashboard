@@ -263,6 +263,7 @@ export default function Type1_3(props) {
                   "Type",
                   "Message",
                   "Category",
+                  "Branch",
                   "Date",
                   "Time",
                   "Camera ID",

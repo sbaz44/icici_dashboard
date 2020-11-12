@@ -86,7 +86,31 @@ export default function CustomTable(props) {
                         fontSize: "0.9em",
                       }}
                     >
-                      {row.Message}
+                      {(() => {
+                        if (row.Group === "Business insights") {
+                          if (
+                            row.Message ===
+                            "Social Distancing not maintained in Branch"
+                          ) {
+                            return "Crowd detected in Branch";
+                          } else if (
+                            row.Message ===
+                            "Social Distancing not maintained in Vault"
+                          ) {
+                            return "Crowd detected in Vault";
+                          }
+                        } else {
+                          return row.Message;
+                        }
+                      })()}
+                      {/* {row.Group === "Business insights"
+                        ? row.Message ===
+                          "Social Distancing not maintained in Branch"
+                          ? "Crowd detected in Branch"
+                          : row.Message
+                        : row.Message} */}
+                      {/* {row.Message === "Person exceeded in ATM" ?
+                        "Crowd detected in ATM"} */}
                     </TableCell>
                     <TableCell
                       className={classes.tableCell}
@@ -99,7 +123,17 @@ export default function CustomTable(props) {
                     >
                       {row.Group}
                     </TableCell>
-
+                    <TableCell
+                      className={classes.tableCell}
+                      align="center"
+                      style={{
+                        fontWeight: "bold",
+                        color: "#3C4858",
+                        fontSize: "0.9em",
+                      }}
+                    >
+                      {row.Branch}
+                    </TableCell>
                     <TableCell
                       className={classes.tableCell}
                       align="center"

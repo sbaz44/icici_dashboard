@@ -679,7 +679,7 @@ export default function Dashboard() {
                                 } else if (row.Type == "Queue alert") {
                                   return "Queue related alert";
                                 } else if (row.Type == "Social alert") {
-                                  return "Social distancing alert";
+                                  return "Crowd related alert";
                                 } else if (row.Type == "Vault alert") {
                                   return "Vault related alert";
                                 } else {
@@ -1041,7 +1041,7 @@ export default function Dashboard() {
                             {row.Type == "Person alert" ? "Person exceeded alert" : row.Type}
                             {row.Type == "Mask alert" ? "No mask alert" : row.Type} */}
                               {(() => {
-                                if (row.Type == "Social aler") {
+                                if (row.Type == "Social alert") {
                                   return "Social distancing alert";
                                 } else if (row.Type == "Person alert") {
                                   return "Person exceeded alert";

@@ -616,7 +616,7 @@ export default function Type1_1(props) {
                 className={classes.cardCategory}
                 style={{ fontWeight: "bold", color: "#3C4858" }}
               >
-                Social Distancing Alert
+                Crowd Detection Alert
               </p>
               <h3 className={classes.cardTitle}>{data.Social}</h3>
             </CardHeader>
