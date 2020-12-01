@@ -14,10 +14,10 @@ export const GET_THREAT_DETAIL = "GET_THREAT_DETAIL";
 export const POST_BRANCH_DETAILS = "POST_BRANCH_DETAILS";
 export const POST_BRANCH_REPORTS = "POST_BRANCH_REPORTS";
 
-// export const URL = "http://192.168.2.113:8000/dashboard";
+export const URL = "http://192.168.2.114:8000/dashboard";
 // export const URL = "http://13.127.202.106:8000/dashboard";
 
-export const URL = "http://10.11.0.4:8000/dashboard";
+// export const URL = "http://10.11.0.4:8000/dashboard";
 
 //get calls
 export function getbranchDetails(date, state, city) {
@@ -82,14 +82,14 @@ export function dashboardCount(state, city, from, to) {
     axios
       .get(
         URL +
-          "/dashboard?State=" +
-          state +
-          "&City=" +
-          city +
-          "&From=" +
-          from +
-          "&To=" +
-          to
+        "/dashboard?State=" +
+        state +
+        "&City=" +
+        city +
+        "&From=" +
+        from +
+        "&To=" +
+        to
       )
       .then((res) =>
         dispatch({
@@ -106,14 +106,14 @@ export function graphData(state, city, from, to) {
     axios
       .get(
         URL +
-          "/analytics?State=" +
-          state +
-          "&City=" +
-          city +
-          "&From=" +
-          from +
-          "&To=" +
-          to
+        "/analytics?State=" +
+        state +
+        "&City=" +
+        city +
+        "&From=" +
+        from +
+        "&To=" +
+        to
       )
       .then((res) =>
         dispatch({
@@ -144,20 +144,20 @@ export function viewDetail(branch, type, subtype, from, to, page_no, category) {
     axios
       .get(
         URL +
-          "/alert/" +
-          branch +
-          "?Type=" +
-          type +
-          "&Subtype=" +
-          subtype +
-          "&Cat=" +
-          category +
-          "&From=" +
-          from +
-          "&To=" +
-          to +
-          "&page_no=" +
-          page_no
+        "/alert/" +
+        branch +
+        "?Type=" +
+        type +
+        "&Subtype=" +
+        subtype +
+        "&Cat=" +
+        category +
+        "&From=" +
+        from +
+        "&To=" +
+        to +
+        "&page_no=" +
+        page_no
       )
       .then((res) =>
         dispatch({
@@ -174,16 +174,16 @@ export function getTypeDetail(type, state, city, from, to) {
     axios
       .get(
         URL +
-          "/alerts/groups?Type=" +
-          type +
-          "&State=" +
-          state +
-          "&City=" +
-          city +
-          "&From=" +
-          from +
-          "&To=" +
-          to
+        "/alerts/groups?Type=" +
+        type +
+        "&State=" +
+        state +
+        "&City=" +
+        city +
+        "&From=" +
+        from +
+        "&To=" +
+        to
       )
       .then((res) =>
         dispatch({
@@ -211,18 +211,18 @@ export function getThreatDetail(message, type, state, city, from, to) {
     axios
       .get(
         URL +
-          "/alerts/branches?Message=" +
-          message +
-          "&Type=" +
-          type +
-          "&State=" +
-          state +
-          "&City=" +
-          city +
-          "&From=" +
-          from +
-          "&To=" +
-          to
+        "/alerts/branches?Message=" +
+        message +
+        "&Type=" +
+        type +
+        "&State=" +
+        state +
+        "&City=" +
+        city +
+        "&From=" +
+        from +
+        "&To=" +
+        to
       )
       .then((res) =>
         dispatch({

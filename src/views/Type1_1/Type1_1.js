@@ -946,7 +946,7 @@ export default function Type1_1(props) {
               > */}
               <a
                 href={
-                  "/admin/details/threats/no/Covid_safety/" +
+                  "/admin/details/threats/mask/Covid_safety/" +
                   state +
                   "/" +
                   city +
