@@ -249,6 +249,7 @@ export default function ViewDetails(props) {
                   "Type",
                   "Message",
                   "Category",
+                  "Branch",
                   "Date",
                   "Time",
                   "Camera ID",
