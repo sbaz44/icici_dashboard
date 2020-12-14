@@ -88,8 +88,21 @@ const emailsSubscriptionChart = {
     series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]],
   },
   options: {
-    axisX: {
-      showGrid: false,
+    // axisX: {
+    //   showGrid: false,
+    // },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          fontColor: 'red'
+        },
+      }],
+      xAxes: [{
+        ticks: {
+          fontColor: 'green'
+        },
+      }]
     },
     // low: 0,
     // high: 1000,

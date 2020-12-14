@@ -17,6 +17,7 @@ import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
 import "./dashboard.css";
+import { Bar } from "react-chartjs-2";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -70,7 +71,43 @@ const useStyles2 = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
+let barData = {
+  data: {
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August"
+    ],
+    datasets: [
+      {
+        label: "IN",
+        backgroundColor: "rgba(155,231,91,0.2)",
+        borderColor: "rgba(255,99,132,1)",
+        borderWidth: 1,
+        //stack: 1,
+        hoverBackgroundColor: "rgba(255,99,132,0.4)",
+        hoverBorderColor: "rgba(255,99,132,1)",
+        data: [65, 59, 80, 81, 56, 55, 40, 100]
+      },
+      {
+        label: "OUT",
+        backgroundColor: "rgba(255,99,132,0.2)",
+        borderColor: "rgba(255,99,132,1)",
 
+        borderWidth: 1,
+        //stack: 1,
+        hoverBackgroundColor: "rgba(255,99,132,0.4)",
+        hoverBorderColor: "rgba(255,99,132,1)",
+        data: [45, 79, 50, 41, 16, 85, 20, 50]
+      }
+    ]
+  }
+}
 export default function Dashboard() {
   const classes = useStyles();
   const classes2 = useStyles2();
@@ -176,6 +213,7 @@ export default function Dashboard() {
   const Haryana = ["Padla"];
   const Delhi = ["Dwarka", "Najafgarh", "TagoreGarden"];
   const MadhyaPradesha = ["Manawar"];
+
   return (
     <div id="dashboard-page">
       {console.log(selectedToDate)}
@@ -393,7 +431,7 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="warning">
               <ChartistGraph
-                className="ct-chart"
+                className="ct-chart11"
                 data={graph_data.External_threats}
                 type="Line"
                 options={emailsSubscriptionChart.options}
@@ -424,21 +462,21 @@ export default function Dashboard() {
                 href={
                   selectedCity == "" || selectedState == ""
                     ? "/admin/threats/External_threats/" +
-                      null +
-                      "/" +
-                      null +
-                      "/" +
-                      result +
-                      "/" +
-                      result2
+                    null +
+                    "/" +
+                    null +
+                    "/" +
+                    result +
+                    "/" +
+                    result2
                     : "/admin/threats/External_threats/" +
-                      selectedState +
-                      "/" +
-                      selectedCity +
-                      "/" +
-                      result +
-                      "/" +
-                      result2
+                    selectedState +
+                    "/" +
+                    selectedCity +
+                    "/" +
+                    result +
+                    "/" +
+                    result2
                 }
               >
                 <div
@@ -537,7 +575,7 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="danger">
               <ChartistGraph
-                className="ct-chart"
+                className="ct-chart11"
                 data={graph_data.Business_insights}
                 type="Line"
                 options={emailsSubscriptionChart.options}
@@ -568,21 +606,21 @@ export default function Dashboard() {
                 href={
                   selectedCity == "" || selectedState == ""
                     ? "/admin/threats/Business_insights/" +
-                      null +
-                      "/" +
-                      null +
-                      "/" +
-                      result +
-                      "/" +
-                      result2
+                    null +
+                    "/" +
+                    null +
+                    "/" +
+                    result +
+                    "/" +
+                    result2
                     : "/admin/threats/Business_insights/" +
-                      selectedState +
-                      "/" +
-                      selectedCity +
-                      "/" +
-                      result +
-                      "/" +
-                      result2
+                    selectedState +
+                    "/" +
+                    selectedCity +
+                    "/" +
+                    result +
+                    "/" +
+                    result2
                 }
               >
                 <div
@@ -751,7 +789,7 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="primary">
               <ChartistGraph
-                className="ct-chart"
+                className="ct-chart11"
                 data={graph_data.Internal_compliance}
                 type="Line"
                 options={emailsSubscriptionChart.options}
@@ -782,21 +820,21 @@ export default function Dashboard() {
                 href={
                   selectedCity == "" || selectedState == ""
                     ? "/admin/threats/Internal_compliance/" +
-                      null +
-                      "/" +
-                      null +
-                      "/" +
-                      result +
-                      "/" +
-                      result2
+                    null +
+                    "/" +
+                    null +
+                    "/" +
+                    result +
+                    "/" +
+                    result2
                     : "/admin/threats/Internal_compliance/" +
-                      selectedState +
-                      "/" +
-                      selectedCity +
-                      "/" +
-                      result +
-                      "/" +
-                      result2
+                    selectedState +
+                    "/" +
+                    selectedCity +
+                    "/" +
+                    result +
+                    "/" +
+                    result2
                 }
               >
                 <div
@@ -903,7 +941,7 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="success">
               <ChartistGraph
-                className="ct-chart"
+                className="ct-chart1"
                 data={graph_data.Covid_safety}
                 type="Line"
                 options={emailsSubscriptionChart.options}
@@ -935,21 +973,21 @@ export default function Dashboard() {
                 href={
                   selectedCity == "" || selectedState == ""
                     ? "/admin/threats/Covid_safety/" +
-                      null +
-                      "/" +
-                      null +
-                      "/" +
-                      result +
-                      "/" +
-                      result2
+                    null +
+                    "/" +
+                    null +
+                    "/" +
+                    result +
+                    "/" +
+                    result2
                     : "/admin/threats/Covid_safety/" +
-                      selectedState +
-                      "/" +
-                      selectedCity +
-                      "/" +
-                      result +
-                      "/" +
-                      result2
+                    selectedState +
+                    "/" +
+                    selectedCity +
+                    "/" +
+                    result +
+                    "/" +
+                    result2
                 }
               >
                 <div
@@ -1106,6 +1144,7 @@ export default function Dashboard() {
           </Card>
         </GridItem>
       </GridContainer>
+
       {/* <img
         src={bg}
         alt=""

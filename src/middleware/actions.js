@@ -14,7 +14,7 @@ export const GET_THREAT_DETAIL = "GET_THREAT_DETAIL";
 export const POST_BRANCH_DETAILS = "POST_BRANCH_DETAILS";
 export const POST_BRANCH_REPORTS = "POST_BRANCH_REPORTS";
 
-export const URL = "http://192.168.2.114:8000/dashboard";
+export const URL = "http://192.168.2.113:8000/dashboard";
 // export const URL = "http://13.127.202.106:8000/dashboard";
 
 // export const URL = "http://10.11.0.4:8000/dashboard";

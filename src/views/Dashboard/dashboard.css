@@ -1,8 +1,8 @@
-svg.ct-chart-bar,
+/* svg.ct-chart-bar, */
 svg.ct-chart-line {
   overflow: visible;
 }
-.ct-label.ct-label.ct-horizontal.ct-end {
+.ct-chart11 .ct-label.ct-label.ct-horizontal.ct-end {
   position: relative;
   justify-content: flex-end;
   text-align: right;
@@ -10,4 +10,20 @@ svg.ct-chart-line {
   transform: translate(-100%) rotate(-45deg);
   white-space: nowrap;
   font-size: 10px;
+}
+
+.ct-chart2 {
+}
+
+.ct-series-a .ct-bar {
+  stroke: red !important;
+  stroke-width: 10px;
+}
+.ct-series-b .ct-bar {
+  stroke: green;
+  stroke-width: 10px;
+}
+
+.ct-chart22 .ct-label.ct-label.ct-horizontal.ct-end {
+  color: black !important;
 }

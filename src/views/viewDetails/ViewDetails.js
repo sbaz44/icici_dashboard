@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ViewDetails(props) {
   const classes = useStyles();
 
-  const [category, setCategory] = React.useState("null");
+  const [category, setCategory] = React.useState("Alert");
   const [search, setSearch] = React.useState("null");
 
   const handleChange = (event) => {
