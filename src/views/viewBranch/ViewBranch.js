@@ -49,7 +49,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { URL } from "../../middleware/actions";
 import $ from "jquery";
 import { Bar } from "react-chartjs-2";
-
+import red from "../../assets/img/red.png";
+import green from "../../assets/img/green.png";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -81,43 +82,7 @@ const options = {
   //     }]
   // }
 };
-let barData = {
-  data: {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August"
-    ],
-    datasets: [
-      {
-        label: "IN",
-        backgroundColor: "rgba(155,231,91,0.2)",
-        borderColor: "rgba(255,99,132,1)",
-        borderWidth: 1,
-        //stack: 1,
-        hoverBackgroundColor: "rgba(255,99,132,0.4)",
-        hoverBorderColor: "rgba(255,99,132,1)",
-        data: [65, 59, 80, 81, 56, 55, 40, 100]
-      },
-      {
-        label: "OUT",
-        backgroundColor: "rgba(255,99,132,0.2)",
-        borderColor: "rgba(255,99,132,1)",
 
-        borderWidth: 1,
-        //stack: 1,
-        hoverBackgroundColor: "rgba(255,99,132,0.4)",
-        hoverBorderColor: "rgba(255,99,132,1)",
-        data: [45, 79, 50, 41, 16, 85, 20, 50]
-      }
-    ]
-  }
-}
 
 // const useStyless = makeStyles(styless);
 export default function ViewBranch(props) {
@@ -135,7 +100,7 @@ export default function ViewBranch(props) {
   };
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [localData, setLocalData] = React.useState({});
-  const [graphData, setGraphData] = React.useState({});
+  const [graphData, setGraphData] = React.useState(null);
   const [image, setImage] = React.useState(null);
   const handleDateChange = (date) => {
     result = format(date, "dd-MM-yyyy");
@@ -157,32 +122,32 @@ export default function ViewBranch(props) {
         console.log('res.data');
         console.log(res.data);
         setData(res.data);
-        setGraphData({
-          labels: res.data.Hourly_count.Labels,
-          datasets: [
-            {
-              label: "IN",
-              backgroundColor: "rgba(155,231,91,0.2)",
-              borderColor: "rgba(255,99,132,1)",
-              borderWidth: 1,
-              //stack: 1,
-              hoverBackgroundColor: "rgba(255,99,132,0.4)",
-              hoverBorderColor: "rgba(255,99,132,1)",
-              data: res.data.Hourly_count.In,
-            },
-            {
-              label: "OUT",
-              backgroundColor: "rgba(255,99,132,0.2)",
-              borderColor: "rgba(255,99,132,1)",
+        if (res.data.Hourly_count != null) {
+          setGraphData({
+            labels: res.data.Hourly_count.Labels,
+            datasets: [
+              {
+                label: "IN",
+                backgroundColor: "rgba(155,231,91,0.2)",
+                borderColor: "rgba(255,99,132,1)",
+                borderWidth: 1,
+                hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                hoverBorderColor: "rgba(255,99,132,1)",
+                data: res.data.Hourly_count.In,
+              },
+              {
+                label: "OUT",
+                backgroundColor: "rgba(255,99,132,0.2)",
+                borderColor: "rgba(255,99,132,1)",
+                borderWidth: 1,
+                hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                hoverBorderColor: "rgba(255,99,132,1)",
+                data: res.data.Hourly_count.Out,
+              }
+            ]
+          })
+        }
 
-              borderWidth: 1,
-              //stack: 1,
-              hoverBackgroundColor: "rgba(255,99,132,0.4)",
-              hoverBorderColor: "rgba(255,99,132,1)",
-              data: res.data.Hourly_count.Out,
-            }
-          ]
-        })
         setisLoading(false);
       })
       .catch((err) => console.log(err));
@@ -754,13 +719,44 @@ export default function ViewBranch(props) {
                   </CardFooter>
                 </Card>
               </GridItem>
+              <GridItem xs={12} sm={6} md={3}>
+                <Card>
+                  <div style={{ display: 'flex', marginTop: "20px", marginLeft: "10px", justifyContent: 'center' }}>
+                    <p className={classes.cardCategory}
+                      style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginRight: "20px" }}>HDD Status</p>
+                    {data.CameraStatus ? <img src={green} width="20px" style={{ objectFit: 'contain' }} /> : <img src={red} width="20px" style={{ objectFit: 'contain' }} />}
+
+                  </div>
+                  <div style={{ display: 'flex', marginTop: "20px", marginBottom: "20px", marginLeft: "10px", justifyContent: 'center' }}>
+                    <p className={classes.cardCategory}
+                      style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginRight: "20px" }}>DVR Status</p>
+                    {data.DvrStatus ? <img src={green} width="20px" style={{ objectFit: 'contain' }} /> : <img src={red} width="20px" style={{ objectFit: 'contain' }} />}
+                  </div>
+                </Card>
+              </GridItem>
 
               <GridItem xs={12} sm={6} md={3}>
                 <Card>
+                  <div style={{ display: 'flex', marginTop: "20px", marginLeft: "10px", justifyContent: 'center' }}>
+                    <p className={classes.cardCategory}
+                      style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginLeft: "10px" }}>DVR Time</p>
+                    <p className={classes.cardCategory}
+                      style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginLeft: "10px" }}>: {data.Local_time}</p>
+                  </div>
+                  <div style={{ display: 'flex', marginTop: "20px", marginBottom: "20px", marginLeft: "10px", justifyContent: 'center' }}>
+
+                    <p className={classes.cardCategory}
+                      style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginLeft: "10px" }}>Server Time</p>
+                    <p className={classes.cardCategory}
+                      style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginLeft: "10px" }}>: {data.Server_time}</p>
+                  </div>
+                </Card>
+              </GridItem>
+
+              {/* <GridItem xs={12} sm={6} md={3}>
+                <Card>
                   <CardHeader color="primary" stats icon>
-                    {/* <CardIcon color="primary">
-                                <AddAlertSharp />
-                            </CardIcon> */}
+                   
                     <div
                       style={{
                         display: "flex",
@@ -788,24 +784,25 @@ export default function ViewBranch(props) {
                       />
                     </div>
 
-                    {/* <h3 className={classes.cardTitle}>
-                                {data.Total_alert}
-                            </h3> */}
+                 
                   </CardHeader>
                   <CardFooter stats></CardFooter>
                 </Card>
-              </GridItem>
+              </GridItem> */}
             </GridContainer>
 
             <GridContainer>
               <GridItem xs={12} sm={12} md={12}>
                 <Card>
-                  <Bar
+
+                  {graphData != null ? <Bar
                     data={graphData}
                     width={null}
                     height={300}
                     options={options}
-                  />
+                  /> : <p className={classes.cardCategory}
+                    style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center' }}>No Data to display</p>}
+
                 </Card>
               </GridItem>
             </GridContainer>
