@@ -10,6 +10,7 @@ import Icon from "@material-ui/core/Icon";
 import Store from "@material-ui/icons/Store";
 import Whatshot from "@material-ui/icons/Whatshot";
 import Accessibility from "@material-ui/icons/Accessibility";
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import DriveEta from "@material-ui/icons/DriveEta";
 import ErrorSharp from "@material-ui/icons/ErrorSharp";
 import TransferWithinAStationSharp from "@material-ui/icons/TransferWithinAStationSharp";
@@ -706,9 +707,9 @@ export default function ViewBranch(props) {
 
               <GridItem xs={12} sm={6} md={3}>
                 <Card>
-                  <CardHeader color="primary" stats icon>
-                    <CardIcon color="primary">
-                      <AddAlertSharp />
+                  <CardHeader color="info" stats icon>
+                    <CardIcon color="info">
+                      <SupervisedUserCircleIcon />
                     </CardIcon>
                     <p
                       className={classes.cardCategory}
@@ -716,7 +717,7 @@ export default function ViewBranch(props) {
                     >
                       Total Trending
                   </p>
-                    <h3 className={classes.cardTitle}>{data.Total_alert}</h3>
+                    <h3 className={classes.cardTitle}>{data.Total_trending}</h3>
                   </CardHeader>
                   <CardFooter stats>
                     <a
