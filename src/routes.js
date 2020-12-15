@@ -86,7 +86,7 @@ const dashboardRoutes = [
   //   invisible: true,
   // },
   {
-    path: "/view/:branch/:type/:subtype/:date",
+    path: "/view/:branch/:type/:subtype/:category/:date",
     name: "View Details",
     rtlName: "قائمة الجدول",
     icon: LibraryBooks,

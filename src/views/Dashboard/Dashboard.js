@@ -941,7 +941,7 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="success">
               <ChartistGraph
-                className="ct-chart1"
+                className="ct-chart11"
                 data={graph_data.Covid_safety}
                 type="Line"
                 options={emailsSubscriptionChart.options}

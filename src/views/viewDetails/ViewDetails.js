@@ -31,8 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ViewDetails(props) {
   const classes = useStyles();
-
-  const [category, setCategory] = React.useState("Alert");
+  const [category, setCategory] = React.useState("null");
   const [search, setSearch] = React.useState("null");
 
   const handleChange = (event) => {
@@ -130,6 +129,7 @@ export default function ViewDetails(props) {
     $("#root").find(".makeStyles-content-3").css("margin-top", "0");
     $("#root").find(".makeStyles-content-3").css("padding", "0px 15px");
     currentPage = 1;
+    setCategory(props.match.params.category)
     if (
       props.match.params.type == "null" &&
       props.match.params.subtype == "null"
@@ -142,7 +142,7 @@ export default function ViewDetails(props) {
           props.match.params.date,
           "",
           currentPage,
-          category
+          props.match.params.category
         )
       );
     } else {
@@ -155,7 +155,7 @@ export default function ViewDetails(props) {
           props.match.params.date,
           "",
           1,
-          category
+          props.match.params.category
         )
       );
     }

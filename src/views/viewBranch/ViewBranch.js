@@ -20,6 +20,7 @@ import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
 import Switch from "@material-ui/core/Switch";
+import Tooltip from '@material-ui/core/Tooltip';
 import ReactSpeedometer from "react-d3-speedometer";
 import {
   dailySalesChart,
@@ -57,6 +58,7 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import smart from "../../assets/img/smartAI.png";
+import "chartjs-plugin-datalabels";
 
 import Dialog from "@material-ui/core/Dialog";
 
@@ -70,24 +72,64 @@ const useStyles = makeStyles(styles);
 const options = {
   responsive: true,
   legend: {
-    display: false
+    display: true,
+    position: 'right',
+    align: "start"
   },
-  type: "bar"
-  //   scales: {
-  //     xAxes: [{
-  //         stacked: true
-  //     }],
-  //     yAxes: [{
-  //         stacked: true
-  //     }]
-  // }
+  type: "bar",
+  tooltips: {
+    "enabled": false
+  },
+  scales: {
+    xAxes: [{
+      gridLines: {
+        display: true
+      },
+      scaleLabel: {
+        display: true,
+        labelString: 'Hours'
+      }
+    }],
+    yAxes: [{
+      gridLines: {
+        display: true
+      },
+      scaleLabel: {
+        display: true,
+        labelString: 'People Count'
+      }
+    }]
+  },
+  plugins: {
+    plugins: {
+      datalabels: {
+        color: 'black',
+        padding: '0',
+        backgroundColor: 'white',
+        offset: 0,
+        formatter: value => this.moneyFormat(value),
+        align: 'end',
+        anchor: 'end',
+        display: context => context.dataset.hidden, // this needs to update ??
+      },
+    },
+    // labels: false,
+    // datalabels: {
+    //   display: ctx => {
+
+    //     return true;
+    //   },
+    //   formatter: (ctx, data) => {
+    //     return `${data.dataIndex}`;
+    //   }
+    // }
+  }
 };
 
 
 // const useStyless = makeStyles(styless);
 export default function ViewBranch(props) {
   const classes = useStyles();
-
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [isLoading, setisLoading] = React.useState(false);
@@ -122,12 +164,14 @@ export default function ViewBranch(props) {
         console.log('res.data');
         console.log(res.data);
         setData(res.data);
+        console.log("time")
+        console.log(res.data.Local_time + " -" + res.data.Server_time)
         if (res.data.Hourly_count != null) {
           setGraphData({
             labels: res.data.Hourly_count.Labels,
             datasets: [
               {
-                label: "IN",
+                label: "IN Count",
                 backgroundColor: "rgba(155,231,91,0.2)",
                 borderColor: "rgba(255,99,132,1)",
                 borderWidth: 1,
@@ -135,15 +179,15 @@ export default function ViewBranch(props) {
                 hoverBorderColor: "rgba(255,99,132,1)",
                 data: res.data.Hourly_count.In,
               },
-              {
-                label: "OUT",
-                backgroundColor: "rgba(255,99,132,0.2)",
-                borderColor: "rgba(255,99,132,1)",
-                borderWidth: 1,
-                hoverBackgroundColor: "rgba(255,99,132,0.4)",
-                hoverBorderColor: "rgba(255,99,132,1)",
-                data: res.data.Hourly_count.Out,
-              }
+              // {
+              //   label: "OUT",
+              //   backgroundColor: "rgba(255,99,132,0.2)",
+              //   borderColor: "rgba(255,99,132,1)",
+              //   borderWidth: 1,
+              //   hoverBackgroundColor: "rgba(255,99,132,0.4)",
+              //   hoverBorderColor: "rgba(255,99,132,1)",
+              //   data: res.data.Hourly_count.Out,
+              // }
             ]
           })
         }
@@ -483,7 +527,7 @@ export default function ViewBranch(props) {
                       href={
                         "/admin/view/" +
                         props.match.params.branch +
-                        "/External_threat/fire/" +
+                        "/External_threat/fire/Alert/" +
                         result
                       }
                     >
@@ -523,7 +567,7 @@ export default function ViewBranch(props) {
                       href={
                         "/admin/view/" +
                         props.match.params.branch +
-                        "/External_threat/weapon/" +
+                        "/External_threat/weapon/Alert/" +
                         result
                       }
                     >
@@ -557,7 +601,7 @@ export default function ViewBranch(props) {
                       href={
                         "/admin/view/" +
                         props.match.params.branch +
-                        "/External_threat/trespassing/" +
+                        "/External_threat/trespassing/Alert/" +
                         result
                       }
                     >
@@ -644,7 +688,7 @@ export default function ViewBranch(props) {
                       href={
                         "/admin/view/" +
                         props.match.params.branch +
-                        "/null/null/" +
+                        "/null/null/Alert/" +
                         result
                       }
                     >
@@ -659,6 +703,42 @@ export default function ViewBranch(props) {
                   </CardFooter>
                 </Card>
               </GridItem>
+
+              <GridItem xs={12} sm={6} md={3}>
+                <Card>
+                  <CardHeader color="primary" stats icon>
+                    <CardIcon color="primary">
+                      <AddAlertSharp />
+                    </CardIcon>
+                    <p
+                      className={classes.cardCategory}
+                      style={{ fontWeight: "bold", color: "#3C4858" }}
+                    >
+                      Total Trending
+                  </p>
+                    <h3 className={classes.cardTitle}>{data.Total_alert}</h3>
+                  </CardHeader>
+                  <CardFooter stats>
+                    <a
+                      href={
+                        "/admin/view/" +
+                        props.match.params.branch +
+                        "/null/null/Trending/" +
+                        result
+                      }
+                    >
+                      <div
+                        className={classes.stats}
+                        style={{ color: "#43a047", textAlign: "center" }}
+                      >
+                        {/* <DateRange /> */}
+                      View More
+                    </div>
+                    </a>
+                  </CardFooter>
+                </Card>
+              </GridItem>
+
 
               {/* <GridItem xs={12} sm={6} md={3}>
                 <Card className="adjust">
@@ -721,37 +801,40 @@ export default function ViewBranch(props) {
               </GridItem>
               <GridItem xs={12} sm={6} md={3}>
                 <Card>
-                  <div style={{ display: 'flex', marginTop: "20px", marginLeft: "10px", justifyContent: 'center' }}>
+                  <div style={{ display: 'flex', marginTop: "20px", justifyContent: 'center' }}>
                     <p className={classes.cardCategory}
                       style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginRight: "20px" }}>HDD Status</p>
                     {data.CameraStatus ? <img src={green} width="20px" style={{ objectFit: 'contain' }} /> : <img src={red} width="20px" style={{ objectFit: 'contain' }} />}
 
                   </div>
-                  <div style={{ display: 'flex', marginTop: "20px", marginBottom: "20px", marginLeft: "10px", justifyContent: 'center' }}>
+
+                  <Tooltip disableFocusListener title={"Local Time : " + data.Local_time + " " + "Server Time : " + data.Server_time}>
+                    <div style={{ display: 'flex', marginTop: "10px", justifyContent: 'center' }}>
+                      <p className={classes.cardCategory}
+                        style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginRight: "20px" }}>DVR Time Sync</p>
+                      {data.DvrSync ? <img src={green} width="20px" style={{ objectFit: 'contain' }} /> : <img src={red} width="20px" style={{ objectFit: 'contain' }} />}
+
+                    </div>
+                  </Tooltip>
+
+                  <div style={{ display: 'flex', marginTop: "10px", marginBottom: "20px", justifyContent: 'center' }}>
                     <p className={classes.cardCategory}
                       style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginRight: "20px" }}>DVR Status</p>
                     {data.DvrStatus ? <img src={green} width="20px" style={{ objectFit: 'contain' }} /> : <img src={red} width="20px" style={{ objectFit: 'contain' }} />}
                   </div>
-                </Card>
-              </GridItem>
 
-              <GridItem xs={12} sm={6} md={3}>
-                <Card>
-                  <div style={{ display: 'flex', marginTop: "20px", marginLeft: "10px", justifyContent: 'center' }}>
-                    <p className={classes.cardCategory}
-                      style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginLeft: "10px" }}>DVR Time</p>
-                    <p className={classes.cardCategory}
-                      style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginLeft: "10px" }}>: {data.Local_time}</p>
-                  </div>
-                  <div style={{ display: 'flex', marginTop: "20px", marginBottom: "20px", marginLeft: "10px", justifyContent: 'center' }}>
 
+                  <div style={{ display: 'flex', marginTop: "05px", marginBottom: "20px", justifyContent: 'center' }}>
+                    <img src={green} width="12px" style={{ objectFit: 'contain' }} />
                     <p className={classes.cardCategory}
-                      style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginLeft: "10px" }}>Server Time</p>
+                      style={{ fontWeight: "bold", fontSize: '10px', color: "#3C4858", textAlign: 'center', paddingTop: 0, marginRight: "10px", marginLeft: "5px" }}>OK</p>
+                    <img src={red} width="12px" style={{ objectFit: 'contain' }} />
                     <p className={classes.cardCategory}
-                      style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginLeft: "10px" }}>: {data.Server_time}</p>
+                      style={{ fontWeight: "bold", fontSize: '10px', color: "#3C4858", textAlign: 'center', paddingTop: 0, marginRight: "10px", marginLeft: "5px" }}>Fail</p>
                   </div>
                 </Card>
               </GridItem>
+
 
               {/* <GridItem xs={12} sm={6} md={3}>
                 <Card>
@@ -794,7 +877,8 @@ export default function ViewBranch(props) {
             <GridContainer>
               <GridItem xs={12} sm={12} md={12}>
                 <Card>
-
+                  <p className={classes.cardCategory}
+                    style={{ fontWeight: "bold", color: "#3C4858", textAlign: 'center', paddingTop: 0, marginTop: "15px", marginBottom: "10px", fontSize: "22px" }}>Hourly Footfall</p>
                   {graphData != null ? <Bar
                     data={graphData}
                     width={null}
@@ -872,7 +956,7 @@ export default function ViewBranch(props) {
                       href={
                         "/admin/view/" +
                         props.match.params.branch +
-                        "/Covid_safety/null/" +
+                        "/Covid_safety/null/null/" +
                         result
                       }
                     >
@@ -953,7 +1037,7 @@ export default function ViewBranch(props) {
                         href={
                           "/admin/view/" +
                           props.match.params.branch +
-                          "/null/atm/" +
+                          "/null/atm/null/" +
                           result
                         }
                       >
@@ -1031,11 +1115,12 @@ export default function ViewBranch(props) {
                     {Object.keys(data).length > 0 && data.Branch_performance[1]}
                   </div>
                   <CardFooter stats>
+
                     <a
                       href={
                         "/admin/view/" +
                         props.match.params.branch +
-                        "/null/branch/" +
+                        "/null/branch/null/" +
                         result
                       }
                     >
