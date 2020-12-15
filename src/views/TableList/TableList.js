@@ -24,6 +24,9 @@ import Pagination from "components/pagination/Pagination";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import red from "../../assets/img/red.png";
+import green from "../../assets/img/green.png";
+import gray from "../../assets/img/gray.png";
 const styles = {
   cardCategoryWhite: {
     "&,& a,& a:hover,& a:focus": {
@@ -224,6 +227,17 @@ export default function TableList() {
           </Card>
         </GridItem>
       </GridContainer>
+      <div style={{ display: 'flex', marginTop: "05px", marginBottom: "20px", justifyContent: 'center' }}>
+        <img src={green} width="12px" style={{ objectFit: 'contain' }} />
+        <p className={classes.cardCategory}
+          style={{ fontWeight: "bold", fontSize: '10px', color: "#3C4858", textAlign: 'center', paddingTop: 0, marginRight: "10px", marginLeft: "5px" }}>Followed</p>
+        <img src={red} width="12px" style={{ objectFit: 'contain' }} />
+        <p className={classes.cardCategory}
+          style={{ fontWeight: "bold", fontSize: '10px', color: "#3C4858", textAlign: 'center', paddingTop: 0, marginRight: "10px", marginLeft: "5px" }}>Not Followed</p>
+        <img src={gray} width="12px" style={{ objectFit: 'contain' }} />
+        <p className={classes.cardCategory}
+          style={{ fontWeight: "bold", fontSize: '10px', color: "#3C4858", textAlign: 'center', paddingTop: 0, marginRight: "10px", marginLeft: "5px" }}>No Data</p>
+      </div>
       {/* <Pagination currentPage={1} lastPage={Math.ceil(12 / 10)} /> */}
     </div>
   );
